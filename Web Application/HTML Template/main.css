@@ -1,0 +1,15 @@
+.body{
+  /*background-color: #b0e57c; Lightgreen */
+  background-color: #b0e57c;
+  margin: 0;
+}
+.nav{
+  height: 15vh;
+  width: 100%;
+  border-bottom: 1vh solid #000;
+}
+.logo{
+  width: auto;
+  margin-left: 2%;
+  height: 15vh;
+}
