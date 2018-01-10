@@ -3,13 +3,11 @@ body{
   background-image: url("Media/babyBackground.png");
 }
 
-@include keyframes(scrollBad) {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 -320px;
-  }
+.banner{
+  height: 13vh;
+  margin-top: 1vh;
+  width: 20%;
+  margin-left: 40%;
 }
 
 .header{
@@ -83,8 +81,9 @@ body{
 .loginInput{
   height: 6.25vh;
   font-size: 3vh;
-  width: 58%;
+  width: 56%;
   padding-left: 2%;
+  padding-right: 2%;
   background-color: #dadada;
   border: solid #dadada thick;
   float: left;
