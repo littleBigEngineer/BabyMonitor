@@ -1,0 +1,25 @@
+.nav{
+  height: 15vh;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1vh solid #000;
+}
+.banner{
+  height: 13vh;
+  margin-top: 1vh;
+  width: 20%;
+  margin-left: 40%;
+}
+
+.closeButton{
+  width: 5%;
+  height: 4vh;
+  margin-left: 92%;
+  z-index: 2;
+  position: absolute;
+}
+.closeButton:hover{
+  width: 6%;
+  height: 4.5vh;
+  margin-left: 91%;
+}

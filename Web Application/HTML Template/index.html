@@ -3,17 +3,38 @@
   <head>
   <meta charset="UTF-8">
   <title>BABA | Neonatal Monitoring</title>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="Stylesheets/index.css">
+  <link rel="stylesheet" href="Stylesheets/gen.css">
+  <script src="Script/index.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="Media/icon.png" />
   </head>
 
   <body>
+    <div style="visibility: hidden;" id="cover" class="cover">
+      <div class="popup">
+        <img src="Media/close.png" class="closeButton" onmousedown="closePopup('cover')">
+        <p class="popupHeader">Please Complete Sign-up</p>
+        <form>
+          <input type="text" id="firstName" name="firstName" class="signUpTextBox loginInput" placeholder="First Name">
+          <input type="text" id="lastName" name="lastName" class="signUpTextBox loginInput" placeholder="Last Name">
+          <input type="email" id="email" name="email" class="signUpTextBox loginInput" placeholder="E-mail Address">
+          <input type="text" id="phone" name="phone" class="signUpTextBox loginInput" placeholder="Phone Number">
+          <input type="password" id="password" name="password" class="signUpTextBox loginInputPassword" placeholder="Password"><img src="Media/showPass.png" class="passwordIcon" onmouseover="passDisplay('password')" onmouseout="passHide('password')">
+          <input type="password" id="passwordConfirm" name="passwordConfirm" class="signUpTextBox loginInputPassword" placeholder="Confirm Password"><img src="Media/showPass.png" class="passwordIcon" onmouseover="passDisplay('passwordConfirm')" onmouseout="passHide('passwordConfirm')">
+
+          <input type="submit" value="Create Account" class="loginButton">
+        </form>
+      </div>
+    </div>
     <div class="nav">
   		<img class="banner" src="Media/header.png">
   	</div>
     <div class="contentPane">
-      <div class="ShortSideLines"></div><p class="header">BABA - Neonatal Monitoring System</p><div class="ShortSideLines"></div>
-      <br><br>
+      <div>
+        <div class="ShortSideLines"></div>
+        <p class="header">BABA - Neonatal Monitoring System</p>
+        <div class="ShortSideLines"></div>
+      </div>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
     </div>
@@ -26,8 +47,8 @@
         <input type="text" name="username" class="loginInput" placeholder="Username">
         <img class="textBoxIcon" src="Media/password.png">
         <input type="password" name="password" class="loginInput" placeholder="Password">
-        <input type="submit" value="Submit" class="loginButton" onclick="alert("Hello")">
-        <p class="loginRegister">Not a member yet? <a href="" class="link">Register Now</a></p>
+        <input type="submit" value="Sign In" class="loginButton">
+        <p class="loginRegister">Not a member yet? <a href="" onmousedown="showPopup('cover')" class="link">Register Now</a></p>
       </form>
     </div>
     <div class="companionPane">
