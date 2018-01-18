@@ -1,19 +1,12 @@
-body{
-  font-family: "Arial";
-  background-color: #7EC0EE;
-  background-image: url("../Media/backgroundDots.png");
-  -webkit-animation: scroll 40s linear infinite;
-  animation: scroll 40s linear infinite;
-}
-
-@-webkit-keyframes scroll {
-  from {background-position: 100% 0;}
-  to {background-position: 0 0;}
-}
-
-@keyframes scroll {
-  from {background-position: 100% 0;}
-  to {background-position: 0 0;}
+.splashImage{
+  width: 36%;
+  height: auto;
+  float: right;
+  margin-top: 1vh;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 1vh;
+  display: block;
 }
 
 .header{
@@ -43,8 +36,8 @@ body{
   width: 30%;
   height: auto;
   float: left;
-  background-color: #84E184;
-  border-radius: 20px 20px 0px 0px;
+  /* background-color: #84E184; */
+  background-color: #ad974f;
   margin-top: 5vh;
   margin-left: 4.25%;
   z-index: 0;
@@ -54,8 +47,6 @@ body{
   margin-left: 3%;
   width: 56%;
   height: 69vh;
-  border-radius: 20px;
-  background-color: rgb(255, 255, 255);
   margin-top: 5vh;
   float: left;
   padding-left: 2%;
@@ -79,10 +70,8 @@ body{
   width: 30%;
   margin-left: 4.25%;
   margin-top: 2vh;
-  background-color: rgb(255, 255, 255);
   float: left;
   position: relative;
-  border-radius: 0px 0px 20px 20px;
   z-index: 0;
 }
 
@@ -181,9 +170,9 @@ body{
 }
 
 .loginButton{
-  background-color: #ffff4c;
+  background-color: #8e793e;
   z-index: 0;
-  border: solid #cccc3c medium;
+  border: solid #60532b medium;
   font-weight: bold;
   width: 50%;
   height: 8vh;
@@ -206,7 +195,7 @@ body{
   width: 40%;
   padding-top: 2vh;
   padding-bottom: 2vh;
-  background-color: #84E184;
+  background-color: #ad974f;
   margin-left: 30%;
   margin-top: 5vh;
   position: absolute;

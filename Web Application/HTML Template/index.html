@@ -14,7 +14,7 @@
       <div class="popup">
         <img src="Media/close.png" class="closeButton" onmousedown="closePopup('cover')">
         <p class="popupHeader">Please Complete Sign-up</p>
-        <form>
+        <form method="GET" action="dashboard.html">
           <input type="text" id="firstName" name="firstName" class="signUpTextBox loginInput" placeholder="First Name">
           <input type="text" id="lastName" name="lastName" class="signUpTextBox loginInput" placeholder="Last Name">
           <input type="email" id="email" name="email" class="signUpTextBox loginInput" placeholder="E-mail Address">
@@ -29,31 +29,32 @@
     <div class="nav">
   		<img class="banner" src="Media/header.png">
   	</div>
-    <div class="contentPane">
-      <div>
-        <div class="ShortSideLines"></div>
-        <p class="header">BABA - Neonatal Monitoring System</p>
-        <div class="ShortSideLines"></div>
+    <div class="content" id="style-2">
+      <div class="contentPane">
+        <div>
+          <div class="ShortSideLines"></div>
+          <p class="header">BABA - Neonatal Monitoring System</p>
+          <div class="ShortSideLines"></div>
+        </div>
+        <div><img src="Media/feature_image.png" class="splashImage">Baba is a neonatal monitoring system designed to increase the security and safety of infants, while keeping the parents confidence in mind. Baba is a sensory device that will monitor your infants enviornmental conditions. Parameters such as Temperature, Humidity, Gas levels. Baba also offers features such as live video and audio streaming, abilility to playlullabies for infants. <br><br>Baba has been designed with state of the art sensors, developed with efficiency in mind. The overall aim of the system is to provide a higher level of care for infants, while not increasing the workload of already busy parents. Baba comes with a companion application which is availbale on the Google Play Store. With this application the parent can monitor their infant from the comfort of their couch, or even on the go.<br><br>Your infants safety is the #1 priority!</div>
       </div>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-    </div>
-    <div class="loginPane">
-      <div class="sideLines"></div>
-      <img src="Media/sleepingBaby.png" class="loginPaneImage">
-      <div class="sideLines"></div>
-      <form>
-        <img class="textBoxIcon" src="Media/username.png">
-        <input type="text" name="username" class="loginInput" placeholder="Username">
-        <img class="textBoxIcon" src="Media/password.png">
-        <input type="password" name="password" class="loginInput" placeholder="Password">
-        <input type="submit" value="Sign In" class="loginButton">
-        <p class="loginRegister">Not a member yet? <a href="" onmousedown="showPopup('cover')" class="link">Register Now</a></p>
-      </form>
-    </div>
-    <div class="companionPane">
-      <img src="Media/playStore.png" class="appStoreLabel">
-      <img src="Media/appStore.png" class="appStoreLabel">
+      <div class="loginPane">
+        <div class="sideLines"></div>
+        <img src="Media/sleepingBaby.png" class="loginPaneImage">
+        <div class="sideLines"></div>
+        <form>
+          <img class="textBoxIcon" src="Media/username.png">
+          <input type="text" name="username" class="loginInput" placeholder="Username">
+          <img class="textBoxIcon" src="Media/password.png">
+          <input type="password" name="password" class="loginInput" placeholder="Password">
+          <input type="submit" value="Sign In" class="loginButton">
+          <p class="loginRegister">Not a member yet? <a href="" onmousedown="showPopup('cover')" class="link">Register Now</a></p>
+        </form>
+      </div>
+      <div class="companionPane">
+        <img src="Media/playStore.png" class="appStoreLabel">
+        <img src="Media/appStore.png" class="appStoreLabel">
+      </div>
     </div>
   </body>
 </html>

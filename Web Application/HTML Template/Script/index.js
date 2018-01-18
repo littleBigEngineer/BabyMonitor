@@ -3,6 +3,7 @@ function showPopup(obj) {
     item.style.visibility = 'visible';
 }
 
+
 function closePopup(obj) {
     var item = document.getElementById(obj);
     item.style.visibility = 'hidden';
