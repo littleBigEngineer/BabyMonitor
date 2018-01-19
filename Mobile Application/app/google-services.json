@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "935817435019",
+    "firebase_url": "https://baba-neonatal-monitoring.firebaseio.com",
+    "project_id": "baba-neonatal-monitoring",
+    "storage_bucket": "baba-neonatal-monitoring.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935817435019:android:db408e2b17d4bbbb",
+        "android_client_info": {
+          "package_name": "neo.baba.neonatalmonitoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935817435019-72g0dvdu7tuaill7skcn1a99psgdh58n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "neo.baba.neonatalmonitoring",
+            "certificate_hash": "9663feefaeeb3ecc009b7e47e442630c136a4868"
+          }
+        },
+        {
+          "client_id": "935817435019-ias33utc3b3l19sckj0qql0ll66b74t8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMoCrG-t5T53bSlW4zNNXsT70gIj2Aqxo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935817435019-ias33utc3b3l19sckj0qql0ll66b74t8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

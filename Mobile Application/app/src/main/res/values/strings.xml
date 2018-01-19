@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">NeonatalMonitoring</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="forgot_pass">Forgotten Password?</string>
+    <string name="login">Login</string>
+    <string name="dont_have">Don\'t have an account?</string>
+    <string name="create_one">Create One</string>
+
 </resources>
