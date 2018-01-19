@@ -1,6 +1,6 @@
 body{
   font-family: "Arial";
-  background-color: #231F20;
+  background-color: #000;
 }
 
 #style-2::-webkit-scrollbar-track
@@ -14,7 +14,7 @@ body{
   height: 15vh;
   width: 100%;
   /* background-color: #fff; */
-  background-color: #eaeaea;
+  background-color: #2ECC71;
   border-bottom: 1vh solid #000;
 }
 .banner{
@@ -41,5 +41,5 @@ body{
 .content{
   width: 100%;
   height: 81vh;
-  background-color: #eaeaea;
+  background-color: #ecf0f1;
 }

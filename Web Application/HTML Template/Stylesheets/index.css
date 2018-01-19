@@ -37,7 +37,7 @@
   height: auto;
   float: left;
   /* background-color: #84E184; */
-  background-color: #ad974f;
+  background-color: #BD3525;
   margin-top: 5vh;
   margin-left: 4.25%;
   z-index: 0;
@@ -73,6 +73,8 @@
   float: left;
   position: relative;
   z-index: 0;
+  background-color: #F39C12;
+  border-radius: 0 0 20px 20px;
 }
 
 .loginInput{
@@ -170,9 +172,9 @@
 }
 
 .loginButton{
-  background-color: #8e793e;
+  background-color: #7F8C8D;
   z-index: 0;
-  border: solid #60532b medium;
+  border: solid #615D59 medium;
   font-weight: bold;
   width: 50%;
   height: 8vh;
