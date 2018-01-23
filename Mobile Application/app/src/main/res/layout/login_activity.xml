@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/email"
             android:layout_width="190dp"
             android:layout_height="40dp"
             android:layout_marginEnd="45dp"
@@ -26,8 +26,8 @@
             android:autoText="false"
             android:background="#dadada"
             android:ems="10"
-            android:hint="@string/username"
-            android:inputType="textPersonName"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:paddingLeft="20dp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -52,7 +52,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/password_icon"
-            app:layout_constraintTop_toBottomOf="@+id/username" />
+            app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <ImageView
             android:id="@+id/baby_head"
@@ -74,7 +74,7 @@
             android:layout_marginStart="144dp"
             android:layout_marginTop="12dp"
             android:background="#7F8C8D"
-            android:onClick="event"
+            android:onClick="login"
             android:text="@string/login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
             android:layout_marginStart="45dp"
             android:layout_marginTop="133dp"
             android:background="#dadada"
-            app:layout_constraintEnd_toStartOf="@+id/username"
+            app:layout_constraintEnd_toStartOf="@+id/email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:srcCompat="@drawable/username" />
@@ -127,6 +127,7 @@
             android:textColor="#000"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/create_one"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
@@ -137,6 +138,7 @@
             android:layout_marginEnd="52dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="82dp"
+            android:onClick="createAccount"
             android:text="@string/create_one"
             android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
