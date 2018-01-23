@@ -1,6 +1,14 @@
+# -*- coding: utf-8 -*-
 import os
 import glob
 import time
+import pyrebase
+
+config = {"apiKey": "AIzaSyCgj-4Kh-qGt8M9_xIXWzusCPeS-rfpyZk","authDomain": "baba-neonatal-monitoring.firebaseapp.com","databaseURL": "https://baba-neonatal-monitoring.firebaseio.com","projectId": "baba-neonatal-monitoring","storageBucket": "baba-neonatal-monitoring.appspot.com","messagingSenderId": "935817435019"}
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+count = 0
+total = 0
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -28,9 +36,14 @@ def read_temp():
     temp_string = lines[1][equals_pos+2:]
     temp_c = float(temp_string) / 1000.0
     temp_f = temp_c * 9.0 / 5.0 + 32.0
-    return temp_c, temp_f
+    return temp_c
 
 while True:
-  print(read_temp())
-  time.sleep(1)
+    temp = {"Current Temp":read_temp()}
+    count += 1
+    total += read_temp()
+    avg = total/count
+    data = {"Current Temp":read_temp(), "Average Temp":avg}
+    db.child("Temperature").set(data)
+    time.sleep(5)
 
