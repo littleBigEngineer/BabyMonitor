@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context="neo.baba.neonatalmonitoring.Login">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="#F39c12"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/create_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="16dp"
+            android:text="Create an Account"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/first_name"
+            android:layout_width="225dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:autoText="false"
+            android:background="#dadada"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/create_account" />
+
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="225dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:autoText="false"
+            android:background="#dadada"
+            android:ems="10"
+            android:hint="@string/last_name"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/first_name" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="225dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:autoText="false"
+            android:background="#dadada"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_name" />
+
+        <EditText
+            android:id="@+id/phone_no"
+            android:layout_width="225dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:autoText="false"
+            android:background="#dadada"
+            android:ems="10"
+            android:hint="@string/Phone_no"
+            android:inputType="phone"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="225dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:autoText="false"
+            android:background="#dadada"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword|phone"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_no" />
+
+        <EditText
+            android:id="@+id/password_again"
+            android:layout_width="225dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:autoText="false"
+            android:background="#dadada"
+            android:ems="10"
+            android:hint="@string/pass_again"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="152dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="30dp"
+            android:background="#7F8C8D"
+            android:onClick="event"
+            android:text="@string/create_account"
+            app:layout_constraintTop_toBottomOf="@+id/password_again"
+            tools:layout_editor_absoluteX="84dp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:onClick="back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/left_arrow" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
