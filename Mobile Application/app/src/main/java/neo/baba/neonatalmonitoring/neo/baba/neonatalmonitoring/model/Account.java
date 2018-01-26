@@ -1,27 +1,17 @@
 package neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model;
 
 public class Account {
-    private String email, firstName, lastName, uid, password, phone;
+    private String firstName, lastName, uid, phone;
 
-    public Account(String email, String firstName, String lastName, String uid, String password, String phone) {
-        this.email = email;
+    public Account(String firstName, String lastName, String uid, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.uid = uid;
-        this.password = password;
         this.phone = phone;
     }
 
     public Account(){
 
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getFirstName() {
@@ -46,14 +36,6 @@ public class Account {
 
     public void setUid(String uid) {
         this.uid = uid;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
-    tools:context="neo.baba.neonatalmonitoring.Login">
+    tools:context="neo.baba.neonatalmonitoring.CreateAccount">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/panel"
@@ -14,20 +14,25 @@
         android:layout_height="match_parent"
         android:layout_margin="20dp"
         android:background="#F39c12"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="34dp">
 
         <TextView
             android:id="@+id/create_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="223dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="15dp"
+            android:alpha="1.0"
             android:text="Create an Account"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textColor="#000"
+            android:textSize="25sp"
             android:textStyle="bold"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -39,7 +44,7 @@
             android:background="#dadada"
             android:ems="10"
             android:hint="@string/first_name"
-            android:inputType="textPersonName"
+            android:inputType="textCapWords|textPersonName"
             android:paddingLeft="20dp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -57,7 +62,7 @@
             android:background="#dadada"
             android:ems="10"
             android:hint="@string/last_name"
-            android:inputType="textPersonName"
+            android:inputType="textCapWords|textPersonName"
             android:paddingLeft="20dp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -111,7 +116,7 @@
             android:background="#dadada"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPassword|phone"
+            android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -144,12 +149,15 @@
             android:id="@+id/login_button"
             android:layout_width="152dp"
             android:layout_height="29dp"
+            android:layout_marginEnd="84dp"
+            android:layout_marginStart="84dp"
             android:layout_marginTop="30dp"
             android:background="#7F8C8D"
-            android:onClick="event"
+            android:onClick="createAccount"
             android:text="@string/create_account"
-            app:layout_constraintTop_toBottomOf="@+id/password_again"
-            tools:layout_editor_absoluteX="84dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_again" />
 
         <ImageView
             android:id="@+id/back"
