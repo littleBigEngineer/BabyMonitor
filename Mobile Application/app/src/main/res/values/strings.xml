@@ -11,4 +11,7 @@
     <string name="Phone_no">Phone Number</string>
     <string name="pass_again">Password Again</string>
     <string name="create_account">Create Account</string>
+    <string name="logout">Logout</string>
+    <string name="deg_f">\u00b0F</string>
+    <string name="deg_c">\u00b0C</string>
 </resources>
