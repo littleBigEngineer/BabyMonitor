@@ -1,0 +1,231 @@
+.splashImage{
+  width: 36%;
+  height: auto;
+  float: right;
+  margin-top: 1vh;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 1vh;
+  display: block;
+}
+
+.header{
+  text-align: center;
+  font-size: 3.5vh;
+  font-weight: bolder;
+  width: 60%;
+  float: left;
+  z-index: 0;
+}
+
+.body{
+  background-color: #b0e57c;
+  margin: 0;
+  padding: 0;
+}
+
+.logo{
+  width: 9%;
+  margin-left: 45%;
+  height: 13vh;
+  margin-top: 1vh;
+  z-index: 0;
+}
+
+.loginPane{
+  width: 30%;
+  height: auto;
+  float: left;
+  /* background-color: #84E184; */
+  background-color: #BD3525;
+  margin-top: 5vh;
+  margin-left: 4.25%;
+  z-index: 0;
+}
+
+.contentPane{
+  margin-left: 3%;
+  width: 56%;
+  height: 69vh;
+  margin-top: 5vh;
+  float: left;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  font-size: 2.6vh;
+  z-index: 0;
+}
+
+.appStoreLabel{
+  width: 40%;
+  height: 8vh;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  z-index: 0;
+}
+.companionPane{
+  width: 30%;
+  margin-left: 4.25%;
+  margin-top: 2vh;
+  float: left;
+  position: relative;
+  z-index: 0;
+  background-color: #F39C12;
+  border-radius: 0 0 20px 20px;
+}
+
+.loginInput{
+  height: 6.25vh;
+  font-size: 3vh;
+  width: 56%;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: #dadada;
+  border: solid #dadada thick;
+  float: left;
+  margin-bottom: 1vh;
+  position: relative;
+  z-index: 0;
+}
+
+.loginInputPassword{
+  height: 6.25vh;
+  font-size: 3vh;
+  width: 46%;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: #dadada;
+  border: solid #dadada thick;
+  float: left;
+  margin-bottom: 1vh;
+  position: relative;
+  z-index: 0;
+}
+
+.passwordIcon{
+  float: left;
+  width: 8%;
+  height: 6.5vh;
+  background-color: #dadada;
+  border: solid #dadada thick;
+  margin-bottom: 1vh;
+}
+
+.loginPaneImage{
+  width: 15%;
+  height: 9vh;
+  margin-top: 5vh;
+  margin-bottom: 3vh;
+  float: left;
+  z-index: 0;
+}
+
+.link{
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  z-index: 0;
+}
+
+.loginRegister{
+  font-size: 2.5vh;
+  text-align: center;
+  margin-bottom: 9vh;
+  z-index: 0;
+}
+
+.sideLines{
+  margin-top: 10vh;
+  height: 0.5vh;
+  width: 22.5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: #000;
+  float: left;
+  margin-bottom: 7vh;
+  z-index: 0;
+}
+
+.ShortSideLines{
+  height: 0.5vh;
+  width: 18%;
+  background-color: #000;
+  float: left;
+  margin-top: 5.5vh;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 5vh;
+  z-index: 0;
+}
+
+.textBoxIcon{
+  position: relative;
+  width: 13%;
+  height: 8vh;
+  background-color: #b5b5b5;
+  margin-left: 10%;
+  float: left;
+  z-index: 0;
+}
+
+.loginButton{
+  background-color: #7F8C8D;
+  z-index: 0;
+  border: solid #615D59 medium;
+  font-weight: bold;
+  width: 50%;
+  height: 8vh;
+  margin-left: 25%;
+  margin-top: 2vh;
+  font-size: 3vh;
+}
+
+.cover{
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+}
+
+.popup{
+  width: 40%;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: #ad974f;
+  margin-left: 30%;
+  margin-top: 5vh;
+  position: absolute;
+}
+
+.popupHeader{
+    text-align: center;
+    font-size: 3.5vh;
+    font-weight: bolder;
+    width: 60%;
+    margin-left: 20%;
+    float: left;
+}
+.checkboxPopupText{
+  font-size: 3vh;
+  margin-left: 25%;
+  float: left;
+  width: 30%;
+}
+
+.checkboxPopup {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    float: left;
+    margin-top:3vh;
+}
+
+.signUpTextBox{
+  margin-left: 20%;
+}

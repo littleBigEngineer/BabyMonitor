@@ -1,0 +1,45 @@
+body{
+  font-family: "Arial";
+  background-color: #000;
+}
+
+#style-2::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.nav{
+  height: 15vh;
+  width: 100%;
+  /* background-color: #fff; */
+  background-color: #2ECC71;
+  border-bottom: 1vh solid #000;
+}
+.banner{
+  height: 13vh;
+  margin-top: 1vh;
+  width: 20%;
+  margin-left: 40%;
+}
+
+.closeButton{
+  width: 5%;
+  height: 4vh;
+  margin-left: 92%;
+  z-index: 2;
+  position: absolute;
+}
+
+.closeButton:hover{
+  width: 6%;
+  height: 4.5vh;
+  margin-left: 91%;
+}
+
+.content{
+  width: 100%;
+  height: 81vh;
+  background-color: #ecf0f1;
+}

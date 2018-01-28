@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+<title>BABA | Neonatal Monitoring</title>
+<link rel="stylesheet" type="text/css" media="all" href="../static/index.css" th:href="@{/index.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../static/gen.css" th:href="@{/gen.css}"/>
+<script src="../static/script/index.js" th:src="@{/script/index.js}"></script>
+</head>
+
+<body>
+	<div style="visibility: hidden;" id="cover" class="cover">
+		<div class="popup">
+			<img src="../static/Media/close.png" th:src="@{/Media/close.png}" class="closeButton" onmousedown="closePopup('cover')" />
+			<p class="popupHeader">Please Complete Sign-up</p>
+			<form method="GET" action="dashboard.html">
+				<input type="text" id="firstName" name="firstName" class="signUpTextBox loginInput" placeholder="First Name" />
+				<input type="text" id="lastName" name="lastName" class="signUpTextBox loginInput" placeholder="Last Name" />
+				<input type="email" id="email" name="email" class="signUpTextBox loginInput" placeholder="E-mail Address" />
+				<input type="text" id="phone" name="phone" class="signUpTextBox loginInput" placeholder="Phone Number" />
+				<input type="password" id="password" name="password" class="signUpTextBox loginInputPassword" placeholder="Password" />
+				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" onmouseover="passDisplay('password')" onmouseout="passHide('password')" />
+				<input type="password" id="passwordConfirm" name="passwordConfirm" class="signUpTextBox loginInputPassword" placeholder="Confirm Password" />
+				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" onmouseover="passDisplay('passwordConfirm')" onmouseout="passHide('passwordConfirm')" />
+				<input type="submit" value="Create Account" class="loginButton"  />
+			</form>
+		</div>
+	</div>
+	<div class="nav">
+		<img class="banner" src="../static/Media/header.png" th:src="@{/Media/header.png}" />
+	</div>
+	<div class="content" id="style-2">
+		<div class="contentPane">
+			<div>
+				<div class="ShortSideLines"></div>
+				<p class="header">BABA - Neonatal Monitoring System</p>
+				<div class="ShortSideLines"></div>
+			</div>
+			<div>
+				<img src="../static/Media/feature_image.png" th:src="@{/Media/feature_image.png}" class="splashImage" />Baba is
+				a neonatal monitoring system designed to increase the security and
+				safety of infants, while keeping the parents confidence in mind.
+				Baba is a sensory device that will monitor your infants
+				enviornmental conditions. Parameters such as Temperature, Humidity,
+				Gas levels. Baba also offers features such as live video and audio
+				streaming, abilility to playlullabies for infants. <br />
+				<br />Baba has been designed with state of the art sensors,
+				developed with efficiency in mind. The overall aim of the system is
+				to provide a higher level of care for infants, while not increasing
+				the workload of already busy parents. Baba comes with a companion
+				application which is availbale on the Google Play Store. With this
+				application the parent can monitor their infant from the comfort of
+				their couch, or even on the go.<br />
+				<br />Your infants safety is the #1 priority!
+			</div>
+		</div>
+		<div class="loginPane">
+			<div class="sideLines"></div>
+			<img src="../static/Media/sleepingBaby.png" th:src="@{/Media/sleepingBaby.png}" class="loginPaneImage" />
+			<div class="sideLines"></div>
+			<form>
+				<img class="textBoxIcon" src="../static/Media/username.png" th:src="@{/Media/username.png}" />
+				<input type="text" name="username" class="loginInput" placeholder="Username" />
+				<img class="textBoxIcon" src="../static/Media/password.png" th:src="@{/Media/password.png}" />
+				<input type="password" name="password" class="loginInput" placeholder="Password" />
+				<input type="submit" value="Sign In" class="loginButton" />
+				<p class="loginRegister">
+					Not a member yet? <a href="" onmousedown="showPopup('cover')" class="link">Register Now</a>
+				</p>
+			</form>
+		</div>
+		<div class="companionPane">
+			<img src="../static/Media/playStore.png" class="appStoreLabel" th:src="@{/Media/playStore.png}" /> <img
+				src="../static/Media/appStore.png" class="appStoreLabel" th:src="@{/Media/appStore.png}" />
+		</div>
+	</div>
+</body>
+</html>
