@@ -12,6 +12,6 @@
     <string name="pass_again">Password Again</string>
     <string name="create_account">Create Account</string>
     <string name="logout">Logout</string>
-    <string name="deg_f">\u00b0F</string>
-    <string name="deg_c">\u00b0C</string>
+    <string name="return_login">Return to Login</string>
+    <string name="send_email">Send E-mail</string>
 </resources>

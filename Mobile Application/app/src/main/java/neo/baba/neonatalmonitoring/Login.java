@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -64,7 +66,6 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             loading();
                         } else {
-                            task.getException();
                             AuthError();
                         }
                     }
@@ -77,17 +78,31 @@ public class Login extends AppCompatActivity {
     }
 
     public void forgotten(View view){
-        forgotten = true;
 
-        EditText email = findViewById(R.id.email);
-        email.setHint("Verification e-mail");
-        EditText password = findViewById(R.id.password);
-        password.setEnabled(false);
-        Button button = findViewById(R.id.login_button);
-        button.setText("Send Email");
+        final ImageView passImg = findViewById(R.id.password_icon);
+        final EditText email = findViewById(R.id.email);
+        final TextView forgotten_txt = findViewById(R.id.forgot_pass);
+        final Button button = findViewById(R.id.login_button);
+
+
+        if(forgotten){
+            Intent login = new Intent(Login.this, Login.class);
+            Login.this.startActivity(login);
+        }
+        else {
+            forgotten = true;
+            email.setHint("Verification e-mail");
+            EditText password = findViewById(R.id.password);
+            password.setEnabled(false);
+            password.setVisibility(View.GONE);
+            passImg.setVisibility(View.GONE);
+            forgotten_txt.setText(R.string.return_login);
+            button.setText(R.string.send_email);
+        }
     }
 
     public void forgottenPassword(String email){
+        Toast.makeText(Login.this, "Input e-mail address in ", Toast.LENGTH_LONG).show();
         FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -95,7 +110,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Verification e-mail sent", Toast.LENGTH_LONG).show();
                     Intent login = new Intent(Login.this, Login.class);
                     Login.this.startActivity(login);
-
+                    forgotten = false;
                 }
             }
         });

@@ -1,0 +1,12 @@
+{
+	"type": "service_account",
+	"project_id": "baba-neonatal-monitoring",
+	"private_key_id": "b30b156e7320b53805a6f2451dd4fa31bc9133ee",
+	"private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC7Nd1XEY5GPKsH\nCAHsIRfM9RleCq8BNkIlxM0BAkFHS/m+riBNdW/GfwCq1pL4oQ3Wxyoxh/vC1Cdt\nzUXjTfqUulV8x7n0bpGdQ1wiUVsUGzvuiHUu2rMjzJVoo7NjwHMSE7iQCYLy3gjQ\npFONn9k64cfds5nBBrjoZKjRGFWnJaKlU51F1dvM6j4NkUXLN99Q3Cb9tBhPhdhL\nOBO/5/WIFttthaAy82UDeXxkhqOiYsLeNv+Mrm2zLI/sNfgGoU2ZvW17zf19BVna\ncjbxRzZtVyqUIghX04/ZsuT6fup9YbthFl4O6CpSNiVroi3mndAyaAGdmVZsAxHW\nZkqaJzHhAgMBAAECggEAPGFrocT6R+ISYWKuSAwGYqccxu2YM0JeRFM8sZoaFtZE\n10DPD1yUsAdPXkp1vbYoQgEbtT0AMP7/NpVx+JWyf9y3bNb4PYOZ+Ih8w17NCueb\nxVwCu5lzFNVLzSObXM1577cnnGFM+GsvmaeegTuwsyKWNYXTTeQOqHmqz0HTgmR9\n4IOZmNcipf/oYqWr1DCgpUkGp+eCto4YSaEJSvhvvbjtsiO70SSz35JztiVeJE91\n9OtfRuyFLLjLbAcCDCIB0hCXf8lLkzPY2DrZ6VhhNp+entVb3V4b+Ny0nYddZTF4\nzoN4ePmSr9YL3taTFxn1VTcLPYeCHsoSIWpLwnkT5wKBgQDuJiGt5YkwgDRPtN7G\n8jhHvL6HUgZ3Z/24HKeHdkHKzRu0+dnuyQ2jsYlNUvhGsILF3r3DRNrknm18WQR5\nVvonGUqHP14pCmtrCQ+hR3u0wQ2EcfqvG6ObYuDKMlJ9WaL6EDA7UNOHcUxf5vgU\nprDKPQ1KleJWbzD1vSxpMFGRfwKBgQDJPkRu/H6Y/GUMRcRMmZ12mdSCXlQEOjYF\nF7BSlwfaZSEBMnDTwaL8bONAcmoOa3tm1saqeHSEG0GrZyCvA5tg/3QofFaAQ01S\ntDNqen3Ah6vsEemxuQFjr/7U2u8aMIGAu7v+uwctw7wJiTZ+BMSrbN5y4r4SMXEF\nf88D84QsnwKBgELjNNxptsGHkKm+bD/GcmY7revF7wkEjS9z5N3YKhxyxVBsSHiX\nwZvzVlQAdLkuBFzc9cFtimlh0fB19Bq8giAPK26XLrQqOAdlER3EPQuEmW5UsQsT\noT0YZXiE78RDM9I2T8WpKvBEsyXQcmcidk8nHJ+RP3P1YPP0QQ/+QTqzAoGAZNNo\nr/6bYwTZj7uIrSQty1UpLqQaDgAoPobu1YJL8fTHA3WFJ+MVSMk5Vnm8fzsEmbKz\n2Ib/QYzyavEBZA43k/KI/RvGrv6JSA120TtLs+GFloInBt79PjfYQkbqksGIsLne\nZ7LG1vwBQvnXLm4vJwAlt4O43R6eVLYDPySLrVsCgYB8xroVvFHZ6vxZmVrQnR8A\naT9CjpSK2OD49eUYIZL/TArvM/c0hy3ASMKpOu6RyhKdZv/nrbU8V3NS5Mi6544n\nt42BhdxvDMn5p3XeDplloMEDphDpJ2qbErNx/uv7XnbTeV/rTnb+vpi7BMLBflp8\n0qPt9yTza5dTWu9MDS5NLw==\n-----END PRIVATE KEY-----\n",
+	"client_email": "firebase-adminsdk-cw0zh@baba-neonatal-monitoring.iam.gserviceaccount.com",
+	"client_id": "109574472390984673672",
+	"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+	"token_uri": "https://accounts.google.com/o/oauth2/token",
+	"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+	"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-cw0zh%40baba-neonatal-monitoring.iam.gserviceaccount.com"
+}

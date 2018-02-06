@@ -7,9 +7,11 @@
 <link rel="stylesheet" type="text/css" media="all" href="../static/index.css" th:href="@{/index.css}" />
 <link rel="stylesheet" type="text/css" media="all" href="../static/gen.css" th:href="@{/gen.css}"/>
 <script src="../static/script/index.js" th:src="@{/script/index.js}"></script>
+<script src="../static/script/firebase.js" th:src="@{/script/firebase.js}"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 </head>
 
-<body>
+<body onload="initFirebase()">
 	<div style="visibility: hidden;" id="cover" class="cover">
 		<div class="popup">
 			<img src="../static/Media/close.png" th:src="@{/Media/close.png}" class="closeButton" onmousedown="closePopup('cover')" />
@@ -49,7 +51,7 @@
 				developed with efficiency in mind. The overall aim of the system is
 				to provide a higher level of care for infants, while not increasing
 				the workload of already busy parents. Baba comes with a companion
-				application which is availbale on the Google Play Store. With this
+				application which is available on the Google Play Store. With this
 				application the parent can monitor their infant from the comfort of
 				their couch, or even on the go.<br />
 				<br />Your infants safety is the #1 priority!
@@ -59,12 +61,12 @@
 			<div class="sideLines"></div>
 			<img src="../static/Media/sleepingBaby.png" th:src="@{/Media/sleepingBaby.png}" class="loginPaneImage" />
 			<div class="sideLines"></div>
-			<form>
+			<form method="POST">
 				<img class="textBoxIcon" src="../static/Media/username.png" th:src="@{/Media/username.png}" />
-				<input type="text" name="username" class="loginInput" placeholder="Username" />
-				<img class="textBoxIcon" src="../static/Media/password.png" th:src="@{/Media/password.png}" />
-				<input type="password" name="password" class="loginInput" placeholder="Password" />
-				<input type="submit" value="Sign In" class="loginButton" />
+				<input type="text" id="loginEmail" name="email" class="loginInput" placeholder="E-mail Address" />
+				<img id="loginEmailIcon" class="textBoxIcon" src="../static/Media/password.png" th:src="@{/Media/password.png}" />
+				<input type="password" id="loginPassword" name="password" class="loginInput" placeholder="Password" />
+				<input type="submit" value="Sign In" onmousedown="signInUser();" class="loginButton" />
 				<p class="loginRegister">
 					Not a member yet? <a href="" onmousedown="showPopup('cover')" class="link">Register Now</a>
 				</p>
