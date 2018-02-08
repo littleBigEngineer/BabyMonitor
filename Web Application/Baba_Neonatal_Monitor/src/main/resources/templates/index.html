@@ -61,12 +61,12 @@
 			<div class="sideLines"></div>
 			<img src="../static/Media/sleepingBaby.png" th:src="@{/Media/sleepingBaby.png}" class="loginPaneImage" />
 			<div class="sideLines"></div>
-			<form method="POST">
+			<form th:action="@{/login}" method="post" th:object="${login}">
 				<img class="textBoxIcon" src="../static/Media/username.png" th:src="@{/Media/username.png}" />
-				<input type="text" id="loginEmail" name="email" class="loginInput" placeholder="E-mail Address" />
+				<input type="text" id="loginEmail" th:field="${login.email}" name="email" class="loginInput" placeholder="E-mail Address" />
 				<img id="loginEmailIcon" class="textBoxIcon" src="../static/Media/password.png" th:src="@{/Media/password.png}" />
-				<input type="password" id="loginPassword" name="password" class="loginInput" placeholder="Password" />
-				<input type="submit" value="Sign In" onmousedown="signInUser();" class="loginButton" />
+				<input type="password"  id="loginPassword" th:field="${login.password}" class="loginInput" placeholder="Password" />
+				<input type="submit" class="loginButton" />
 				<p class="loginRegister">
 					Not a member yet? <a href="" onmousedown="showPopup('cover')" class="link">Register Now</a>
 				</p>

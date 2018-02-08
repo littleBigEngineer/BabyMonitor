@@ -34,24 +34,39 @@ function signInUser(){
 	
 	var user = firebase.auth().currentUser;
 	if(user == null){
-		alert("You Failure");
+		//alert("You Failure");
 	}
-	alert(user.uid);
+	//alert(user.uid);
 	window.location.href = "../templates/dashboard.html";
 	firebase.auth().signOut();
 }
 
 function getTemp(){
 	var temp = firebase.database().ref('Temperature/Current Temp');
+	var avg = firebase.database().ref('Temperature/Average Temp');
 	temp.on('value', function(snapshot) {
-		alert("Hello");
 		var val = snapshot.val();
 		tempC = Math.round(val);
 		tempF = (val*1.8)+32;
 		tempF = Math.round(tempF);
-		console.log(val);
-		console.log(tempC);
-		document.getElementById("tempReading").innerHTML = tempC + ' &#8451;';
-		alert("Bye");
+		document.getElementById("tempReading").innerHTML = "Current: " + tempC + '&#176;C';
+		document.getElementById("tempReadingAvg").innerHTML = "Average: " + tempC + '&#176;C';
+		if(tempC > 25){
+			document.getElementById('thermometer').src='../static/Media/hotTherm.png';
+		}
+		if(tempC < 15){
+			document.getElementById('thermometer').src='../static/Media/coldTherm.png';
+		}
+		if(tempC > 15 && tempC < 25){
+			document.getElementById('thermometer').src='../static/Media/medTherm.png';
+		}
+	});
+	
+	avg.on('value', function(snapshot) {
+		var val = snapshot.val();
+		tempC = Math.round(val);
+		tempF = (val*1.8)+32;
+		tempF = Math.round(tempF);
+		document.getElementById("tempReadingAvg").innerHTML = "Average: " + tempC + '&#176;C';
 	});
 }

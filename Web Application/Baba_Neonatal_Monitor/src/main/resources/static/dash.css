@@ -4,7 +4,7 @@
   width: 28.8%;
   margin-left: 2%;
   margin-right: 2%;
-  background-color: #BD3525;
+  background-color: #029da7;
   border: #000 solid medium;
   float: left;
 }
@@ -15,12 +15,35 @@ body{
   fonr-size: 3em;
 } 
 
+.therm{
+	width: 15%;
+	height: 25vh;
+	float: left;
+	overflow: hidden;
+	margin-top: 3vh;
+	margin-left: 5%;
+}
+
+.thermImg{
+	width: 100%;
+}
 .measureHeading{
-  font-size: 4vh;
+  font-size: 4.3vh;
   font-weight: bolder;
   color: #fff;
   float: left;
-  width: 100%;
-  text-align: center;
+  width: 70%;
+  margin-left: 10%;
+  text-align: left;
   margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.measureSub{
+	font-size: 3.5vh;
+	color: #fff;
+	float: left;
+	width: 60%;
+	text-algin: left;
+	margin-left: 15%;
 }

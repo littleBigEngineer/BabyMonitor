@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/username"
             android:layout_width="190dp"
             android:layout_height="40dp"
             android:layout_marginEnd="45dp"
@@ -26,8 +26,8 @@
             android:autoText="false"
             android:background="#dadada"
             android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
+            android:hint="@string/username"
+            android:inputType="text"
             android:paddingLeft="20dp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -52,7 +52,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/password_icon"
-            app:layout_constraintTop_toBottomOf="@+id/email" />
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <ImageView
             android:id="@+id/baby_head"
@@ -87,7 +87,7 @@
             android:layout_marginStart="45dp"
             android:layout_marginTop="133dp"
             android:background="#dadada"
-            app:layout_constraintEnd_toStartOf="@+id/email"
+            app:layout_constraintEnd_toStartOf="@+id/username"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:srcCompat="@drawable/username" />

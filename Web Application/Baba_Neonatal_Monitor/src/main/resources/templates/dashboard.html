@@ -9,7 +9,8 @@
 <link rel="stylesheet" type="text/css" media="all"
 	href="../static/dash.css" th:href="@{/dash.css}" />
 <script src="../static/script/index.js" th:src="@{/script/index.js}"></script>
-<script src="../static/script/firebase.js" th:src="@{/script/firebase.js}"></script>
+<script src="../static/script/firebase.js"
+	th:src="@{/script/firebase.js}"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 </head>
 
@@ -20,11 +21,24 @@
 	</div>
 	<div class="content" id="style-2">
 		<div class="measureBox">
+			<div class="therm">
+				<img id="thermometer" class="thermImg" src="../static/Media/medTherm.png"/>
+			</div>
 			<div class="measureHeading">Temperature</div>
-			<p class="measureHeading" id="tempReading">--</p>
+			<div class="measureSub" id="tempReading">--</div>
+			<div class="measureSub" id="tempReadingAvg">--</div>
 		</div>
 		<div class="measureBox">
 			<div class="measureHeading">Humidity</div>
+		</div>
+		<div class="measureBox">
+			<div class="measureHeading">Temperature</div>
+		</div>
+		<div class="measureBox">
+			<div class="measureHeading">Temperature</div>
+		</div>
+		<div class="measureBox">
+			<div class="measureHeading">Temperature</div>
 		</div>
 		<div class="measureBox">
 			<div class="measureHeading">Temperature</div>

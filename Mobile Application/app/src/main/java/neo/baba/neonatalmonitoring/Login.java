@@ -14,24 +14,21 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Login extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private boolean forgotten = false;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         setContentView(R.layout.login_activity);
-        mAuth = FirebaseAuth.getInstance();
-
-        if(mAuth.getCurrentUser() != null){
-            loading();
-        }
     }
 
     public void loading(){
@@ -45,42 +42,37 @@ public class Login extends AppCompatActivity {
     }
 
     public void login(View view){
-        final EditText email = findViewById(R.id.email);
-        String e = email.getText().toString();
+        final EditText username = findViewById(R.id.username);
+        String u = username.getText().toString();
 
         if(!forgotten) {
             final EditText password = findViewById(R.id.password);
             String p = password.getText().toString();
 
-            if (e.equals("a")) {
-                e = "robert.crowley1@mycit.ie";
-                p = "password1";
+            if (u.equals("a")) {
+                u = "RobCrowley";
+                p = "Password1!";
             }
 
-            if (!(e.length() > 0 && p.length() > 0))
+            if (!(u.length() > 0 && p.length() > 0))
                 AuthError();
             else {
-                mAuth.signInWithEmailAndPassword(e, p).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            loading();
-                        } else {
-                            AuthError();
-                        }
-                    }
-                });
+                if(mDatabase.child("Accounts").child(u) != null){
+                    loading();
+                }
+                else
+                    AuthError();
             }
         }
         else{
-            forgottenPassword(e);
+            forgottenPassword(u);
         }
     }
 
     public void forgotten(View view){
 
         final ImageView passImg = findViewById(R.id.password_icon);
-        final EditText email = findViewById(R.id.email);
+        final EditText email = findViewById(R.id.username);
         final TextView forgotten_txt = findViewById(R.id.forgot_pass);
         final Button button = findViewById(R.id.login_button);
 
