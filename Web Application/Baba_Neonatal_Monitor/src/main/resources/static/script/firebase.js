@@ -31,7 +31,7 @@ function signInUser(){
 	firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
 
 	});
-	
+
 	var user = firebase.auth().currentUser;
 	if(user == null){
 		//alert("You Failure");
@@ -51,17 +51,18 @@ function getTemp(){
 		tempF = Math.round(tempF);
 		document.getElementById("tempReading").innerHTML = "Current: " + tempC + '&#176;C';
 		document.getElementById("tempReadingAvg").innerHTML = "Average: " + tempC + '&#176;C';
+		
 		if(tempC > 25){
-			document.getElementById('thermometer').src='../static/Media/hotTherm.png';
+			document.getElementById('thermometer').src = "../static/Media/hotTherm.png";
 		}
 		if(tempC < 15){
-			document.getElementById('thermometer').src='../static/Media/coldTherm.png';
+			document.getElementById('thermometer').src = "../static/Media/coldTherm.png";
 		}
 		if(tempC > 15 && tempC < 25){
-			document.getElementById('thermometer').src='../static/Media/medTherm.png';
+			document.getElementById('thermometer').src = "../static/Media/medTherm.png";
 		}
 	});
-	
+
 	avg.on('value', function(snapshot) {
 		var val = snapshot.val();
 		tempC = Math.round(val);

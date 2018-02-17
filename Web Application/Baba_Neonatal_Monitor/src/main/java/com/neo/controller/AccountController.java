@@ -1,12 +1,16 @@
 package com.neo.controller;
 
+import com.neo.model.Account;
+
 public class AccountController {
 	
 	FirebaseController fc = new FirebaseController();
 	boolean goodFlag;
 
-	public void checkForAccount(String username, String password) {
-		fc.checkForAccount(username, password);
+	public Account checkForAccount(String username, String password) {
+		System.out.println("Accounts");
+		Account a = fc.checkForAccount(username, password);
+		return a;
 	}
 	
 //	public void receiveAccount(Account account) {

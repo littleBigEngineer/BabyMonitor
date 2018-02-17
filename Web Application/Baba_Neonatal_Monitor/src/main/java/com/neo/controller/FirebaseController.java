@@ -19,6 +19,7 @@ public class FirebaseController {
 	DataSnapshot ds;
 	AccountController ac;
 	Account account;
+	boolean accountFlag;
 
 
 	public void initFirebase() throws IOException {
@@ -36,21 +37,32 @@ public class FirebaseController {
 
 	}
 
-	public void checkForAccount(String username, String password) {
+	public Account checkForAccount(String username, String password) {
+		System.out.println("Firebase");
+		System.out.println(username);
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Accounts/"+username);
+		accountFlag = false;
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot dataSnapshot) {
+				System.out.println("onChange");
 				account = dataSnapshot.getValue(Account.class);
-				if(!password.equals(account.getPassword()))
-					account = null;
+				System.out.println(account.getFirstName());
+				accountFlag = true;
 			}
 
 			@Override
 			public void onCancelled(DatabaseError error) {
-				// TODO Auto-generated method stub	
+				
 			}
 		});
+		while(!accountFlag) {
+			
+		}
+		if(!password.equals(account.getPassword()))
+			account = null;
+		
+		return account;
 	}
 
 	public void firebaseDatabase() {

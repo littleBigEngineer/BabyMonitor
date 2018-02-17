@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.neo.model.Account;
 import com.neo.model.Login;
 
 @Controller
@@ -18,13 +19,12 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/")
 	public String login(Login login) {
-		ac.checkForAccount(login.getEmail(), login.getPassword());
-	    return "index";
+		Account account = ac.checkForAccount(login.getEmail(), login.getPassword());
+		return "dashboard";
 	}
 	
-
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String dashboard() {
 		return "dashboard";

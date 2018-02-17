@@ -15,24 +15,41 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model.Account;
 
 public class Login extends AppCompatActivity {
 
     private boolean forgotten = false;
     private DatabaseReference mDatabase;
+    private String u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        if(SaveSharedPreference.getUserName(Login.this).length() == 0)
+        {
+            String a = SaveSharedPreference.getUserName(Login.this);
+        }
+        else
+        {
+            String user = SaveSharedPreference.getUserName(Login.this);
+            loading(user);
+        }
         mDatabase = FirebaseDatabase.getInstance().getReference();
         setContentView(R.layout.login_activity);
     }
 
-    public void loading(){
+    public void loading(String username){
         Intent loading = new Intent(Login.this, Loading.class);
+        loading.putExtra("logged", username);
         Login.this.startActivity(loading);
     }
 
@@ -43,7 +60,7 @@ public class Login extends AppCompatActivity {
 
     public void login(View view){
         final EditText username = findViewById(R.id.username);
-        String u = username.getText().toString();
+        u = username.getText().toString();
 
         if(!forgotten) {
             final EditText password = findViewById(R.id.password);
@@ -54,14 +71,29 @@ public class Login extends AppCompatActivity {
                 p = "Password1!";
             }
 
+            SaveSharedPreference.setUserName(Login.this, u);
+
             if (!(u.length() > 0 && p.length() > 0))
                 AuthError();
             else {
-                if(mDatabase.child("Accounts").child(u) != null){
-                    loading();
-                }
-                else
-                    AuthError();
+                DatabaseReference acc = mDatabase.child("Accounts");
+                acc.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.hasChild(u)) {
+                            AuthError();
+                        }
+                        else{
+                            Account a = dataSnapshot.child(u).getValue(Account.class);
+                            loading(a.getUsername());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         }
         else{
@@ -110,5 +142,13 @@ public class Login extends AppCompatActivity {
 
     public void AuthError(){
         Toast.makeText(Login.this, "Invalid Email Address/Password Provided", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent();
+        i.setAction(Intent.ACTION_MAIN);
+        i.addCategory(Intent.CATEGORY_HOME);
+        this.startActivity(i);
     }
 }

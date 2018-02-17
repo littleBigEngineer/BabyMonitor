@@ -14,12 +14,10 @@ import com.neo.controller.MainController;
 @SpringBootApplication
 @ComponentScan(basePackageClasses=MainController.class)
 public class BabaNeonatalMonitorApplication extends SpringBootServletInitializer{
-	
+
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
 		SpringApplication.run(BabaNeonatalMonitorApplication.class, args);
 		FirebaseController fc = new FirebaseController();
 		fc.initFirebase();
-		//fc.loginUser("robert.crowley1@mycit.ie", "password");
-		
 	}
 }

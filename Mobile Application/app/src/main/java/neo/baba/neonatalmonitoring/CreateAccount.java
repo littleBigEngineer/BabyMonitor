@@ -9,15 +9,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model.Account;
 
 public class CreateAccount extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
-    private String firstName, lastName, phone;
+    private String firstName, lastName, phone, uName;
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,10 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     public void createAccount(View view) {
-        boolean flag = true;
+
         final EditText fName = findViewById(R.id.first_name);
         final EditText lName = findViewById(R.id.last_name);
-        final EditText emailAdd = findViewById(R.id.username);
+        final EditText emailAdd = findViewById(R.id.email);
         final EditText phoneNo = findViewById(R.id.phone_no);
         final EditText pOne = findViewById(R.id.password);
         final EditText pTwo = findViewById(R.id.password_again);
@@ -47,7 +51,9 @@ public class CreateAccount extends AppCompatActivity {
         String email = emailAdd.getText().toString();
         phone = phoneNo.getText().toString();
         String password = pOne.getText().toString();
-        String uName = username.getText().toString();
+        uName = username.getText().toString();
+
+        System.out.println(uName);
 
         if (firstName.length() < 1) {
             fName.setText("");
@@ -82,11 +88,23 @@ public class CreateAccount extends AppCompatActivity {
             username.setError("Valid username requires between 8-20 characters in length");
             flag = false;
         }
-        if(mDatabase.child("Accounts").child(uName) != null){
-            username.setText("");
-            username.setError("Username is already in use");
-            flag = false;
-        }
+
+        DatabaseReference newAcc = mDatabase.child("Accounts");
+        newAcc.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(uName)) {
+                    username.setText("");
+                    username.setError("Username is already in use");
+                    flag = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         if (flag) {
             Account account = new Account(email, uName, password, firstName, lastName, phone);

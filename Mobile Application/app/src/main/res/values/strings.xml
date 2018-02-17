@@ -15,4 +15,7 @@
     <string name="return_login">Return to Login</string>
     <string name="send_email">Send E-mail</string>
     <string name="username">Username</string>
+    <string name="appwidget_text">Baba</string>
+    <string name="add_widget">Add widget</string>
+    <string name="back_to_dash">Back to Dashboard</string>
 </resources>

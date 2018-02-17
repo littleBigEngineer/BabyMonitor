@@ -9,10 +9,31 @@ body {
 	background-color: #F5F5F5;
 }
 
+.measureBox{
+  height: 30vh;
+  margin-top: 5vh;
+  width: 28.8%;
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: #B267B0;
+  border: #000 solid medium;
+  float: left;
+}
+
+.navBar{
+	height: 5vh;
+	width: 100%;
+	background-color: #000;
+	float: left;
+}
+
+.navButton{
+	margin-left: 5%;
+}
 .nav {
 	height: 15vh;
 	width: 100%;
-	background-color: #ffc110;
+	background-color: #FFD357;
 	border-bottom: 1vh solid #000;
 }
 
