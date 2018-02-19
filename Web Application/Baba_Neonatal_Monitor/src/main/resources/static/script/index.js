@@ -1,12 +1,9 @@
 function showPopup(obj) {
-    var item = document.getElementById(obj);
-    item.style.visibility = 'visible';
+    document.getElementById(obj).style.visibility = 'visible';
 }
 
-
 function closePopup(obj) {
-    var item = document.getElementById(obj);
-    item.style.visibility = 'hidden';
+    document.getElementById(obj).style.visibility = 'hidden';
 
     document.getElementById('firstName').value="";
     document.getElementById('lastName').value="";

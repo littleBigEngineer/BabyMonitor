@@ -9,20 +9,20 @@
 <link rel="stylesheet" type="text/css" media="all"
 	href="../static/dash.css" th:href="@{/dash.css}" />
 <script src="../static/script/index.js" th:src="@{/script/index.js}"></script>
-<script src="../static/script/firebase.js"
-	th:src="@{/script/firebase.js}"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 </head>
 
-<body onload="initFirebase();getTemp();">
+<body>
 	<div class="nav">
-		<img class="banner" src="../static/Media/header.png"
-			th:src="@{/Media/header.png}" />
+		<img class="banner" src="../static/Media/header.png" th:src="@{/Media/header.png}" />
 	</div>
 	<div class="content" id="style-2">
+		<div class="deviceSelectionText">Select a device: </div>
+		<select th:field="${devices}" class="deviceBox">
+			<option th:each="device : ${devices}" th:value="${device.id}" th:text="${device.device_name} "></option>
+		</select>
 		<div class="measureBox">
 			<div class="therm">
-				<img id="thermometer" class="thermImg" th:src="@{/Media/medTherm.png}"/>
+				<img id="thermometer" class="thermImg" th:src="@{/Media/medTherm.png}" />
 			</div>
 			<div class="measureHeading">Temperature</div>
 			<div class="measureSub" id="tempReading">--</div>

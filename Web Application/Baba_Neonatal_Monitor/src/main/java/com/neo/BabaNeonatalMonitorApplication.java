@@ -16,8 +16,8 @@ import com.neo.controller.MainController;
 public class BabaNeonatalMonitorApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
-		SpringApplication.run(BabaNeonatalMonitorApplication.class, args);
 		FirebaseController fc = new FirebaseController();
 		fc.initFirebase();
+		SpringApplication.run(BabaNeonatalMonitorApplication.class, args);
 	}
 }
