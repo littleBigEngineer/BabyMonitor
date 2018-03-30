@@ -1,0 +1,182 @@
+@font-face {
+  font-family: 'digital';
+  src: url('digital.ttf');
+}
+
+.monitor_outer_box{
+  height: 30vh;
+  margin-top: 5vh;
+  width: 28.8%;
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: #000;
+  border: #000 solid medium;
+  float: left;
+  border-radius: 3vh;
+  border: 1vh solid #c0c0c0;
+}
+
+.monitor_thermometer{
+  font-family: "digital";
+  float: left;
+  width: 10%;
+  height: 25vh;
+  margin-top: 2.5vh;
+  margin-bottom: 3vh;
+  margin-left: 5%;
+  margin-right: 5%;
+  /* background-color: #fff; */
+}
+
+.monitor_content{
+  float: left;
+  width: 100%;
+  text-align: left;
+  height: 17.5vh;
+  margin-top: 2vh;
+  font-family: "digital";
+}
+
+.monitor_temp_value{
+  float: left;
+  width: 25%;
+  height: 3vh;
+  margin-bottom: 2.5vh;
+  color: #44C553;
+  font-size: 4.5vh;
+  font-weight: bolder;
+  font-family: "digital";
+}
+
+.media_play{
+  float: left;
+  margin-left: 16%;
+  margin-right: 16%;
+  height: 4vh;
+  width: 13%;
+}
+
+.monitor_values{
+  float: left;
+  width: 50%;
+  height: 2vh;
+  margin-bottom: 1vh;
+  color: #44C553;
+  font-size: 2.5vh;
+  font-family: "digital";
+}
+
+.monitor_media{
+  width: 100%;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  height: 5vh;
+  float: left;
+}
+
+.media_button{
+  float: left;
+  width: 10%;
+  height: 4vh;
+}
+
+.media_title{
+  font-size: 3vh;
+  margin-top: 0.5vh;
+  text-align: left:
+}
+
+.media_screen{
+  float: left;
+  width: 70%;
+  height: 3vh;
+  margin-top: 0.5vh;
+  margin-left: 5%;
+  margin-right: 5%;
+  overflow: hidden;
+}
+
+.monitor_thermometer_section{
+  width: 90%;
+  height: 2.16vh;
+  margin-top: 0.5vh;
+  border-radius: 1vh;
+  border: solid 0.1vh #fff;
+  /* background-color: #fff; */
+  float: left;
+}
+
+.monitor_header{
+  font-family: "digital";
+  float: left;
+  width: 60%;
+  height: 5vh;
+  color: #44C553;
+  font-size: 5vh;
+  margin-top: 2.5vh;
+  text-align: center;
+}
+
+body{
+  font-family: "Arial";
+  background-color: #2e2e2e;
+  fonr-size: 3em;
+}
+
+.therm{
+	width: 15%;
+	height: 25vh;
+	float: left;
+	overflow: hidden;
+	margin-top: 3vh;
+	margin-left: 5%;
+}
+
+.thermImg{
+	width: 100%;
+}
+.measureHeading{
+  font-size: 4vh;
+  font-weight: bolder;
+  color: #fff;
+  float: left;
+  width: 90%;
+  margin-left: 5%;
+  text-align: left;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.measureMeter{
+  height: 20vh;
+  width: 15%;
+  float: left;
+  background-color: #fff;
+  margin-left: 5%;
+}
+
+.measureSub{
+	font-size: 3vh;
+	color: #fff;
+	width: 40%;
+  margin-left: 5%;
+  height: 5vh;
+  float: left;
+}
+
+.deviceBox{
+	margin-top: 2vh;
+	font-size: 2.8vh;
+	float: left;
+	width: 60%;
+	height: 5vh;
+	color: #000;
+}
+
+.deviceSelectionText{
+	font-size: 3vh;
+	float: left;
+	margin-top: 3vh;
+	margin-left: 2%;
+	margin-right: 2%;
+}

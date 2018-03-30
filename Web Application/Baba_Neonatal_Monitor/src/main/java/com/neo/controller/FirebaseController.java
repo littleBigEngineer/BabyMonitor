@@ -1,118 +1,81 @@
 package com.neo.controller;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.neo.model.Account;
-import com.neo.model.Device;
 
 public class FirebaseController {
 
 	DatabaseReference ref;
 	DataSnapshot ds;
 	AccountController ac;
-	Account account;
-	FirebaseApp firebaseApp;
-	boolean accountFlag, deviceFlag;
-	ArrayList<String> deviceList = new ArrayList<>();
-	ArrayList<String> childrenId = new ArrayList<>();
-	ArrayList<Device> devices = new ArrayList<>();
-	
-	public void initFirebase() throws IOException {
-		FileInputStream serviceAccount = new FileInputStream("src/main/resources/static/firebase-key.json");
+	FirebaseDatabase fd;
 
+	String uName = "";
+	Map<String, Object> output = new HashMap<>();
+
+	ArrayList<String> username = new ArrayList<>();
+	ArrayList<String> email = new ArrayList<>();
+	boolean done = false;
+	ArrayList<ArrayList<String>> returnValue = new ArrayList<>();
+
+	final String firebaseKey = "https://s3.us-east-2.amazonaws.com/elasticbeanstalk-us-east-2-522520740280/firebase-key.json";
+
+	public void initFirebase() throws IOException {
+		InputStream serviceAccount = new URL(firebaseKey).openStream();
 		FirebaseOptions options = new FirebaseOptions.Builder()
 				.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 				.setDatabaseUrl("https://baba-neonatal-monitoring.firebaseio.com")
 				.build();
 
-		firebaseApp = FirebaseApp.initializeApp(options);
-		FirebaseAuth.getInstance(firebaseApp);
+		FirebaseApp.initializeApp(options);
 	}
-	
-	public void getTemperatureReading() {
 
-	}
-	public Account checkForAccount(String username, String password) {
-		ref = FirebaseDatabase.getInstance().getReference("Accounts/"+username);
-		accountFlag = false;
+	public ArrayList<ArrayList<String>> getUsernames(){
+		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Accounts");
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
 			@Override
-			public void onDataChange(DataSnapshot dataSnapshot) {
-				account = dataSnapshot.getValue(Account.class);
-				accountFlag = true;
+			public void onDataChange(DataSnapshot snapshot) {
+				username.clear();
+				email.clear();
+
+				for(DataSnapshot ds: snapshot.getChildren()) {
+					output = (Map<String, Object>) ds.getValue();
+					username.add(output.get("username").toString());
+					email.add(output.get("email").toString());
+				}
+
+				returnValue.clear();
+
+				returnValue.add(username);
+				returnValue.add(email);
+				done = true;
 			}
 
 			@Override
 			public void onCancelled(DatabaseError error) {
-				
+				// TODO Auto-generated method stub
+
 			}
 		});
-		while(!accountFlag) {
-			
+
+		while(!done) {
+			System.out.println("Waiting");
 		}
-		if(!password.equals(account.getPassword()))
-			account = null;
-		
-		return account;
-	}	
-	public ArrayList<Device> getDeviceList(String userId){
-		devices.removeAll(devices);
-		deviceList.removeAll(deviceList);
-		childrenId.removeAll(childrenId);
-		deviceFlag = false;
-		ref = FirebaseDatabase.getInstance().getReference("Device Assoc").child(userId);
-		ref.addListenerForSingleValueEvent(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot dataSnapshot) {
-				for(int i = 1; i <= 6; i++) {
-                    if(dataSnapshot.hasChild(""+i)) {
-                        String device = dataSnapshot.child("" + i).getValue().toString();
-                        if(!deviceList.contains(device))
-                        	deviceList.add(device);
-                    }
-                }
-				getDevices();
-			}
-
-			@Override
-			public void onCancelled(DatabaseError error) {
-				
-			}
-		});
-		while(!deviceFlag) {
-			
-		}
-		return devices;
-	}	
-	public void getDevices(){
-		ref = FirebaseDatabase.getInstance().getReference("Devices");
-		ref.addListenerForSingleValueEvent(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot dataSnapshot) {
-				for (int i = 0; i < deviceList.size(); i++) {
-                    Device d = dataSnapshot.child(deviceList.get(i)).getValue(Device.class);
-                    d.setId(deviceList.get(i));
-                    System.out.println(d.getDevice_name());
-                    childrenId.add(d.getChild());
-                    devices.add(d);
-                }
-				deviceFlag = true;
-			}
-
-			@Override
-			public void onCancelled(DatabaseError error) {
-			}
-		});
+		return returnValue;
 	}
 }

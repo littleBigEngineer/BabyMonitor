@@ -1,9 +1,14 @@
 package neo.baba.neonatalmonitoring;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -18,12 +23,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import neo.baba.neonatalmonitoring.fragment.LogoutFragment;
 import neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model.Child;
 import neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model.Device;
 
 public class Devices extends AppCompatActivity {
 
     private String username;
+    private DrawerLayout mDrawerLayout;
     private FirebaseDatabase database;
     private ArrayList<String> deviceId = new ArrayList<>();
     private ArrayList<Device> devices = new ArrayList<>();
@@ -34,6 +41,9 @@ public class Devices extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         Bundle extra = getIntent().getExtras();
         username = extra.getString("username");
 
@@ -41,6 +51,17 @@ public class Devices extends AppCompatActivity {
         setContentView(R.layout.devices_activity);
         database = FirebaseDatabase.getInstance();
         getDevices();
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
     }
 
     public void getDevices(){
@@ -139,6 +160,36 @@ public class Devices extends AppCompatActivity {
             name.setText(sel_dev.getDevice_name());
             child.setText("Child: " + childName);
         }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    public boolean onNavigationItemSelected(MenuItem item){
+       int id = item.getItemId();
+       Fragment fragment = null;
+       Bundle bundle = new Bundle();
+       if(id == R.id.nav_logout)
+           fragment = new LogoutFragment();
+
+       if(fragment !=  null) {
+           FragmentTransaction ft = getFragmentManager().beginTransaction();
+           ft.replace(R.id.content_frame, fragment);
+           ft.commit();
+       }
+       DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       drawer.closeDrawer(GravityCompat.START);
+       return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent();
+        i.setAction(Intent.ACTION_MAIN);
+        i.addCategory(Intent.CATEGORY_HOME);
+        this.startActivity(i);
     }
 
     public void logout(View view){

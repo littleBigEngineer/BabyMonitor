@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.neo.controller.FirebaseController;
 import com.neo.controller.MainController;
 
 @SpringBootApplication
@@ -16,8 +15,6 @@ import com.neo.controller.MainController;
 public class BabaNeonatalMonitorApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
-		FirebaseController fc = new FirebaseController();
-		fc.initFirebase();
 		SpringApplication.run(BabaNeonatalMonitorApplication.class, args);
 	}
 }

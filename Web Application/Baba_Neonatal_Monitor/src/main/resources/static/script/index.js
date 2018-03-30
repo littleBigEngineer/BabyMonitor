@@ -1,22 +1,31 @@
 function showPopup(obj) {
-    document.getElementById(obj).style.visibility = 'visible';
+	document.getElementById(obj).style.visibility = 'visible';
 }
 
 function closePopup(obj) {
-    document.getElementById(obj).style.visibility = 'hidden';
+	document.getElementById(obj).style.visibility = 'hidden';
 
-    document.getElementById('firstName').value="";
-    document.getElementById('lastName').value="";
-    document.getElementById('email').value="";
-    document.getElementById('phone').value="";
-    document.getElementById('password').value="";
-    document.getElementById('passwordConfirm').value="";
+	document.getElementById('firstName').value="";
+	document.getElementById('lastName').value="";
+	document.getElementById('email').value="";
+	document.getElementById('phone').value="";
+	document.getElementById('password').value="";
+	document.getElementById('passwordConfirm').value="";
 }
 
 function passDisplay(obj) {
-      document.getElementById(obj).type="text";
+	document.getElementById(obj).type="text";
 }
 
 function passHide(obj) {
-      document.getElementById(obj).type="password";
+	document.getElementById(obj).type="password";
+}
+
+function changeImg(){
+	var therm = document.getElementById('thermometer');
+	therm.src="../Media/hotTherm.png";
+}
+
+function doStuff(){
+	
 }

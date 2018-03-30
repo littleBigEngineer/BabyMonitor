@@ -1,10 +1,34 @@
 package com.neo.model;
 
-import java.util.ArrayList;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 public class Account {
-	private String email, firstName, lastName, phone, password, username;
-	private ArrayList<String> associatedDevices = new ArrayList<>();
+	
+	@NotNull
+	@Length(min=1, max=30)
+	private String email;
+	
+	@NotNull
+	@Length(min=1, max=20)
+	private String firstName;
+	
+	@NotNull
+	@Length(min=1, max=20)
+	private String lastName;
+	
+	@NotNull
+	@Length(min=10, max=10)
+	private String phone;
+	
+	@NotNull
+	@Length(min=8, max=20)
+	private String password;
+	
+	@NotNull
+	@Length(min=1, max=20)
+	private String username;
 
 	public Account(String email, String firstName, String lastName, String phone, String password, String username) {
 		super();
@@ -19,28 +43,8 @@ public class Account {
 	public Account(){
 
 	}
-	
-	//Account functionality
-	
-	public void addAssociatedDevice(String deviceId) {
-		if(associatedDevices.size() < 7)
-			associatedDevices.add(deviceId);
-	}
-	
-	public void removeAssociatedDevice(String deviceId) {
-		associatedDevices.remove(deviceId);
-	}
-	
-	
+
 	//Getters and Setters	
-
-	public ArrayList<String> getAssociatedDevices() {
-		return associatedDevices;
-	}
-
-	public void setAssociatedDevices(ArrayList<String> associatedDevices) {
-		this.associatedDevices = associatedDevices;
-	}
 
 	public String getUsername() {
 		return username;

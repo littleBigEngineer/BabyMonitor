@@ -1,395 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/background"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
-    tools:context="neo.baba.neonatalmonitoring.Dashboard">
+    android:fitsSystemWindows="true">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/panel"
+    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/drawer_view"
+        app:headerLayout="@layout/nav_header"/>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="#F39c12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="#000"
+        tools:context="neo.baba.neonatalmonitoring.Dashboard">
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/panel"
             android:layout_width="match_parent"
-            android:layout_height="51dp"
-            android:background="#ECF0F1">
-
-            <TextView
-                android:id="@+id/logout_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="29dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:onClick="logout"
-                android:text="@string/logout"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/logout_img"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/logout_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:contentDescription="Logout Button"
-                android:onClick="logout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/logout" />
-
-            <ImageView
-                android:id="@+id/timer_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginEnd="60dp"
-                android:layout_marginTop="10dp"
-                android:contentDescription="Logout Button"
-                android:onClick="timerScreen"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/timer" />
-
-            <ImageView
-                android:id="@+id/setting_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:contentDescription="Logout Button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/cog" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/device_1"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/layout_border"
-            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:background="#F39c12"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/device_1_name"
-                android:layout_width="120dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:text="Device Name"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:background="#ECF0F1">
+
+                <ImageView
+                    android:id="@+id/logout_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="Hamburger Menu"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/hamburger" />
+
+                <ImageView
+                    android:id="@+id/timer_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="Timer  Button"
+                    android:onClick="timerScreen"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/timer" />
+
+                <ImageView
+                    android:id="@+id/setting_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="Logout Button"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/cog" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/device_1"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_border"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-            <TextView
-                android:id="@+id/device_1_child"
-                android:layout_width="100dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="10dp"
-                android:text="Device Child"
-                android:textAlignment="textStart"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                <TextView
+                    android:id="@+id/device_1_name"
+                    android:layout_width="120dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Device Name"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/device_1_child"
+                    android:layout_width="100dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Device Child"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_1_name" />
+
+                <TextView
+                    android:id="@+id/device_1_room"
+                    android:layout_width="100dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Device Room"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_1_child" />
+
+                <ImageView
+                    android:id="@+id/device_1_off"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="40dp"
+                    app:layout_constraintEnd_toStartOf="@+id/temperate2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_1_room"
+                    app:srcCompat="@drawable/empty_circ" />
+
+                <ImageView
+                    android:id="@+id/device_1_on"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cold2"
+                    app:layout_constraintTop_toBottomOf="@+id/device_1_room"
+                    app:srcCompat="@drawable/empty_circ" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/device_2"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_border"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_1_name" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-            <TextView
-                android:id="@+id/device_1_room"
-                android:layout_width="100dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="10dp"
-                android:text="Device Room"
-                android:textAlignment="textStart"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_1_child" />
+                <TextView
+                    android:id="@+id/device_2_name"
+                    android:layout_width="120dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Device Name"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/device_1_off"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="40dp"
-                app:layout_constraintEnd_toStartOf="@+id/temperate2"
+                <TextView
+                    android:id="@+id/device_2_child"
+                    android:layout_width="100dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Device Child"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_2_name" />
+
+                <TextView
+                    android:id="@+id/device_2_room"
+                    android:layout_width="100dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Device Room"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_2_child" />
+
+                <ImageView
+                    android:id="@+id/device_2_off"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="40dp"
+                    app:layout_constraintEnd_toStartOf="@+id/temperate2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_2_room"
+                    app:srcCompat="@drawable/empty_circ" />
+
+                <ImageView
+                    android:id="@+id/device_2_on"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cold2"
+                    app:layout_constraintTop_toBottomOf="@+id/device_2_room"
+                    app:srcCompat="@drawable/empty_circ" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/device_3"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_border"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_1_room"
-                app:srcCompat="@drawable/empty_circ" />
+                app:layout_constraintTop_toBottomOf="@+id/device_1">
 
-            <ImageView
-                android:id="@+id/device_1_on"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginStart="20dp"
+                <TextView
+                    android:id="@+id/device_3_name"
+                    android:layout_width="120dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Device Name"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/device_3_child"
+                    android:layout_width="100dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Device Child"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_3_name" />
+
+                <TextView
+                    android:id="@+id/device_3_room"
+                    android:layout_width="100dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Device Room"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_3_child" />
+
+                <ImageView
+                    android:id="@+id/device_3_off"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="40dp"
+                    app:layout_constraintEnd_toStartOf="@+id/temperate2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_3_room"
+                    app:srcCompat="@drawable/empty_circ" />
+
+                <ImageView
+                    android:id="@+id/device_3_on"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cold"
+                    app:layout_constraintTop_toBottomOf="@+id/device_3_room"
+                    app:srcCompat="@drawable/empty_circ" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/device_4"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/layout_border"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cold2"
-                app:layout_constraintTop_toBottomOf="@+id/device_1_room"
-                app:srcCompat="@drawable/empty_circ" />
+                app:layout_constraintTop_toBottomOf="@+id/device_2">
+
+                <TextView
+                    android:id="@+id/device_4_name"
+                    android:layout_width="120dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Device Name"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/device_4_child"
+                    android:layout_width="100dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Device Child"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_4_name" />
+
+                <TextView
+                    android:id="@+id/device_4_room"
+                    android:layout_width="100dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Device Room"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_4_child" />
+
+                <ImageView
+                    android:id="@+id/device_4_off"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="40dp"
+                    app:layout_constraintEnd_toStartOf="@+id/temperate2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/device_4_room"
+                    app:srcCompat="@drawable/empty_circ" />
+
+                <ImageView
+                    android:id="@+id/device_4_on"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cold"
+                    app:layout_constraintTop_toBottomOf="@+id/device_4_room"
+                    app:srcCompat="@drawable/empty_circ" />
+
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/device_2"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/layout_border"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-            <TextView
-                android:id="@+id/device_2_name"
-                android:layout_width="120dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:text="Device Name"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/device_2_child"
-                android:layout_width="100dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="10dp"
-                android:text="Device Child"
-                android:textAlignment="textStart"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_2_name" />
-
-            <TextView
-                android:id="@+id/device_2_room"
-                android:layout_width="100dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="10dp"
-                android:text="Device Room"
-                android:textAlignment="textStart"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_2_child" />
-
-            <ImageView
-                android:id="@+id/device_2_off"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="40dp"
-                app:layout_constraintEnd_toStartOf="@+id/temperate2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_2_room"
-                app:srcCompat="@drawable/empty_circ" />
-
-            <ImageView
-                android:id="@+id/device_2_on"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cold2"
-                app:layout_constraintTop_toBottomOf="@+id/device_2_room"
-                app:srcCompat="@drawable/empty_circ" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/device_3"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/layout_border"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/device_1">
-
-            <TextView
-                android:id="@+id/device_3_name"
-                android:layout_width="120dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:text="Device Name"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/device_3_child"
-                android:layout_width="100dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="10dp"
-                android:text="Device Child"
-                android:textAlignment="textStart"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_3_name" />
-
-            <TextView
-                android:id="@+id/device_3_room"
-                android:layout_width="100dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="10dp"
-                android:text="Device Room"
-                android:textAlignment="textStart"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_3_child" />
-
-            <ImageView
-                android:id="@+id/device_3_off"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="40dp"
-                app:layout_constraintEnd_toStartOf="@+id/temperate2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_3_room"
-                app:srcCompat="@drawable/empty_circ" />
-
-            <ImageView
-                android:id="@+id/device_3_on"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cold2"
-                app:layout_constraintTop_toBottomOf="@+id/device_3_room"
-                app:srcCompat="@drawable/empty_circ" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/device_4"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/layout_border"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/device_2">
-
-            <TextView
-                android:id="@+id/device_4_name"
-                android:layout_width="120dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:text="Device Name"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/device_4_child"
-                android:layout_width="100dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="12dp"
-                android:text="Device Child"
-                android:textAlignment="textStart"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_4_name" />
-
-            <TextView
-                android:id="@+id/device_4_room"
-                android:layout_width="100dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="10dp"
-                android:text="Device Room"
-                android:textAlignment="textStart"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_4_child" />
-
-            <ImageView
-                android:id="@+id/device_4_off"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="40dp"
-                app:layout_constraintEnd_toStartOf="@+id/temperate2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/device_4_room"
-                app:srcCompat="@drawable/empty_circ" />
-
-            <ImageView
-                android:id="@+id/device_4_on"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cold2"
-                app:layout_constraintTop_toBottomOf="@+id/device_4_room"
-                app:srcCompat="@drawable/empty_circ" />
-
-        </android.support.constraint.ConstraintLayout>
-
     </android.support.constraint.ConstraintLayout>
-
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.DrawerLayout>

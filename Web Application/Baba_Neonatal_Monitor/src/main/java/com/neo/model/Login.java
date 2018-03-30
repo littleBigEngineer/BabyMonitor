@@ -1,11 +1,11 @@
 package com.neo.model;
 
 public class Login {
-	String email, password;
+	String username, password;
 	
-	public Login(String email, String password) {
+	public Login(String username, String password) {
 		super();
-		this.email = email;
+		this.username = username;
 		this.password = password;
 	}
 	
@@ -13,12 +13,12 @@ public class Login {
 		super();
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
