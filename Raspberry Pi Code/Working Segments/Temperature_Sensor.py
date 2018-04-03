@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import glob
 import time
@@ -45,5 +44,5 @@ while True:
     avg = total/count
     data = {"Current Temp":read_temp(), "Average Temp":avg}
     db.child("Temperature").set(data)
-    time.sleep(5)
+    time.sleep(1)
 
