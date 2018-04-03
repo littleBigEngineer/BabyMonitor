@@ -14,28 +14,42 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model.Account;
 
 public class Login extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private boolean forgotten = false;
+    private DatabaseReference mDatabase;
+    private String u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.login_activity);
-        mAuth = FirebaseAuth.getInstance();
 
-        if(mAuth.getCurrentUser() != null){
-            loading();
+        if(SaveSharedPreference.getUserName(Login.this).length() == 0)
+        {
+            String a = SaveSharedPreference.getUserName(Login.this);
         }
+        else
+        {
+            String user = SaveSharedPreference.getUserName(Login.this);
+            loading(user);
+        }
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        setContentView(R.layout.login_activity);
     }
 
-    public void loading(){
+    public void loading(String username){
         Intent loading = new Intent(Login.this, Loading.class);
+        loading.putExtra("logged", username);
         Login.this.startActivity(loading);
     }
 
@@ -45,42 +59,52 @@ public class Login extends AppCompatActivity {
     }
 
     public void login(View view){
-        final EditText email = findViewById(R.id.email);
-        String e = email.getText().toString();
+        final EditText username = findViewById(R.id.username);
+        u = username.getText().toString();
 
         if(!forgotten) {
             final EditText password = findViewById(R.id.password);
             String p = password.getText().toString();
 
-            if (e.equals("a")) {
-                e = "robert.crowley1@mycit.ie";
-                p = "password1";
+            if (u.equals("a")) {
+                u = "RobCrowley";
+                p = "Password1!";
             }
 
-            if (!(e.length() > 0 && p.length() > 0))
+            SaveSharedPreference.setUserName(Login.this, u);
+
+            if (!(u.length() > 0 && p.length() > 0))
                 AuthError();
             else {
-                mAuth.signInWithEmailAndPassword(e, p).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                DatabaseReference acc = mDatabase.child("Accounts");
+                acc.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            loading();
-                        } else {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.hasChild(u)) {
                             AuthError();
                         }
+                        else{
+                            Account a = dataSnapshot.child(u).getValue(Account.class);
+                            loading(a.getUsername());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
                     }
                 });
             }
         }
         else{
-            forgottenPassword(e);
+            forgottenPassword(u);
         }
     }
 
     public void forgotten(View view){
 
         final ImageView passImg = findViewById(R.id.password_icon);
-        final EditText email = findViewById(R.id.email);
+        final EditText email = findViewById(R.id.username);
         final TextView forgotten_txt = findViewById(R.id.forgot_pass);
         final Button button = findViewById(R.id.login_button);
 
@@ -118,5 +142,13 @@ public class Login extends AppCompatActivity {
 
     public void AuthError(){
         Toast.makeText(Login.this, "Invalid Email Address/Password Provided", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent();
+        i.setAction(Intent.ACTION_MAIN);
+        i.addCategory(Intent.CATEGORY_HOME);
+        this.startActivity(i);
     }
 }

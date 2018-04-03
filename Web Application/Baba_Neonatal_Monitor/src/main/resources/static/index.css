@@ -19,7 +19,6 @@
 }
 
 .body {
-	background-color: #b0e57c;
 	margin: 0;
 	padding: 0;
 }
@@ -36,7 +35,7 @@
 	width: 30%;
 	height: auto;
 	float: left;
-	background-color: #029da7;
+	background-color: #89cff0;
 	margin-top: 5vh;
 	margin-left: 4.25%;
 	z-index: 0;
@@ -66,6 +65,11 @@
 	z-index: 0;
 }
 
+.labelSmaller{
+	width: 25%;
+	margin-left: 13.5%;
+}
+
 .companionPane {
 	width: 30%;
 	margin-left: 4.25%;
@@ -73,7 +77,7 @@
 	float: left;
 	position: relative;
 	z-index: 0;
-	background-color: #92278f;
+	background-color: #c68dff;
 	border-radius: 0 0 20px 20px;
 }
 
@@ -98,11 +102,16 @@
 	padding-left: 2%;
 	padding-right: 2%;
 	background-color: #dadada;
+	border: none;
 	border: solid #dadada thick;
 	float: left;
 	margin-bottom: 1vh;
 	position: relative;
 	z-index: 0;
+}
+
+input:focus{
+	outline-width: 0;
 }
 
 .passwordIcon {
@@ -172,7 +181,7 @@
 }
 
 .loginButton {
-	background-color: #ffc110;
+	background-color: #FFD357;
 	z-index: 0;
 	border: solid #000 medium;
 	font-weight: bold;
@@ -197,7 +206,7 @@
 	width: 40%;
 	padding-top: 2vh;
 	padding-bottom: 2vh;
-	background-color: #029da7;
+	background-color: #4CBAC0;
 	margin-left: 30%;
 	margin-top: 5vh;
 	position: absolute;
@@ -229,4 +238,13 @@
 
 .signUpTextBox {
 	margin-left: 20%;
+}
+
+.errorImage{
+	width: 8%;
+	margin-left: 2%;
+	height: 6.25vh;
+	float: left;
+	margin-top: 1vh;
+	visibility: inherit;
 }

@@ -4,31 +4,64 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta charset="UTF-8" />
 <title>BABA | Neonatal Monitoring</title>
-<link rel="stylesheet" type="text/css" media="all"
-	href="../static/gen.css" th:href="@{/gen.css}" />
-<link rel="stylesheet" type="text/css" media="all"
-	href="../static/dash.css" th:href="@{/dash.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../static/gen.css" th:href="@{/gen.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../static/dashboard_style.css" th:href="@{/dashboard_style.css}" />
+
 <script src="../static/script/index.js" th:src="@{/script/index.js}"></script>
-<script src="../static/script/firebase.js" th:src="@{/script/firebase.js}"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="../static/script/jQuery.js" th:src="@{/script/jQuery.js}"></script>
 </head>
 
-<body onload="initFirebase();getTemp();">
+<body>
 	<div class="nav">
-		<img class="banner" src="../static/Media/header.png"
-			th:src="@{/Media/header.png}" />
+		<img class="banner" src="../static/Media/header.png" th:src="@{/Media/header.png}" />
 	</div>
+
 	<div class="content" id="style-2">
-		<div class="measureBox">
-			<div class="measureHeading">Temperature</div>
-			<p class="measureHeading" id="tempReading">--</p>
+		<div class="monitor_outer_box" id="dv1">
+			<div class="monitor_thermometer">
+				<div class="monitor_thermometer_section" id="dv1Therm9"></div>
+				<div class="monitor_thermometer_section" id="dv1Therm8"></div>
+				<div class="monitor_thermometer_section" id="dv1Therm7"></div>
+				<div class="monitor_thermometer_section" id="dv1Therm6"></div>
+				<div class="monitor_thermometer_section" id="dv1Therm5"></div>
+				<div class="monitor_thermometer_section" id="dv1Therm4"></div>
+				<div class="monitor_thermometer_section" id="dv1Therm3"></div>
+				<div class="monitor_thermometer_section" id="dv1Therm2"></div>
+				<div class="monitor_thermometer_section" id="dv1Therm1"></div>
+			</div>
+			<div class="monitor_header" id="dv1Name">Device Name
+				<div class="monitor_content">
+					<div class="monitor_values" id="devCo">CO Level: High</div>
+					<div class="monitor_values">CO<sub>2</sub> Level: Low</div>
+					<div class="monitor_values">Humidity: 25%</div>
+					<div class="monitor_values">Movement: No</div>
+					<div class="monitor_media">
+						<img src="../static/Media/previous.png" th:src="@{/Media/previous.png}" class="media_button"/>
+						<div class="media_screen">
+							<div class="media_title"><marquee behavior="scroll" direction="left">Media Title | Media Title | Media Title
+								| Media Title | Media Title </marquee></div>
+						</div>
+						<img src="../static/Media/next.png" th:src="@{/Media/next.png}" class="media_button"/>
+					</div>
+					<div class="monitor_temp_value" id="devTemp">32&deg;C</div>
+					<img src="../static/Media/play.png" th:src="@{/Media/play.png}" class="media_play"/>
+					<div class="monitor_temp_value">17 db</div>
+				</div>
+			</div>
+			<div class="monitor_thermometer">
+				<div class="monitor_thermometer_section"></div>
+				<div class="monitor_thermometer_section"></div>
+				<div class="monitor_thermometer_section"></div>
+				<div class="monitor_thermometer_section"></div>
+				<div class="monitor_thermometer_section"></div>
+				<div class="monitor_thermometer_section"></div>
+				<div class="monitor_thermometer_section"></div>
+				<div class="monitor_thermometer_section"></div>
+				<div class="monitor_thermometer_section"></div>
+			</div>
 		</div>
-		<div class="measureBox">
-			<div class="measureHeading">Humidity</div>
-		</div>
-		<div class="measureBox">
-			<div class="measureHeading">Temperature</div>
-		</div>
+
 	</div>
 </body>
 </html>

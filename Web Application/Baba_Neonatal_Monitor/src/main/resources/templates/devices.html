@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+<title>BABA | Neonatal Monitoring</title>
+<link rel="stylesheet" type="text/css" media="all" href="../static/gen.css" th:href="@{/gen.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../static/device.css" th:href="@{/device.css}" />
+</head>
+
+<body>
+	<div class="nav">
+		<img class="banner" src="../static/Media/header.png"
+			th:src="@{/Media/header.png}" />
+	</div>
+	<div class="content" id="content">
+	   <div class="navBar">
+       <div onmousedown="addDevice()">
+         <img src="../static/Media/add_white.png" th:src="@{/Media/add_white.png}" class="navBarAdd"/>
+         <div class="navBarText">Add Device</div>
+       </div>
+     </div>
+	</div>
+</body>
+</html>

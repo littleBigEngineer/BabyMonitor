@@ -3,29 +3,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BABA | Neonatal Monitoring</title>
 <link rel="stylesheet" type="text/css" media="all" href="../static/index.css" th:href="@{/index.css}" />
 <link rel="stylesheet" type="text/css" media="all" href="../static/gen.css" th:href="@{/gen.css}"/>
-<script src="../static/script/index.js" th:src="@{/script/index.js}"></script>
-<script src="../static/script/firebase.js" th:src="@{/script/firebase.js}"></script>
-<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="../static/script/index_jquery.js" th:src="@{/script/index_jquery.js}"></script>
+
 </head>
 
-<body onload="initFirebase()">
-	<div style="visibility: hidden;" id="cover" class="cover">
+<body>
+	<div style="visibility: hidden;" id="registerPopup" class="cover">
 		<div class="popup">
-			<img src="../static/Media/close.png" th:src="@{/Media/close.png}" class="closeButton" onmousedown="closePopup('cover')" />
+			<img src="../static/Media/close.png" th:src="@{/Media/close.png}" class="closeButton" id="reg-user-close" />
 			<p class="popupHeader">Please Complete Sign-up</p>
-			<form method="GET" action="dashboard.html">
-				<input type="text" id="firstName" name="firstName" class="signUpTextBox loginInput" placeholder="First Name" />
-				<input type="text" id="lastName" name="lastName" class="signUpTextBox loginInput" placeholder="Last Name" />
-				<input type="email" id="email" name="email" class="signUpTextBox loginInput" placeholder="E-mail Address" />
-				<input type="text" id="phone" name="phone" class="signUpTextBox loginInput" placeholder="Phone Number" />
-				<input type="password" id="password" name="password" class="signUpTextBox loginInputPassword" placeholder="Password" />
-				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" onmouseover="passDisplay('password')" onmouseout="passHide('password')" />
-				<input type="password" id="passwordConfirm" name="passwordConfirm" class="signUpTextBox loginInputPassword" placeholder="Confirm Password" />
-				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" onmouseover="passDisplay('passwordConfirm')" onmouseout="passHide('passwordConfirm')" />
-				<input type="submit" value="Create Account" class="loginButton"  />
+
+			<form method="post" id="registerForm" action="#">
+				<input type="text" id="firstName" name="firstName" class="signUpTextBox loginInput" placeholder="First Name"/>
+				<input type="text" id="lastName" name="lastName" class="signUpTextBox loginInput" placeholder="Last Name"/>
+				<input type="email" id="email" name="email" class="signUpTextBox loginInput" placeholder="E-mail Address"/>
+				<input type="text" id="username" name="create_username" class="signUpTextBox loginInput" placeholder="Username"/>
+				<input type="text" id="phone" name="phone" class="signUpTextBox loginInput" placeholder="Phone Number"/>
+				<input type="password" id="password" name="create_password" class="signUpTextBox loginInputPassword" placeholder="Password"/>
+				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" id="pass-img"/>
+				<input type="password" id="passwordConfirm" name="passwordConfirm" class="signUpTextBox loginInputPassword" placeholder="Confirm Password"/>
+				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" id="pass-conf-img" />
+				<input type="submit" id="createButton" value="Create Account" class="loginButton"  />
 			</form>
 		</div>
 	</div>
@@ -61,20 +65,20 @@
 			<div class="sideLines"></div>
 			<img src="../static/Media/sleepingBaby.png" th:src="@{/Media/sleepingBaby.png}" class="loginPaneImage" />
 			<div class="sideLines"></div>
-			<form method="POST">
+			<p class="errorBar" th:text="${error}"></p>
+			<form th:action="@{/login}" method="post" th:object="${login}">
 				<img class="textBoxIcon" src="../static/Media/username.png" th:src="@{/Media/username.png}" />
-				<input type="text" id="loginEmail" name="email" class="loginInput" placeholder="E-mail Address" />
+				<input type="text" id="loginUsername" th:field="${login.username}" name="username" class="loginInput" placeholder="Username" />
 				<img id="loginEmailIcon" class="textBoxIcon" src="../static/Media/password.png" th:src="@{/Media/password.png}" />
-				<input type="password" id="loginPassword" name="password" class="loginInput" placeholder="Password" />
-				<input type="submit" value="Sign In" onmousedown="signInUser();" class="loginButton" />
-				<p class="loginRegister">
-					Not a member yet? <a href="" onmousedown="showPopup('cover')" class="link">Register Now</a>
-				</p>
+				<input type="password"  id="loginPassword" th:field="${login.password}" class="loginInputPassword" placeholder="Password" />
+				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" onmouseover="passDisplay('loginPassword')" onmouseout="passHide('loginPassword')" />
+				<input type="submit" class="loginButton" />
+				<p class="loginRegister" id="reg-user">Not a member yet? <a class="link">Register Now</a></p>
 			</form>
 		</div>
 		<div class="companionPane">
-			<img src="../static/Media/playStore.png" class="appStoreLabel" th:src="@{/Media/playStore.png}" /> <img
-				src="../static/Media/appStore.png" class="appStoreLabel" th:src="@{/Media/appStore.png}" />
+			<img src="../static/Media/playStore.png" class="appStoreLabel" th:src="@{/Media/playStore.png}" />
+			<img src="../static/Media/appStore.png" class="appStoreLabel" th:src="@{/Media/appStore.png}" />
 		</div>
 	</div>
 </body>

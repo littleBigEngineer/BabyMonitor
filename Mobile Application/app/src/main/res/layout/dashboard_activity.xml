@@ -15,7 +15,7 @@
         android:layout_margin="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:background="#F39c12"
+        android:background="#89cff0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -55,18 +55,32 @@
                 app:srcCompat="@drawable/logout" />
 
             <ImageView
-                android:id="@+id/logout_img2"
+                android:id="@+id/timer_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="Logout Button"
+                android:onClick="timerScreen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/timer" />
+
+            <ImageView
+                android:id="@+id/setting_img"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
                 android:contentDescription="Logout Button"
-                android:onClick="logout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/cog" />
+
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
@@ -80,7 +94,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/noise"
+                android:id="@+id/device_1"
                 android:layout_width="120dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="5dp"
@@ -110,7 +124,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/noise" />
+                app:layout_constraintTop_toBottomOf="@+id/device_1" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
@@ -124,30 +138,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Switch
-                android:id="@+id/temp_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="5dp"
-                android:checked="true"
-                android:onClick="tempSwitch"
-                android:splitTrack="false"
-                android:textOff="Off"
-                android:textOn="On"
-                android:textSize="8sp"
-                android:thumbTint="#BD3525"
-                android:trackTint="#F39C12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:checked="true" />
-
             <TextView
                 android:id="@+id/temp"
                 android:layout_width="120dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:text="Temperature"
                 android:textAlignment="center"
                 android:textColor="#000"
@@ -155,7 +152,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/temp_switch" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/currTemp"
