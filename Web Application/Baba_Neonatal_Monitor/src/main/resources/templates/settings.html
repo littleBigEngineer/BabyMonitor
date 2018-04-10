@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+<title>BABA | Neonatal Monitoring</title>
+<link rel="stylesheet" type="text/css" media="all" href="../static/setting.css" th:href="@{/setting.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../static/gen.css" th:href="@{/gen.css}" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="../static/script/settings_jquery.js" th:src="@{/script/settings_jquery.js}"></script>
+</head>
+
+<body>
+	<div class="nav">
+		<img class="banner" src="../static/Media/header.png" th:src="@{/Media/header.png}" />
+	</div>
+
+	<div class="content" id="style-2" style="overflow: scroll-y;">
+
+    <div class="sidebar" id="sidebar"></div>
+
+		<div class="setting_panel">
+			<div class="settings_heading">Device Details</div>
+			<div class="settings_edit">[Edit]</div>
+			<hr/>
+			<div class="col">
+					<div class="settings_subheading">Device ID: </div><div class="settings_general_text">baba_123</div>
+					<br/>
+					<div class="settings_subheading">Device Name: </div><div class="settings_general_text">Baba 123</div>
+					<br/>
+					<div class="settings_subheading">Last Active: </div><div class="settings_general_text">Active Now</div>
+			</div>
+			<div class="col">
+				<div class="settings_subheading">Current Users: </div>
+				<br/>
+				<li style="margin-left: 5%;">Robert</li>
+				<li style="margin-left: 5%;">Harry</li>
+			</div>
+
+			<div style="width: 100%; float: left;"><div class="settings_heading">Device Features</div>
+			<div class="settings_edit">[Edit]</div></div>
+			<hr/>
+			<div class="col">
+					<div class="settings_subheading">Carbon Monoxide: </div><div class="settings_general_text">Enabled</div>
+					<br/>
+					<div class="settings_subheading">Carbon Dioxide: </div><div class="settings_general_text">Enabled</div>
+					<br/>
+					<div class="settings_subheading">Sound Detection: </div><div class="settings_general_text">Enabled</div>
+			</div>
+			<div class="col">
+				<div class="settings_subheading">Video Feed: </div><div class="settings_general_text">Enabled</div>
+				<br/>
+				<div class="settings_subheading">Humidity Monitoring: </div><div class="settings_general_text">Enabled</div>
+				<br/>
+				<div class="settings_subheading">Temperature Monitoring: </div><div class="settings_general_text">Enabled</div>
+			</div>
+
+			<div class="settings_heading">Device Lullaby Library</div>
+			<div class="settings_edit">[Edit]</div>
+			<hr/>
+			<div class="settings_library">
+				<table cellspacing="0" border="1">
+  				<tr>
+    				<th>Company</th>
+				    <th>Contact</th>
+				    <th>Country</th>
+  				</tr>
+  				<tr>
+				    <td>Alfreds Futterkiste</td>
+				    <td>Maria Anders</td>
+				    <td>Germany</td>
+				  </tr>
+				</table>
+				<!-- <input type="file" id="fileUpload"> -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

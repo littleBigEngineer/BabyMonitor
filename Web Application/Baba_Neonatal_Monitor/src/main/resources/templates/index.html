@@ -7,9 +7,11 @@
 <title>BABA | Neonatal Monitoring</title>
 <link rel="stylesheet" type="text/css" media="all" href="../static/index.css" th:href="@{/index.css}" />
 <link rel="stylesheet" type="text/css" media="all" href="../static/gen.css" th:href="@{/gen.css}"/>
+<link rel="stylesheet" type="text/css" media="all" href="../Addons/QTip/jquery.qtip.css" th:href="@{../Addons/QTip/jquery.qtip.css}"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="../static/script/index_jquery.js" th:src="@{/script/index_jquery.js}"></script>
+<script src="../Addons/QTip/jquery.qtip.js" th:src="@{../Addons/QTip/jquery.qtip.js}"></script>
 
 </head>
 
@@ -19,18 +21,34 @@
 			<img src="../static/Media/close.png" th:src="@{/Media/close.png}" class="closeButton" id="reg-user-close" />
 			<p class="popupHeader">Please Complete Sign-up</p>
 
-			<form method="post" id="registerForm" action="#">
-				<input type="text" id="firstName" name="firstName" class="signUpTextBox loginInput" placeholder="First Name"/>
-				<input type="text" id="lastName" name="lastName" class="signUpTextBox loginInput" placeholder="Last Name"/>
-				<input type="email" id="email" name="email" class="signUpTextBox loginInput" placeholder="E-mail Address"/>
-				<input type="text" id="username" name="create_username" class="signUpTextBox loginInput" placeholder="Username"/>
-				<input type="text" id="phone" name="phone" class="signUpTextBox loginInput" placeholder="Phone Number"/>
-				<input type="password" id="password" name="create_password" class="signUpTextBox loginInputPassword" placeholder="Password"/>
-				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" id="pass-img"/>
-				<input type="password" id="passwordConfirm" name="passwordConfirm" class="signUpTextBox loginInputPassword" placeholder="Confirm Password"/>
-				<img src="../static/Media/showPass.png" th:src="@{/Media/showPass.png}" class="passwordIcon" id="pass-conf-img" />
-				<input type="submit" id="createButton" value="Create Account" class="loginButton"  />
-			</form>
+      <form method="post" id="registerForm" action="#">
+        <input type="text" id="firstName" name="firstName" class="signUpTextBox loginInput" placeholder="First Name"/>
+        <img src="../static/Media/error.png" class="errorImage" id="first_name_error" alt="Error" />
+        <input type="text" id="lastName" name="lastName" class="signUpTextBox loginInput" placeholder="Last Name"/>
+        <img src="../static/Media/error.png" class="errorImage" id="last_name_error" alt="Error"/>
+        <input type="email" id="email" name="email" class="signUpTextBox loginInput" placeholder="E-mail Address"/>
+        <img src="../static/Media/error.png" class="errorImage" id="email_error" alt="Error"/>
+        <input type="text" id="username" name="create_username" class="signUpTextBox loginInput" placeholder="Username"/>
+        <img src="../static/Media/error.png" class="errorImage" id="username_error" alt="Error"/>
+        <input type="text" id="phone" name="phone" class="signUpTextBox loginInput" placeholder="Phone Number"/>
+        <img src="../static/Media/error.png" class="errorImage" id="phone_error" alt="Error"/>
+        <input type="password" id="password" name="create_password" class="signUpTextBox loginInputPassword" placeholder="Password"/>
+        <img src="../static/Media/showPass.png" class="passwordIcon" id="pass-img" alt="Password Show"/>
+        <img src="../static/Media/error.png" class="errorImage" id="pass_one_error" alt="Error" />
+        <input type="password" id="passwordConfirm" name="passwordConfirm" class="signUpTextBox loginInputPassword" placeholder="Confirm Password"/>
+        <img src="../static/Media/showPass.png" class="passwordIcon" id="pass-conf-img" alt="Password Show"/>
+        <img src="../static/Media/error.png" class="errorImage" id="pass_two_error" alt="Error" />
+        <input type="submit" id="createButton" value="Create Account" class="loginButton"/>
+      </form>
+		</div>
+    <div style="visibility: hidden;" id="registerFormClose" class="cover_layer_two">
+			<div class="registerFormClose">
+				<img src="../static/Media/sleepingBaby.png" class="regClosePaneImage" alt="close pane"/>
+				<p>Are you sure you want to abandon your progress?</p>
+					<span style="font-weight: bolder; text-decoration: underline;">Your current input will not be saved</span>
+				<div id="reg_close" class="registerFormClose_button">Yes</div>
+				<div id="reg_open" class="registerFormClose_button">No</div>
+			</div>
 		</div>
 	</div>
 	<div class="nav">

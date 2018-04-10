@@ -28,7 +28,7 @@ $(document).ready(function() {
 	}
 
 	function getTemp(){
-		getRegUsers();
+		//getRegUsers();
 		var cdata;
 		$.ajax({
 			url: "/customerdata",

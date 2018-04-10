@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectListing;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.neo.model.Account;
 import com.neo.model.Device;
 import com.neo.model.Login;
@@ -21,10 +24,13 @@ public class MainController{
 	FirebaseController fc = new FirebaseController();
 	DeviceController dc = new DeviceController();
 	SensorController sc = new SensorController();
+	StorageController storeC = new StorageController();
 	Thread mainThread = Thread.currentThread();
 	
 	String currentUser = "";
 	boolean first = true;
+	
+	AmazonS3 s3client;
 
 	@RequestMapping(value = "/")
 	public String index(Model model) throws IOException {
@@ -34,7 +40,14 @@ public class MainController{
 		}
 		model.addAttribute("login", new Login()); 
 		model.addAttribute("account", new Account()); 
+		
 		return "index";
+	}
+	
+	@RequestMapping(value = "/settings")
+	public String settings(Model model) throws IOException {
+		storeC.initStorage();
+		return "settings";
 	}
 
 	@RequestMapping(value = "/login")
@@ -51,6 +64,28 @@ public class MainController{
 	public ResponseEntity<ArrayList<ArrayList<String>>> getRegistered(){
 		ArrayList<ArrayList<String>> output = fc.getUsernames();
 		return new ResponseEntity<>(output, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getDeviceAssoc", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<ArrayList<String>> getDeviceAssoc(){
+		ArrayList<String> devices = new ArrayList<>();
+		for(String device : ac.getAssocDevices("RobCrowley")) {
+			devices.add(device);
+		}
+		return new ResponseEntity<>(devices, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getFiles", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<ArrayList<String>> getFiles(){
+		System.out.println("HERE");
+		ArrayList<String> files = new ArrayList<>();
+		ObjectListing objectListing = storeC.getListFiles("baba123");
+		
+		for(S3ObjectSummary os : objectListing.getObjectSummaries()) {
+			files.add(os.getKey());
+		}		
+		
+		return new ResponseEntity<>(files, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/customerdata", method = RequestMethod.GET, produces = {"application/json"})

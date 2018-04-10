@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:background="#F39c12"
+        android:background="#fcfc9a"
         tools:layout_editor_absoluteX="20dp"
         tools:layout_editor_absoluteY="34dp">
 
