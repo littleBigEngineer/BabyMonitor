@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<!-- Disables Zooming -->
+<title>BABA | Neonatal Monitoring</title>
+<link rel="stylesheet" type="text/css" media="all" href="../static/Addons/Bootstrap/css/bootstrap.css" th:href="@{/Addons/Bootstrap/css/bootstrap.css}" />
+<link rel="shortcut icon" href="../static/Media/favicon.ico" th:href="@{/Media/favicon.ico}" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="../Addons/QTip/jquery.qtip.css" th:href="@{../Addons/QTip/jquery.qtip.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../static/index.css" th:href="@{/index.css}" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="../static/script/index_jquery.js" th:src="@{/script/index_jquery.js}"></script>
+<script src="../static/Addons/QTip/jquery.qtip.js" th:src="@{/Addons/QTip/jquery.qtip.js}"></script>
+<script src="../static/Addons/Bootstrap/js/bootstrap.js" th:src="@{/Addons/Bootstrap/js/bootstrap.js}"></script>
+</head>
+
+<body style="text-align: center;">
+	<div id="createdAccount"
+		style="visibility: hidden; margin-left: 30%; margin-top: 1rem; z-index: 100; position: absolute; width: 40%;"
+		class="alert alert-success">
+		<strong>Success!</strong> Account Created!
+	</div>
+	<div id="passError"
+		style="visibility: hidden; margin-left: 30%; margin-top: 1rem; z-index: 100; position: absolute; width: 40%;"
+		class="alert alert-danger">
+		<strong>Uh Oh!</strong> Invalid E-mail Address <u>or</u> password
+		provided!
+	</div>
+	<div class="jumbotron text-center">
+		<img src="../static/Media/header.png" class="img-responsive"
+			th:src="@{/Media/header.png}" style="max-width: 300px;" />
+	</div>
+
+	<div class="container">
+
+		<div id="loadingModal" class="modal fade" role="dialog" style="top: 25%; position: absolute;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body" style="padding-top: 2rem; padding-bottom: 2rem;">
+						<img src="../static/Media/loading.png"
+								th:src="@{/Media/loading.png}" class="loadingImg img-responsive" style="margin-left: 0%; margin-right: 0%; max-width: 150%;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="registerModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<div class="modal-content">
+					<form id="registerForm">
+						<div class="modal-header">
+							<h4 class="modal-title">Create an Account</h4>
+						</div>
+						<div class="modal-body">
+							<div>
+								<div class="row" style="margin-bottom: 1rem;">
+									<div class="col-sm-2 float-left"></div>
+									<input id="firstName" class="form-control col-sm-8 float-left"
+										type="text" placeholder="First Name" />
+									<div class="col-sm-1 float-left">
+										<img data-toggle="tooltip" id="first_name_error"
+											src="../static/Media/error.png" th:src="@{/Media/error.png}"
+											class="img-responsive"
+											style="max-width: 35px; visibility: hidden;" />
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 1rem;">
+									<div class="col-sm-2 float-left"></div>
+									<input id="lastName" class="form-control col-sm-8 float-left"
+										type="text" placeholder="Last Name"></input>
+									<div class="col-sm-1 float-left">
+										<img data-toggle="tooltip" id="last_name_error"
+											src="../static/Media/error.png" th:src="@{/Media/error.png}"
+											class="img-responsive"
+											style="max-width: 35px; visibility: hidden;" />
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 1rem;">
+									<div class="col-sm-2 float-left"></div>
+									<input id="email" class="form-control col-sm-8 float-left"
+										type="email" placeholder="E-mail Address"></input>
+									<div class="col-sm-1 float-left">
+										<img data-toggle="tooltip" id="email_error"
+											src="../static/Media/error.png" th:src="@{/Media/error.png}"
+											class="img-responsive"
+											style="max-width: 35px; visibility: hidden;" />
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 1rem;">
+									<div class="col-sm-2 float-left"></div>
+									<input id="username" class="form-control col-sm-8 float-left"
+										type="text" placeholder="Username"></input>
+									<div class="col-sm-1 float-left">
+										<img data-toggle="tooltip" id="username_error"
+											src="../static/Media/error.png" th:src="@{/Media/error.png}"
+											class="img-responsive"
+											style="max-width: 35px; visibility: hidden;" />
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 1rem;">
+									<div class="col-sm-2 float-left"></div>
+									<input id="phone" class="form-control col-sm-8 float-left"
+										type="tel" placeholder="Phone Number"></input>
+									<div class="col-sm-1 float-left">
+										<img data-toggle="tooltip" id="phone_error"
+											src="../static/Media/error.png" th:src="@{/Media/error.png}"
+											class="img-responsive"
+											style="max-width: 35px; visibility: hidden;" />
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 1rem;">
+									<div class="col-sm-2 float-left"></div>
+									<input id="password" class="form-control col-sm-8 float-left"
+										type="password" placeholder="Password"></input>
+									<div class="col-sm-1 float-left">
+										<img data-toggle="tooltip" id="pass_one_error"
+											src="../static/Media/error.png" th:src="@{/Media/error.png}"
+											class="img-responsive"
+											style="max-width: 35px; visibility: hidden;" />
+									</div>
+								</div>
+								<div class="row" style="margin-bottom: 1rem;">
+									<div class="col-sm-2 float-left"></div>
+									<input id="passwordConfirm"
+										class="form-control col-sm-8 float-left" type="password"
+										placeholder="Confirm Password"></input>
+									<div class="col-sm-1 float-left">
+										<img data-toggle="tooltip" id="pass_two_error"
+											src="../static/Media/error.png" th:src="@{/Media/error.png}"
+											class="img-responsive"
+											style="max-width: 35px; visibility: hidden;" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="reg_close" type="button" class="btn btn-danger"
+								style="z-index: 100;" data-dismiss="modal">Cancel</button>
+							<input type="submit" class="btn btn-success"
+								value="Create Account" />
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-sm-7 float-left">
+				<h4 class="text-center hide" style="padding-bottom: 20px;">BABA
+					- Neonatal Monitoring System</h4>
+				<img id="splashImage" src="../static/Media/feature_image.png"
+					th:src="@{/Media/feature_image.png}"
+					class="img-responsive hide float-right" style="max-width: 250px;" />
+				<p style="text-align: left;">
+					Baba is a neonatal monitoring system designed to increase the
+					security and safety of infants, while keeping the parents
+					confidence in mind. Baba is a sensory device that will monitor your
+					infants enviornmental conditions. Parameters such as Temperature,
+					Humidity, Gas levels. Baba also offers features such as live video
+					and audio streaming, abilility to playlullabies for infants. <br />
+					<br />Baba has been designed with state of the art sensors,
+					developed with efficiency in mind. The overall aim of the system is
+					to provide a higher level of care for infants, while not increasing
+					the workload of already busy parents. Baba comes with a companion
+					application which is available on the Google Play Store. With this
+					application the parent can monitor their infant from the comfort of
+					their couch, or even on the go.<br /> <br />Your infants safety
+					is the #1 priority!
+				</p>
+			</div>
+			<div class="col-sm-4 container float-right col-sm-push-4">
+				<div class="row">
+					<div class="col-sm-12"
+						style="background-color: #89cff0; padding-bottom: 30px;">
+						<div class="text-center"
+							style="margin-top: 30px; margin-bottom: 30px;">
+							<img src="../static/Media/sleepingBaby.png"
+								th:src="@{/Media/sleepingBaby.png}" class="img-responsive "
+								width="60" />
+						</div>
+						<form id="loginForm">
+							<div class="container" style="margin-top: 20px;">
+								<div class="row">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-10">
+										<input type="text" name="username" class="form-control"
+											placeholder="Username" id="loginUsername" />
+									</div>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-10">
+										<input type="password" name="password" class="form-control"
+											placeholder="Password" id="loginPassword" />
+									</div>
+								</div>
+								<div class="row" style="margin-top: 1rem;">
+									<div class="col-sm-2"></div>
+									<input type="submit" class="col-sm-8 btn btn-warning"
+										value="Login" />
+								</div>
+								<div class="row" style="margin-top: 20px;">
+									<div class="col-sm-1"></div>
+									<p class="col-sm-10 text-center">
+										Not a member yet? <strong style="cursor: pointer;"
+											data-toggle="modal" data-target="#registerModal">Register
+											Now</strong>
+									</p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="row text-center" style="margin-top: 20px;">
+					<div id="companionPane" class="hide col-sm-12"
+						style="background-color: #c68dff; padding-bottom: 20px; padding-top: 20px; border-radius: 0px 0px 20px 20px;">
+						<img src="../static/Media/playStore.png" class="img-responsive"
+							width="45%" th:src="@{/Media/playStore.png}" /> <img
+							src="../static/Media/appStore.png" class="img-responsive"
+							width="45%" th:src="@{/Media/appStore.png}" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -37,6 +37,18 @@ body {
 	float: left;
 }
 
+.genButton {
+	background-color: #FFD357;
+	z-index: 0;
+	border: solid #000 medium;
+	font-weight: bold;
+	width: 50%;
+	height: 8vh;
+	margin-left: 25%;
+	margin-top: 2vh;
+	font-size: 3vh;
+}
+
 .navButton{
 	margin-left: 5%;
 }

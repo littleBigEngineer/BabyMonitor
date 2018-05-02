@@ -13,6 +13,7 @@
 
 <body>
 	<div class="nav">
+		<div id="notification" class="notification"></div>
 		<img class="banner" src="../static/Media/header.png" th:src="@{/Media/header.png}" />
 	</div>
 
@@ -57,22 +58,35 @@
 			</div>
 
 			<div class="settings_heading">Device Lullaby Library</div>
-			<div class="settings_edit">[Edit]</div>
 			<hr/>
+			<div class="infoText">Upload files using the panel to the right <u>(.mp3 files only)</u></div>
 			<div class="settings_library">
-				<table cellspacing="0" border="1">
-  				<tr>
-    				<th>Company</th>
-				    <th>Contact</th>
-				    <th>Country</th>
-  				</tr>
-  				<tr>
-				    <td>Alfreds Futterkiste</td>
-				    <td>Maria Anders</td>
-				    <td>Germany</td>
-				  </tr>
+				<table cellspacing="0" border="1" width="100%">
+  				<tr><th>Track Name</th></tr>
 				</table>
-				<!-- <input type="file" id="fileUpload"> -->
+				<div class="table_scroll">
+					<table id="library" cellspacing="0" border="1" width="100%">
+						<tr><td width="40%"></td><td width="5%"></td></tr>
+						<!-- <tr id="value"><td>value A</td><td class="centerCell"><img src="../static/Media/trashcan.png" th:src="@{/Media/trashcan.png}" class="del" /></td></tr>
+						<tr id="value" class="odd"><td>value A</td><td class="centerCell"><img src="../static/Media/trashcan.png" th:src="@{/Media/trashcan.png}" class="del"></img></td></tr> -->
+						<!-- <tr class="odd" id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr class="odd" id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr class="odd" id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr class="odd" id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr class="odd" id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr>
+						<tr id="value"><td>value A</td><td class="centerCell"><a class="del" href="#">Remove from library</a></td></tr> -->
+					</table>
+				</div>
+			</div>
+			<div class="table_controls">
+				<form method="POST" enctype="multipart/form-data" action="/upload">
+					<input type="file" class="fileUpload" name="file" accept=".mp3" />
+					<input type="submit" class="genButton" value="Upload" />
+				</form>
 			</div>
 		</div>
 	</div>

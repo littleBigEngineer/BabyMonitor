@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.google.auth.oauth2.GoogleCredentials;
@@ -43,11 +42,17 @@ public class FirebaseController {
 
 		FirebaseApp.initializeApp(options);
 	}
+	
+	public ArrayList<String> getUsers(){
+		getUsernames();
+		return username;
+	}
 
 	public ArrayList<ArrayList<String>> getUsernames(){
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Accounts");
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
 				username.clear();
@@ -74,7 +79,7 @@ public class FirebaseController {
 		});
 
 		while(!done) {
-			System.out.println("Waiting");
+
 		}
 		return returnValue;
 	}

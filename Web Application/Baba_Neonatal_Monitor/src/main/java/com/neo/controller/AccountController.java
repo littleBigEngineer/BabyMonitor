@@ -49,7 +49,6 @@ public class AccountController {
 				for(DataSnapshot ds: dataSnapshot.getChildren()) {
 					devices.add(ds.getValue(String.class));
 				}
-				System.out.println(devices.size());
 				devicesFlag = true;
 			}
 
@@ -68,7 +67,6 @@ public class AccountController {
 	}
 
 	public Account checkForAccount(String username, String password) {
-		System.out.println("Accounts");
 		ref = FirebaseDatabase.getInstance().getReference("Accounts/"+username);
 		accountFlag = false;
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -86,6 +84,7 @@ public class AccountController {
 		while(!accountFlag) {
 
 		}
+		System.out.println(password);
 		if(!password.equals(account.getPassword()))
 			account = null;
 

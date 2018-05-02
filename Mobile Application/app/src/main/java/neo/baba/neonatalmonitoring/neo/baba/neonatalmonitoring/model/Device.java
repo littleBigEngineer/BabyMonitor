@@ -5,7 +5,7 @@ package neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model;
  */
 
 public class Device {
-    private String device_id, device_name, child, user_one, user_two, currently_playing;
+    private String device_id, device_name, user_one, user_two, currently_playing;
     private int active;
 
     public Device() {
@@ -19,13 +19,6 @@ public class Device {
 
     public String getCurrently_playing() { return currently_playing; }
     public void setCurrently_playing(String currently_playing) { this.currently_playing = currently_playing; }
-
-    public String getChild() {
-        return child;
-    }
-    public void setChild(String child) {
-        this.child = child;
-    }
 
     public String getUser_one() {
         return user_one;

@@ -29,9 +29,4 @@ public class Timer extends AppCompatActivity {
         time.setMinute(currentTime.get(Calendar.MINUTE));
         time.animate();
     }
-
-    public void backToDashboard(View view){
-        Intent back = new Intent(Timer.this, Dashboard.class);
-        Timer.this.startActivity(back);
-    }
 }

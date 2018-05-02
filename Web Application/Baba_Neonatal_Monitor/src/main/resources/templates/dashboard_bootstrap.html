@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<!-- Disables Zooming -->
+<title>BABA | Neonatal Monitoring</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../static/Addons/Bootstrap/css/bootstrap.css"
+	th:href="@{/Addons/Bootstrap/css/bootstrap.css}" />
+<link rel="shortcut icon" href="../static/Media/favicon.ico"
+	th:href="@{/Media/favicon.ico}" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../Addons/QTip/jquery.qtip.css"
+	th:href="@{../Addons/QTip/jquery.qtip.css}" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="../static/script/dashboard_jquery.js"
+	th:src="@{/script/dashboard_jquery.js}"></script>
+<script src="../static/Addons/QTip/jquery.qtip.js"
+	th:src="@{/Addons/QTip/jquery.qtip.js}"></script>
+<script src="../static/Addons/Bootstrap/js/bootstrap.js"
+	th:src="@{/Addons/Bootstrap/js/bootstrap.js}"></script>
+</head>
+
+<body>
+	<div class="jumbotron text-center" style="margin-bottom: 0;">
+		<img src="../static/Media/header.png" class="img-responsive"
+			th:src="@{/Media/header.png}" style="max-width: 300px;" />
+	</div>
+	<div style="height: 3rem; background-color: #000; margin-bottom: 2rem;">
+		<img id="logout" src="../static/Media/logout.png"
+			class="img-responsive float-left" th:src="@{/Media/logout.png}"
+			style="max-width: 40px; margin-top: 3px; margin-left: 0.5rem;" />
+		<div id="usernameTag"
+			style="color: #fff; font-size: 1.5rem; margin-top: 0.25rem; font-weight: bold; margin-right: 0.5rem;"
+			class="float-right"></div>
+		<img src="../static/Media/settings.png"
+			class="img-responsive float-right" th:src="@{/Media/settings.png}"
+			style="max-width: 40px; margin-top: 3px; margin-right: 0.5rem;" />
+	</div>
+	<div class="container">
+
+		<div id="topTier" class="row">
+			<div class="col-sm-4" style="visibility: hidden; margin-bottom: 2rem;">
+				<div class="col-sm-1"></div>
+				<div id="dv_0" class="col-sm-11 monitor"
+					style="background-color: #000; border: solid 7px #c0c0c0; border-radius: 20px; height: 180px;">
+					<div class="row">
+						<div id="therm_0" class="col-sm-1 float-left"
+							style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.4rem;"></div>
+						<div class="col-sm-9 float-left text-center"
+							style="margin-top: 0.8rem; color: #44c553;">
+							<p id="name_0">Device Name</p>
+							<div class="row"
+								style="margin-top: -0.5rem; margin-bottom: 0.5rem;">
+								<div class="col-sm-6 float-left"
+									style="height: 1.2rem; font-size: 0.9rem;" id="co_0">CO
+									Level: OK</div>
+								<div class="col-sm-6 float-left"
+									style="height: 1.2rem; font-size: 0.9rem;" id="co2_0">
+									CO<sub>2</sub> Level: OK
+								</div>
+								<div class="col-sm-6 float-left"
+									style="height: 1.2rem; font-size: 0.9rem;" id="hum_0">Humidity:
+									10</div>
+								<div class="col-sm-6 float-left"
+									style="height: 1.2rem; font-size: 0.9rem;" id="move_0">Movement:
+									No</div>
+							</div>
+							<div class="row" style="margin-bottom: 0.5rem;">
+								<img id="prev_0" src="../static/Media/previous.png"
+									th:src="@{/Media/previous.png}"
+									style="margin-left: 0.8rem; height: 1.5rem;" />
+								<div id="curr_0" class="col-sm-8 float-left"
+									style="margin-left: 0.2rem; margin-right: 0.2rem; height: 1.5rem; overflow: hidden;">
+									<marquee>Media Media Media Media Media</marquee>
+								</div>
+								<img id="next_0" src="../static/Media/next.png"
+									th:src="@{/Media/next.png}"
+									style="margin-right: 0.2rem; height: 1.5rem;" />
+							</div>
+							<div class="row">
+								<div id="deg_0" class="col-sm-4 float-left"
+									style="margin-left: 0.35rem; margin-right: 0.91rem; text-align: left;">19oC</div>
+								<img id="play_0" src="../static/Media/play.png"
+									th:src="@{/Media/play.png}"
+									style="height: 1.5rem; margin-right: 0.39rem; margin-left: 0.38rem;" />
+								<div id="db_0" class="col-sm-4 float-left"
+									style="margin-left: 0.91rem; margin-right: 0.35rem; text-align: right;">17db</div>
+							</div>
+						</div>
+						<div id="sound_0" class="col-sm-1 float-left"
+							style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.2rem;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="visibility: hidden; margin-bottom: 2rem;">
+				<div class="col-sm-1"></div>
+				<div id="dv_1" class="col-sm-11 monitor"
+					style="background-color: #000; border: solid 7px #c0c0c0; border-radius: 20px; height: 180px;">
+					<div class="row">
+						<div id="therm_1" class="col-sm-1 float-left"
+							style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.4rem;"></div>
+						<div class="col-sm-9 float-left text-center"
+							style="margin-top: 0.8rem; color: #44c553;">
+							<p id="name_1">Device Name</p>
+							<div class="row"
+								style="margin-top: -0.5rem; margin-bottom: 0.5rem;">
+								<div class="col-sm-6 float-left"
+									style="height: 1.2rem; font-size: 0.9rem;" id="co_1">CO
+									Level: OK</div>
+								<div class="col-sm-6 float-left"
+									style="height: 1.2rem; font-size: 0.9rem;" id="co2_1">
+									CO<sub>2</sub> Level: OK
+								</div>
+								<div class="col-sm-6 float-left"
+									style="height: 1.2rem; font-size: 0.9rem;" id="hum_1">Humidity:
+									10</div>
+								<div class="col-sm-6 float-left"
+									style="height: 1.2rem; font-size: 0.9rem;" id="move_1">Movement:
+									No</div>
+							</div>
+							<div class="row" style="margin-bottom: 0.5rem;">
+								<img id="prev_1" src="../static/Media/previous.png"
+									th:src="@{/Media/previous.png}"
+									style="margin-left: 0.8rem; height: 1.5rem;" />
+								<div id="curr_1" class="col-sm-8 float-left"
+									style="margin-left: 0.2rem; margin-right: 0.2rem; height: 1.5rem; overflow: hidden;">
+									<marquee>Media Media Media Media Media</marquee>
+								</div>
+								<img id="next_1" src="../static/Media/next.png"
+									th:src="@{/Media/next.png}"
+									style="margin-right: 0.2rem; height: 1.5rem;" />
+							</div>
+							<div class="row">
+								<div id="deg_1" class="col-sm-4 float-left"
+									style="margin-left: 0.35rem; margin-right: 0.91rem; text-align: left;">19oC</div>
+								<img id="play_1" src="../static/Media/play.png"
+									th:src="@{/Media/play.png}"
+									style="height: 1.5rem; margin-right: 0.39rem; margin-left: 0.38rem;" />
+								<div id="db_1" class="col-sm-4 float-left"
+									style="margin-left: 0.91rem; margin-right: 0.35rem; text-align: right;">17db</div>
+							</div>
+						</div>
+						<div id="sound_1" class="col-sm-1 float-left"
+							style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.2rem;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="visibility: hidden; margin-bottom: 2rem;">
+				<div class="col-sm-1"></div>
+				<div id="dv_2" class="col-sm-11 monitor" style="background-color: #000; border: solid 7px #c0c0c0; border-radius: 20px; height: 180px;">
+					<div class="row">
+						<div id="therm_2" class="col-sm-1 float-left" style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.4rem;"></div>
+						<div class="col-sm-9 float-left text-center" style="margin-top: 0.8rem; color: #44c553;">
+							<p id="name_2">Device Name</p>
+							<div class="row" style="margin-top: -0.5rem; margin-bottom: 0.5rem;">
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="co_2">CO Level: OK</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="co2_2">CO<sub>2</sub> Level: OK</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="hum_2">Humidity: 10</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="move_2">Movement: No</div>
+							</div>
+							<div class="row" style="margin-bottom: 0.5rem;">
+								<img id="prev_2" src="../static/Media/previous.png" th:src="@{/Media/previous.png}" style="margin-left: 0.8rem; height: 1.5rem;" />
+								<div id="curr_2" class="col-sm-8 float-left" style="margin-left: 0.2rem; margin-right: 0.2rem; height: 1.5rem; overflow: hidden;"><marquee>Media Media Media Media Media</marquee></div>
+								<img id="next_2" src="../static/Media/next.png" th:src="@{/Media/next.png}" style="margin-right: 0.2rem; height: 1.5rem;" />
+							</div>
+							<div class="row">
+								<div id="deg_2" class="col-sm-4 float-left" style="margin-left: 0.35rem; margin-right: 0.91rem; text-align: left;">19oC</div>
+								<img id="play_2" src="../static/Media/play.png" th:src="@{/Media/play.png}" style="height: 1.5rem; margin-right: 0.39rem; margin-left: 0.38rem;" />
+								<div id="db_2" class="col-sm-4 float-left" style="margin-left: 0.91rem; margin-right: 0.35rem; text-align: right;">17db</div>
+							</div>
+						</div>
+						<div id="sound_2" class="col-sm-1 float-left" style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.2rem;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="bottomTier" class="row">
+			<div class="col-sm-4" style="visibility: hidden; margin-bottom: 2rem;">
+				<div class="col-sm-1"></div>
+				<div id="dv_3" class="col-sm-11 monitor" style="background-color: #000; border: solid 7px #c0c0c0; border-radius: 20px; height: 180px;">
+					<div class="row">
+						<div id="therm_3" class="col-sm-1 float-left" style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.4rem;"></div>
+						<div class="col-sm-9 float-left text-center" style="margin-top: 0.8rem; color: #44c553;">
+							<p id="name_3">Device Name</p>
+							<div class="row" style="margin-top: -0.5rem; margin-bottom: 0.5rem;">
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="co_3">CO Level: OK</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="co2_3">CO<sub>2</sub> Level: OK</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="hum_3">Humidity: 10</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="move_3">Movement: No</div>
+							</div>
+							<div class="row" style="margin-bottom: 0.5rem;">
+								<img id="prev_3" src="../static/Media/previous.png" th:src="@{/Media/previous.png}" style="margin-left: 0.8rem; height: 1.5rem;" />
+								<div id="curr_3" class="col-sm-8 float-left" style="margin-left: 0.2rem; margin-right: 0.2rem; height: 1.5rem; overflow: hidden;"><marquee>Media Media Media Media Media</marquee></div>
+								<img id="next_3" src="../static/Media/next.png" th:src="@{/Media/next.png}" style="margin-right: 0.2rem; height: 1.5rem;" />
+							</div>
+							<div class="row">
+								<div id="deg_3" class="col-sm-4 float-left" style="margin-left: 0.35rem; margin-right: 0.91rem; text-align: left;">19oC</div>
+								<img id="play_3" src="../static/Media/play.png" th:src="@{/Media/play.png}" style="height: 1.5rem; margin-right: 0.39rem; margin-left: 0.38rem;" />
+								<div id="db_3" class="col-sm-4 float-left" style="margin-left: 0.91rem; margin-right: 0.35rem; text-align: right;">17db</div>
+							</div>
+						</div>
+						<div id="sound_3" class="col-sm-1 float-left" style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.2rem;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="visibility: hidden; margin-bottom: 2rem;">
+				<div class="col-sm-1"></div>
+				<div id="dv_4" class="col-sm-11 monitor" style="background-color: #000; border: solid 7px #c0c0c0; border-radius: 20px; height: 180px;">
+					<div class="row">
+						<div id="therm_4" class="col-sm-1 float-left" style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.4rem;"></div>
+						<div class="col-sm-9 float-left text-center" style="margin-top: 0.8rem; color: #44c553;">
+							<p id="name_4">Device Name</p>
+							<div class="row" style="margin-top: -0.5rem; margin-bottom: 0.5rem;">
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="co_4">CO Level: OK</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="co2_4">CO<sub>2</sub> Level: OK</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="hum_4">Humidity: 10</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="move_4">Movement: No</div>
+							</div>
+							<div class="row" style="margin-bottom: 0.5rem;">
+								<img id="prev_4" src="../static/Media/previous.png" th:src="@{/Media/previous.png}" style="margin-left: 0.8rem; height: 1.5rem;" />
+								<div id="curr_4" class="col-sm-8 float-left" style="margin-left: 0.2rem; margin-right: 0.2rem; height: 1.5rem; overflow: hidden;"><marquee>Media Media Media Media Media</marquee></div>
+								<img id="next_4" src="../static/Media/next.png" th:src="@{/Media/next.png}" style="margin-right: 0.2rem; height: 1.5rem;" />
+							</div>
+							<div class="row">
+								<div id="deg_4" class="col-sm-4 float-left" style="margin-left: 0.35rem; margin-right: 0.91rem; text-align: left;">19oC</div>
+								<img id="play_4" src="../static/Media/play.png" th:src="@{/Media/play.png}" style="height: 1.5rem; margin-right: 0.39rem; margin-left: 0.38rem;" />
+								<div id="db_4" class="col-sm-4 float-left" style="margin-left: 0.91rem; margin-right: 0.35rem; text-align: right;">17db</div>
+							</div>
+						</div>
+						<div id="sound_4" class="col-sm-1 float-left" style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.2rem;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4" style="visibility: hidden; margin-bottom: 2rem;">
+				<div class="col-sm-1"></div>
+				<div id="dv_5" class="col-sm-11 monitor" style="background-color: #000; border: solid 7px #c0c0c0; border-radius: 20px; height: 180px;">
+					<div class="row">
+						<div id="therm_5" class="col-sm-1 float-left" style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.4rem;"></div>
+						<div class="col-sm-9 float-left text-center" style="margin-top: 0.8rem; color: #44c553;">
+							<p id="name_5">Device Name</p>
+							<div class="row" style="margin-top: -0.5rem; margin-bottom: 0.5rem;">
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="co_5">CO Level: OK</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="co2_5">CO<sub>2</sub> Level: OK</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="hum_5">Humidity: 10</div>
+								<div class="col-sm-6 float-left" style="height: 1.2rem; font-size: 0.9rem;" id="move_5">Movement: No</div>
+							</div>
+							<div class="row" style="margin-bottom: 0.5rem;">
+								<img id="prev_5" src="../static/Media/previous.png" th:src="@{/Media/previous.png}" style="margin-left: 0.8rem; height: 1.5rem;" />
+								<div id="curr_5" class="col-sm-8 float-left" style="margin-left: 0.2rem; margin-right: 0.2rem; height: 1.5rem; overflow: hidden;"><marquee>Media Media Media Media Media</marquee></div>
+								<img id="next_5" src="../static/Media/next.png" th:src="@{/Media/next.png}" style="margin-right: 0.2rem; height: 1.5rem;" />
+							</div>
+							<div class="row">
+								<div id="deg_5" class="col-sm-4 float-left" style="margin-left: 0.35rem; margin-right: 0.91rem; text-align: left;">19oC</div>
+								<img id="play_5" src="../static/Media/play.png" th:src="@{/Media/play.png}" style="height: 1.5rem; margin-right: 0.39rem; margin-left: 0.38rem;" />
+								<div id="db_5" class="col-sm-4 float-left" style="margin-left: 0.91rem; margin-right: 0.35rem; text-align: right;">17db</div>
+							</div>
+						</div>
+						<div id="sound_5" class="col-sm-1 float-left" style="background-color: #fff; margin-top: 0.8rem; margin-left: 0.2rem;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -5,15 +5,39 @@
 
 .monitor_outer_box{
   height: 30vh;
-  margin-top: 5vh;
-  width: 28.8%;
+  margin-top: 3vh;
+  width: 28.3%;
   margin-left: 2%;
   margin-right: 2%;
   background-color: #000;
-  border: #000 solid medium;
+  border: #000 solid thin;
   float: left;
   border-radius: 3vh;
   border: 1vh solid #c0c0c0;
+}
+
+.controls{
+  width: 100%;
+  height: 8vh;
+  background-color: #000;
+  float: left;
+}
+
+.contol_title{
+  margin-top: 0.5vh;
+  margin-bottom: 1vh;
+  font-size: 5vh;
+  margin-right: 1%;
+  color: #fff;
+  font: "Arial";
+  font-weight: bolder;
+  float: right;
+}
+
+.control_icon{
+  margin-top: 0.5vh;
+  height: 6vh;
+  float: right;
 }
 
 .monitor_thermometer{

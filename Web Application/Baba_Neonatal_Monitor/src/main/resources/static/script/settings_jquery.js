@@ -1,7 +1,23 @@
 $(document).ready(function() {
 
 	getDevices();
-	getFilesForDevice();
+
+	$("#library").delegate(".del", "click", function() {
+		$.ajax({
+			type: "POST",
+			url: "/removeFromLibrary",
+			data: { file: $(this).attr('id') }
+		})
+
+		$('#notification').fadeIn();
+		$('#notification').text($(this).attr('id') + " Deleted!");
+
+		setTimeout(function(){
+			$('#notification').fadeOut();
+		}, 2000);
+
+		$(this).closest ('tr').remove();
+	});
 
 	function getFilesForDevice(){
 		var cdata;
@@ -12,10 +28,14 @@ $(document).ready(function() {
 		}).done(function(data){
 			cdata = data;
 			$.each(cdata, function(index, value) {
-				console.log(value);
-				if(value.length > 15)
-					value = value.slice(0,15) + "...";
-				$('#library').after('<tr><th width="50%" class="track cell">' + value + '</th></tr>');
+				if(value.length > 50){
+					value = value.slice(0,50) + "...";
+				}
+
+				if(value === 'lullabies.mp3')
+					$('#library tr:last').after("<tr><td class='align-middle'>" + value + "</td></tr>");
+				else
+					$('#library tr:last').after("<tr><td class='align-middle'>" + value + "<button class='del btn-danger float-right' id='" + value + "'>Delete</button></td></tr>");
 			});
 		});
 	}
@@ -34,13 +54,11 @@ $(document).ready(function() {
 			cdata = data;
 			$.each(cdata, function(index, value) {
 				var tab;
-				if(index == 0)
-					tab = $("<div class='sidebar_tab selected_tab'>" + value + "</div>");
-				else
-					tab = $("<div class='sidebar_tab'>" + value + "</div>");
-				$("#sidebar").append(tab);
+				tab = $("<button class='col-sm-2 btn' style='background-color: #89cff0;'>"+value+"</button>");
+				$("#devices").append(tab);
 				tab.attr('id', value);
 			});
 		});
+		getFilesForDevice();
 	}
 });

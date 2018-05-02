@@ -4,6 +4,9 @@ $(document).ready(function() {
 	var usernames;
 	var alphaNumRegex = /^[0-9a-zA-Z]+$/;
 
+	getRegUsers();
+	setInterval(getRegUsers, 30000);
+
 	$('#first_name_error').prop('title', 'First Name must be <u><b>2-25 characters</b></u> in length.');
 	$('#last_name_error').prop('title', 'Last Name must be <u><b>2-25 characters</b></u> in length.');
 	$('#email_error').prop('title', "E-mail Address must be <u><b>2-40 characters</b></u> in length and <u><b>contain '@' character</b></u>.");
@@ -11,6 +14,8 @@ $(document).ready(function() {
 	$('#phone_error').prop('title', "Phone number must be <u><b>10 numbers</b></u> in length.");
 	$('#pass_one_error').prop('title', "Passwords must:</br><li>be <u><b>8-25 characters</b></u> in length</li><li>contain an <u><b>uppercase letter</b></u> (A-Z)</li><li>contain a <u><b>number</b></u> (0-9)</li><li>contain a <u><b>non-alphanumeric character</b></u> (!-$_ ...)</li>");
 	$('#pass_two_error').prop('title', "Passwords <u><b>do not</b></u> match.");
+	$('#loginPassword').prop('title', "Password may be incorrect.");
+	$('#loginUsername').prop('title', "Username may be incorrect.");
 
 	function getRegUsers(){
 		var cdata;
@@ -22,37 +27,54 @@ $(document).ready(function() {
 			cdata = data;
 			$.each(cdata, function(index, value) {
 				if(index == 0){
-					console.log(value);
 					usernames = value;
 				}
 				if(index == 1){
-					console.log(value);
 					emails = value;
 				}
 			});
 		});
 	}
+
+	$('#loginForm').on('submit', function(e) {
+		if($("#loginUsername").val().length == 0 || $("#loginPassword").val().length == 0 ){
+			e.preventDefault();
+			$("#passError").css("visibility","visible");
+			window.setTimeout(function(){ 
+				$("#passError").css("visibility","hidden");
+			},3000);
+		}
+		else{
+			e.preventDefault();
+			$.ajax({
+		  	type: "GET", 
+		    url: "/login",
+		    data: {username: $("#loginUsername").val(), password: $("#loginPassword").val()}
+			})
+			$('#loadingModal').modal('toggle');
+			window.setTimeout(function(){
+				location.reload()},3000);
+		}
+	});
+
 	$('#registerForm').on('submit', function(e) {
 		e.preventDefault();
 		var status = validateInput();
 		if(status){
-			console.log("All Good!")
+			$.ajax({
+		  	type: "POST",
+		    url: "/registerUser",
+		    data: {fName: $("#firstName").val(), lName: $("#lastName").val(), email: $("#email").val(), phone: $("#phone").val(), password: $("#password").val(), username: $("#username").val()}
+			})
+			getRegUsers();
+			$('#registerModal').modal('toggle');
+			$("#createdAccount").css("visibility","visible");
+			window.setTimeout( function(){ 
+				$("#createdAccount").css("visibility","hidden");
+			},3000 );
 		}
-		// $.ajax({
-		//     url : $(this).attr('action') || window.location.pathname,
-		//     type: "GET",
-		//     data: $(this).serialize(),
-		//     success: function (data) {
-		//         $("#form_output").html(data);
-		//     },
-		//     error: function (jXHR, textStatus, errorThrown) {
-		//         alert(errorThrown);
-		//     }
-		// });
 	});
-	$("#reg-user").click(showRegisterPopup);
-	$("#reg-user").css('cursor','pointer');
-	$('#reg-user-close').click(closeRegisterPopup);
+
 	$("#reg_close").click(function(){
 		$("#registerFormClose").css("visibility", "hidden");
 		$("#registerPopup").css("visibility", "hidden");
@@ -80,35 +102,8 @@ $(document).ready(function() {
 		$('#pass_one_error').css("visibility","hidden");
 		$('#pass_two_error').css("visibility","hidden");
 	});
-	$("#reg_open").click(function(){
-		$("#registerPopup").css("visibility", "visible");
-		$("#registerFormClose").css("visibility", "hidden");
-	})
-	$('#pass-img').click(function(){
-		id= "#" + this.id;
-		var type = $("#"+this.id).attr('type');
-		console.log(id + " " + type);
 
-		if(type == "password"){
-			document.getElementById(id).type = 'text';
-			console.log("changed to text");
-		}
-		if(type == "text"){
-			document.getElementById(id).type = 'password';
-			console.log("changed to password");
-		}
-	});
-	function registerFormClose(){
-		$("#registerPopup").css("visibility", "hidden");
-		$("#registerFormClose").css("visibility", "visible");
-	}
-	function showRegisterPopup(){
-		$("#registerPopup").css("visibility", "visible");
-		getRegUsers();
-	}
-	function closeRegisterPopup(){
-		registerFormClose();
-	}
+
 	function validPass(){
 		var num = false;
 		var capital = false;
@@ -126,12 +121,16 @@ $(document).ready(function() {
 		if(num && capital && symb)
 			return true;
 	}
+
+
 	function validateInput(){
 		var status = true;
+		console.log(status);
 		if($("#firstName").val().length < 2 || $("#firstName").val().length > 25){
 			$("#firstName").css("border-color", "#F31431");
 			$("#first_name_error").css("visibility", "visible");
 			$('#first_name_error[title]').qtip();
+			$("#firstName").val("");
 			status = false;
 		}
 		else{
@@ -142,6 +141,7 @@ $(document).ready(function() {
 
 		if($("#lastName").val().length < 2 || $("#lastName").val().length > 25){
 			$("#lastName").css("border-color", "#F31431");
+			$("#lastName").val("");
 			$("#last_name_error").css("visibility", "visible");
 			$('#last_name_error[title]').qtip();
 			status = false;
@@ -149,20 +149,24 @@ $(document).ready(function() {
 		else{
 			$("#lastName").css("border-color", "");
 			$("#last_name_error").css("visibility", "hidden");
+			status = true;
 		}
 
 		if($.inArray($("#email").val(), emails) !== -1 || $("#email").val().length < 2 || $("#email").val().length > 40){
 			$("#email").css("border-color", "#F31431");
 			$("#email_error").css("visibility", "visible");
 			$('#email_error[title]').qtip();
+			$("#email").val("");
 			status = false;
 		}
 		else{
 			$("#email").css("border-color", "");
 			$("#email_error").css("visibility", "hidden");
+			status = true;
 		}
-		if($.inArray($("#username").val(), usernames) !== -1 || $("#username").val().length < 2 || $("#username").val().length > 25){
+		if($.inArray($("#username").val(), usernames) !== -1 || $("#username").val().length < 2 || $("#username").val().length > 25 || $("#username").val().indexOf(" ") != -1){
 			$("#username").css("border-color", "#F31431");
+			$("#username").val("");
 			$("#username_error").css("visibility", "visible");
 			$('#username_error[title]').qtip();
 			status = false;
@@ -170,40 +174,49 @@ $(document).ready(function() {
 		else{
 			$("#username").css("border-color", "");
 			$("#username_error").css("visibility", "hidden");
+			status = true;
 		}
 		if($("#phone").val().length != 10){
 			$("#phone_error").css("visibility", "visible");
 			$("#phone").css("border-color", "#F31431");
 			$('#phone_error[title]').qtip();
+			$("#phone").val("");
 			status = false;
 		}
 		else{
 			$("#phone").css("border-color", "");
 			$("#phone_error").css("visibility", "hidden");
+			status = true;
 		}
 		if(!validPass() || $("#password").val().length < 8 || $("#password").val().length > 20){
 			$("#password").css("border-color", "#F31431");
 			$("#password_one_error").css("visibility", "visible");
 			$('#pass_one_error[title]').qtip();
 			status = false;
+			$("#password").val("");
 		}
 		else{
 			$("#password").css("border-color", "");
 			$("#password_one_error").css("visibility", "hidden");
+			status = true;
 		}
 		if($("#password").val() != $("#passwordConfirm").val() || $("#passwordConfirm").val().length === 0){
 			$("#pass_two_error").css("visibility", "visible");
 			$("#pass_one_error").css("visibility", "visible");
 			$('#pass_two_error[title]').qtip();
+			$("#passwordConfirm").val("");
 			$("#password").css("border-color", "#F31431");
 			$("#passwordConfirm").css("border-color", "#F31431");
+			status = false;
 		} else{
 			$("#password").css("border-color", "")
 			$("#passwordConfirm").css("border-color", "")
 			$("#pass_two_error").css("visibility", "hidden");
 			$("#pass_one_error").css("visibility", "hidden");
-			status = false;
+			status = true;
 		}
+
 		return status;
 	}
+
 });

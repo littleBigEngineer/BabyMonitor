@@ -26,7 +26,6 @@ public class DeviceController {
 				for (int i = 0; i < deviceList.size(); i++) {
                     Device d = dataSnapshot.child(deviceList.get(i)).getValue(Device.class);
                     d.setId(deviceList.get(i));
-                    System.out.println(d.getDevice_name());
                     childrenId.add(d.getChild());
                     devices.add(d);
                 }
