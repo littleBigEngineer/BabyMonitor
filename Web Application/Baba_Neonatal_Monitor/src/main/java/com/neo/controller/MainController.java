@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.amazonaws.services.appstream.model.Session;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
@@ -36,12 +35,67 @@ public class MainController{
 	DeviceController dc = new DeviceController();
 	SensorController sc = new SensorController();
 	StorageController storeC = new StorageController();
-	Thread mainThread = Thread.currentThread();
+
+	ArrayList<ArrayList<String>> information = new ArrayList<>();
+	ArrayList<Device> devices = new ArrayList<>();
 
 	String currentUser = "";
 	boolean first = true;
 
 	AmazonS3 s3client;
+
+
+	@RequestMapping(value = "/getDeviceInfo", method = RequestMethod.POST, produces = {"application/json"})
+	public ResponseEntity<ArrayList<String>> getDeviceInfo(@RequestParam("device") String device, HttpSession session){
+
+		devices.removeAll(devices);
+		devices = dc.getDeviceList(session.getAttribute("username").toString());
+		ArrayList<String> info = new ArrayList<>();
+		for(int i = 0; i < devices.size(); i++) {
+			if(devices.get(i).getDevice_id().equals(device)) {
+				info.add(devices.get(i).getDevice_name());
+				info.add(devices.get(i).getUser_one());
+				info.add(devices.get(i).getUser_two());
+			}
+		}
+		return new ResponseEntity<>(info, HttpStatus.OK);
+	} 
+
+	@RequestMapping(value = "/getInformation", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<ArrayList<ArrayList<String>>> getInformation(HttpSession session){
+		information.removeAll(information);
+		devices.removeAll(devices);
+
+		devices = dc.getDeviceList(session.getAttribute("username").toString());
+
+		System.out.println(devices.size());
+		for(int i = 0; i < devices.size(); i++) {
+			ArrayList<String> info = new ArrayList<>();
+			info.add(""+devices.get(i).getActive()); //0
+			info.add(""+devices.get(i).getTemperature()); //1
+			info.add(""+devices.get(i).getHumidity()); //2
+			info.add(devices.get(i).getCarbon_dioxide()); //3
+			info.add(devices.get(i).getCarbon_monoxide()); //4
+			info.add("" + devices.get(i).getSound()); //5
+			info.add(devices.get(i).getDevice_name()); //6
+			information.add(info);
+		}
+		return new ResponseEntity<>(information, HttpStatus.OK);
+	} 
+
+	@RequestMapping(value = "/getLullaby", method = RequestMethod.GET, produces = {"application/json"})
+	public ResponseEntity<ArrayList<String>> getLullaby(HttpSession session){
+		ArrayList<String> info = new ArrayList<>();
+		info.removeAll(info);
+		devices.removeAll(devices);
+
+		devices = dc.getDeviceList(session.getAttribute("username").toString());
+		for(int i = 0; i < devices.size(); i++) {
+			info.add(devices.get(i).getCurrently_playing());
+		}
+		return new ResponseEntity<>(info, HttpStatus.OK);
+	} 
+
 
 	@PostMapping("/upload")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws UnsupportedAudioFileException, IOException {
@@ -62,12 +116,9 @@ public class MainController{
 		while(username == null || password == null) {
 
 		}
-		System.out.println(username + " - " + password);
 		Account account = ac.checkForAccount(username, password);
-		if(account != null) {
+		if(account != null)
 			session.setAttribute("username", account.getUsername());
-			System.out.println("New Session: " + username);
-		}
 		while(account == null) {
 
 		}
@@ -76,8 +127,7 @@ public class MainController{
 
 	@RequestMapping(value = "/dashboard", method=RequestMethod.GET)
 	public String dashboard(HttpServletRequest request,HttpServletResponse response, HttpSession session) {
-		System.out.println("USERNAME - " + session.getAttribute("username"));
-		return "dashboard_boostrap";
+		return "dashboard_bootstrap";
 	}
 
 	@RequestMapping(value = "/")
@@ -103,18 +153,16 @@ public class MainController{
 		ArrayList<ArrayList<String>> output = fc.getUsernames();
 		return new ResponseEntity<>(output, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
 	public ResponseEntity<String> getCurrentUser(HttpSession session){
 		String user = session.getAttribute("username").toString();
-		System.out.println(user);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getDeviceAssoc", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<ArrayList<String>> getDeviceAssoc(HttpSession session){
 		ArrayList<String> devices = new ArrayList<>();
-		System.out.println(session.getAttribute("username").toString());
 		for(String device : ac.getAssocDevices(session.getAttribute("username").toString())) {
 			devices.add(device);
 		}
@@ -135,35 +183,20 @@ public class MainController{
 	public @ResponseBody void Submit(@RequestParam("file") String name) {
 		storeC.removeFile(name);
 	}
-	
+
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public @ResponseBody void logout(HttpSession session) {
 		session.removeAttribute("username");
 	}
-	
+
 	@RequestMapping(value="/getDevices", method=RequestMethod.GET)
 	public ResponseEntity<ArrayList<String>> getDevices(HttpSession session){
 		ArrayList<String> devs = new ArrayList<>();
 		ArrayList<Device> devices = dc.getDeviceList(session.getAttribute("username").toString());
-		for(Device d : devices) {
-			devs.add(d.getDevice_name());
+		for(int i = 0; i < devices.size(); i++) {
+			devs.add(devices.get(i).getDevice_name());
 		}
 		return new ResponseEntity<>(devs, HttpStatus.OK);
-		
-	}
 
-	@RequestMapping(value = "/customerdata", method = RequestMethod.GET, produces = {"application/json"})
-	public ResponseEntity<ArrayList<String>> getCustomerData(){
-		sc.getTemperatureReading();
-		ArrayList<String> info = new ArrayList<>();
-		int temp = (int) Math.round(sc.getTemperatureReading());
-		String message = "" + temp;
-		String coStatus = sc.getCarbonMonoxideStatus();
-
-		info.add("Device Name");
-		info.add(message);
-		info.add(coStatus);
-
-		return new ResponseEntity<>(info, HttpStatus.OK);
 	}
 }

@@ -31,7 +31,7 @@ public class FirebaseController {
 	boolean done = false;
 	ArrayList<ArrayList<String>> returnValue = new ArrayList<>();
 
-	final String firebaseKey = "https://s3.us-east-2.amazonaws.com/elasticbeanstalk-us-east-2-522520740280/firebase-key.json";
+	final String firebaseKey = "https://s3.amazonaws.com/babaopenbucket/firebase-key.json";
 
 	public void initFirebase() throws IOException {
 		InputStream serviceAccount = new URL(firebaseKey).openStream();
