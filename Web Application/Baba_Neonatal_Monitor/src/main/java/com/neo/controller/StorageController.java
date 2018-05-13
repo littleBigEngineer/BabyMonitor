@@ -43,23 +43,27 @@ public class StorageController {
 
 	public void initStorage() throws IOException, FileNotFoundException, UnsupportedAudioFileException {
 
+<<<<<<< HEAD
 
 		AWSCredentials credentials = new BasicAWSCredentials("AKIAIPRKFXSZTWDDF4KA","I8/KzpWUvW3aJnCla4dYUPjPYurqNJ7C7j4nrr5r");
+=======
+		AWSCredentials credentials = new BasicAWSCredentials("AKIAI4IOY62475EC63GQ","s7mCeDxMzCUvMQ3UwAFGCIxGJuYFGTGp9darRbMV");
+>>>>>>> parent of 3c29281... Fix up
 		s3client = AmazonS3ClientBuilder
 				.standard()
 				.withCredentials(new AWSStaticCredentialsProvider(credentials))
-				.withRegion(Regions.EU_WEST_1)
+				.withRegion(Regions.US_EAST_2)
 				.build();
 	}
 
 	public ObjectListing getListFiles(String bucket) {
-		ObjectListing objectListing = s3client.listObjects("baba123bucket");
+		ObjectListing objectListing = s3client.listObjects("baba123");
 		return objectListing;			
 	}
 
 	public void removeFile(String filename) {
-		for (S3ObjectSummary file : s3client.listObjects("baba123bucket", filename).getObjectSummaries()){
-			s3client.deleteObject("baba123bucket", file.getKey());
+		for (S3ObjectSummary file : s3client.listObjects("baba123", filename).getObjectSummaries()){
+			s3client.deleteObject("baba123", file.getKey());
 		}
 		System.out.println("Deleted " + filename);
 	}
@@ -80,7 +84,7 @@ public class StorageController {
 	public void uploadFile(MultipartFile file) throws UnsupportedAudioFileException, IOException {	
 		File upload = convertFile(file);
 		s3client.putObject(
-				"baba123bucket", 
+				"baba123", 
 				upload.getName(),  
 				upload
 				);

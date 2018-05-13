@@ -42,7 +42,11 @@ public class FirebaseController {
 	boolean done = false;
 	ArrayList<ArrayList<String>> returnValue = new ArrayList<>();
 
+<<<<<<< HEAD
 	final String firebaseKey = "https://drive.google.com/open?id=1Qpq42kGj0nJy6dDGfuqu4wNRTMEaYCwg";
+=======
+	final String firebaseKey = "https://s3.us-east-2.amazonaws.com/elasticbeanstalk-us-east-2-522520740280/firebase-key.json";
+>>>>>>> parent of 3c29281... Fix up
 
 	public void initFirebase() throws IOException {
 		InputStream serviceAccount = new URL(firebaseKey).openStream();

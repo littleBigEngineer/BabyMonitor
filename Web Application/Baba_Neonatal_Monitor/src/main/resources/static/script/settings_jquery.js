@@ -1,11 +1,6 @@
 $(document).ready(function() {
-	var devices;
-	getCurrentUser();
+
 	getDevices();
-	
-	$("#device").click(function(){
-		console.log("click");
-	});
 
 	$("#library").delegate(".del", "click", function() {
 		$.ajax({
@@ -23,23 +18,7 @@ $(document).ready(function() {
 
 		$(this).closest ('tr').remove();
 	});
-	
-	function getCurrentUser(){
-		$.ajax({
-			url: "/getCurrentUser",
-			method: "get",
-			success: function(data){
-				$('#usernameTag').html(data);
-			}
-		});
-	}
 
-	$("#back").click(function(){
-		$.ajax({
-			url: "/"
-		});
-	});
-	
 	function getFilesForDevice(){
 		var cdata;
 		$.ajax({
@@ -60,10 +39,6 @@ $(document).ready(function() {
 			});
 		});
 	}
-	
-	function getDeviceId(){
-		console.log("here");
-	}
 
 	function fileUpload(){
 
@@ -78,16 +53,15 @@ $(document).ready(function() {
 		}).done(function(data){
 			cdata = data;
 			$.each(cdata, function(index, value) {
-				var tab;					
-				tab = $("<div class='col-sm-2 btn' style='background-color: #89cff0;' onclick='populateInformation(this)'>"+value+"</div>");
-				if(index == 0)
-					populateInformation(value);
+				var tab;
+				tab = $("<button class='col-sm-2 btn' style='background-color: #89cff0;'>"+value+"</button>");
 				$("#devices").append(tab);
 				tab.attr('id', value);
 			});
 		});
 		getFilesForDevice();
 	}
+<<<<<<< HEAD
 	
 	$('#device').on("click", function(){
 		console.log("clicked");
@@ -119,4 +93,6 @@ $(document).ready(function() {
 		    }
 		});
 	}
+=======
+>>>>>>> parent of 3c29281... Fix up
 });

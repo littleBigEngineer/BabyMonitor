@@ -18,10 +18,20 @@
 	</div>
 	<div style="height: 3rem; background-color: #000; margin-bottom:2rem;">
 		<img src="../static/Media/logout.png" class="img-responsive float-left" th:src="@{/Media/logout.png}" style="max-width: 40px; margin-top: 3px; margin-left: 0.5rem;" />
+<<<<<<< HEAD
 		<div id="usernameTag" style="color: #fff; font-size: 1.5rem; margin-top: 0.25rem; font-weight: bold; margin-right: 0.5rem;" class="float-right">Username</div>
 		<img src="../static/Media/settings.png" class="img-responsive float-right" th:src="@{/Media/settings.png}" style="max-width: 40px; margin-top: 3px; margin-right: 0.5rem;" />
 	</div>
 	
+=======
+		<div id="usernameTag" style="color: #fff; font-size: 1.5rem; margin-top: 0.25rem; font-weight: bold; margin-right: 0.5rem;"class="float-right">Username</div>
+		<img src="../static/Media/settings.png" class="img-responsive float-right" th:src="@{/Media/settings.png}" style="max-width: 40px; margin-top: 3px; margin-right: 0.5rem;" />
+	</div>
+	
+	
+
+
+>>>>>>> parent of 3c29281... Fix up
 	<div class="container">
 
 		<div id="detailsModal" class="modal fade" role="dialog">
@@ -35,9 +45,15 @@
 					<div class="modal-body">
 						<div class="container">
 							<div class="col-sm-12 float-left" style="margin-bottom: 1rem;">
+<<<<<<< HEAD
 								<div class="col-sm-3 float-left" id="deviceNameField">Device Name:</div><div class="col-sm-8 float-left"> <input type="text" placeholder="Device Display Name"></input></div></div>
 								<div class="col-sm-12 float-left" id="userOneField"><div class="col-sm-3 float-left">User 1:</div><div class="col-sm-4 float-left"> <input type="text" placeholder="Username"></input></div><div class="col-sm-4 float-left"></div></div>
 								<div class="col-sm-12 float-left" id="userTwoField"><div class="col-sm-3 float-left">User 2:</div><div class="col-sm-4 float-left"> <input type="text" placeholder="Username"></input></div><div class="col-sm-4 float-left"></div></div>
+=======
+								<div class="col-sm-3 float-left">Device Name:</div><div class="col-sm-8 float-left"> <input type="text" placeholder="Device Display Name"></input></div></div>
+								<div class="col-sm-12 float-left"><div class="col-sm-3 float-left">User 1:</div><div class="col-sm-4 float-left"> <input type="text" placeholder="Username"></input></div><div class="col-sm-4 float-left"></div></div>
+								<div class="col-sm-12 float-left"><div class="col-sm-3 float-left">User 2:</div><div class="col-sm-4 float-left"> <input type="text" placeholder="Username"></input></div><div class="col-sm-4 float-left"></div></div>
+>>>>>>> parent of 3c29281... Fix up
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -73,6 +89,15 @@
 			</div>
 
 			<div id="devices" class="row" style="padding-bottom: 1rem;">
+<<<<<<< HEAD
+=======
+				<!-- <button id="dv0" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv1" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv2" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv3" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv4" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv5" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button> -->
+>>>>>>> parent of 3c29281... Fix up
 			</div>
 			<div class="row">
 				<h4 class="col-sm-11"><strong>Device Details</strong></h4>
@@ -81,24 +106,42 @@
 					<div class="col-sm-1"></div>
 					<div class="col-sm-5">
 						<div class="col-sm-6 float-left">Device ID: </div>
+<<<<<<< HEAD
 						<div id="deviceId" class="col-sm-6 float-left">BABA</div>
 						<div class="col-sm-6 float-left">Device Name: </div>
 						<div id="deviceName" class="col-sm-6 float-left">BABA</div>
 						<div class="col-sm-6 float-left">Last Active: </div>
 						<div id="lastActive" class="col-sm-6 float-left">BABA</div>
+=======
+						<div class="col-sm-6 float-left">BABA</div>
+						<div class="col-sm-6 float-left">Device Name: </div>
+						<div class="col-sm-6 float-left">BABA</div>
+						<div class="col-sm-6 float-left">Last Active: </div>
+						<div class="col-sm-6 float-left">BABA</div>
+>>>>>>> parent of 3c29281... Fix up
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-5">
 						<div class="col-sm-12 float-left"><strong>Current Users</strong></div>
 						<div class="col-sm-6 float-left">User 1: </div>
+<<<<<<< HEAD
 						<div id="userOne" class="col-sm-6 float-left">Robert</div>
 						<div class="col-sm-6 float-left">User 2: </div>
 						<div id="userTwo" class="col-sm-6 float-left">Angela</div>
+=======
+						<div class="col-sm-6 float-left">Robert</div>
+						<div class="col-sm-6 float-left">User 2: </div>
+						<div class="col-sm-6 float-left">Angela</div>
+>>>>>>> parent of 3c29281... Fix up
 					</div>
 				</div>
 			</div>
 			<div style="margin-top: 1rem;" class="row">
 				<h4 class="col-sm-11"><strong>Device Features</strong></h4>
+<<<<<<< HEAD
+=======
+				<button class="btn-secondary col-sm-1 float-right" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#featuresModal">Edit</button>
+>>>>>>> parent of 3c29281... Fix up
 				<div class="row col-sm-12" style="padding: 0.5rem; background-color: rgba(192,192,192,0.2);">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-5">

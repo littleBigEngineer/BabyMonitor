@@ -2,10 +2,9 @@ $(document).ready(function() {
 	var usernames, emails;
 
 	getCurrentUser();
-	updateSong()
-	setInterval(getInformation, 1000);
-	setInterval(updateSong, 10000);
+//	setInterval(getTemp, 1000);
 	var prevNum = 0;
+<<<<<<< HEAD
 	
 	$('#vid_0').hide();
 	$('#vid_1').hide();
@@ -111,6 +110,8 @@ $(document).ready(function() {
 			})
 		});
 	}
+=======
+>>>>>>> parent of 3c29281... Fix up
 
 	function getCurrentUser(){
 		$.ajax({
@@ -122,7 +123,7 @@ $(document).ready(function() {
 			}
 		});
 	}
-
+	
 	$("#logout").click(function(){
 		$.ajax({
 			url: "/logout",
@@ -132,11 +133,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-
-	$("#settings").click(function(){
-		window.location = window.location + "settings";
-	});
-
+	
 	function getDevices(){
 		var cdata;
 		$.ajax({
@@ -152,6 +149,15 @@ $(document).ready(function() {
 			}
 		});
 	}
+
+	$("#devCo").attr('title', 'Carbon Monoxide');
+	$('#settingsButton').click(function settingsPage(){
+		$.ajax({
+			url: "/settings",
+			dataType: "json",
+			method: "get"
+		});
+	});
 
 	function fillTherm(num){
 		if(num != prevNum){
