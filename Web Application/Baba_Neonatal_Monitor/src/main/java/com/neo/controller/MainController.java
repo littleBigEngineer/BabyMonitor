@@ -44,7 +44,6 @@ public class MainController{
 
 	AmazonS3 s3client;
 
-
 	@RequestMapping(value = "/getDeviceInfo", method = RequestMethod.POST, produces = {"application/json"})
 	public ResponseEntity<ArrayList<String>> getDeviceInfo(@RequestParam("device") String device, HttpSession session){
 

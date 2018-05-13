@@ -49,27 +49,11 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
                 android:contentDescription="Timer  Button"
-                android:onClick="timerScreen"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/setting_img"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/timer" />
-
-            <ImageView
-                android:id="@+id/setting_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:contentDescription="Logout Button"
-                android:onClick="settings"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/logout"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/cog" />
+                app:srcCompat="@drawable/timer" />
 
             <ImageView
                 android:id="@+id/logout"
@@ -177,7 +161,7 @@
                         android:layout_marginBottom="15dp"
                         android:layout_marginEnd="25dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:background="#fff"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -241,6 +225,7 @@
                         android:layout_height="25dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginTop="10dp"
+                        android:onClick="nextSong"
                         app:layout_constraintEnd_toStartOf="@+id/sound_1"
                         app:layout_constraintTop_toBottomOf="@+id/monoxide_1"
                         app:srcCompat="@drawable/next" />
@@ -251,6 +236,7 @@
                         android:layout_height="25dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
+                        android:onClick="prevSong"
                         app:layout_constraintStart_toEndOf="@+id/temp_1"
                         app:layout_constraintTop_toBottomOf="@+id/monoxide_1"
                         app:srcCompat="@drawable/previous" />
@@ -263,6 +249,7 @@
                         android:layout_marginEnd="55dp"
                         android:layout_marginStart="55dp"
                         android:layout_marginTop="5dp"
+                        android:onClick="pauseSong"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/decb_value_1"
                         app:layout_constraintStart_toEndOf="@+id/temp_value_1"

@@ -24,17 +24,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.TimerTask;
 
 import neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model.Device;
+
 
 public class Devices extends AppCompatActivity {
 
     private String username, notification = "";
     private DatabaseReference database;
-    int num_devices, temp;    boolean devicesDone, sendNotification;
+    int num_devices, temp, sound;    boolean devicesDone, sendNotification;
     private ArrayList<String> listDevices;
     private ArrayList<Device> devices;
+    private boolean pause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +131,7 @@ public class Devices extends AppCompatActivity {
         devicesDone = true;
     }
 
-    public void issueAlert(String message, String device, int deviceNum){
+    public void issueAlert(String device, int deviceNum){
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
 
@@ -141,7 +142,7 @@ public class Devices extends AppCompatActivity {
 
         mBuilder.setSmallIcon(R.drawable.sleeping_baby);
         mBuilder.setContentTitle("Uh Oh, I think we've got something");
-        mBuilder.setContentText("(" + device + ") " + message);
+        mBuilder.setContentText("(" + device + ") " + "Check on the kiddos!");
 
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(deviceNum, mBuilder.build());
@@ -151,13 +152,13 @@ public class Devices extends AppCompatActivity {
     public void updateValues(final String deviceId, final int deviceNum){
         sendNotification = false;
         notification = "";
-        database.child("Temperature").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child("Devices").child(deviceId).child("temperature").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(deviceId).getValue(Double.class) == null)
+                if(dataSnapshot.getValue(Double.class) == null)
                     temp = 0;
                 else
-                    temp = (int)Math.round(0.0 + dataSnapshot.child(deviceId).getValue(Double.class));
+                    temp = (int)Math.round(0.0 + dataSnapshot.getValue(Double.class));
 
                 int res = getResources().getIdentifier("temp_value_" + deviceNum, "id", getPackageName());
                 final TextView tempVal = findViewById(res);
@@ -168,11 +169,11 @@ public class Devices extends AppCompatActivity {
                 tempView.setBackgroundColor(Color.parseColor("#66ff66"));
 
                 if(temp < 15) {
-                    issueAlert("Temperature too low (" + temp + "\u00b0C)", deviceId, deviceNum);
+                    issueAlert(deviceId, deviceNum);
                     tempView.setBackgroundColor(Color.parseColor("#A5F2F3"));
                 }
                 if(temp > 25) {
-                    issueAlert("Temperature too high (" + temp + "\u00b0C)", deviceId, deviceNum);
+                    issueAlert(deviceId, deviceNum);
                     tempView.setBackgroundColor(Color.parseColor("#ce2029"));
                 }
                 tempVal.setText(temp + "\u00b0C");
@@ -184,31 +185,110 @@ public class Devices extends AppCompatActivity {
             }
         });
 
-        database.child("Gasses").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child("Devices").child(deviceId).child("currently_playing").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(deviceId).child("CO").getValue(String.class).equals("Normal")){
-                    int res = getResources().getIdentifier("monoxide_" + deviceNum, "id", getPackageName());
-                    final ImageView image = findViewById(res);
-                    image.setImageResource(R.drawable.green_carbon);
-                    issueAlert("Carbon Monoxide Detected!", deviceId, deviceNum);
-                }
-                else{
-                    int res = getResources().getIdentifier("monoxide_" + deviceNum, "id", getPackageName());
-                    final ImageView image = findViewById(res);
-                    image.setImageResource(R.drawable.red_carbon);
-                }
+                int res = getResources().getIdentifier("currPlaying_" + deviceNum, "id", getPackageName());
+                final TextView currPlay = findViewById(res);
+                currPlay.setText(dataSnapshot.getValue(String.class));
+            }
 
-                if(dataSnapshot.child(deviceId).child("CO2").getValue(String.class).equals("Normal")){
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        database.child("Devices").child(deviceId).child("carbon_dioxide").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue(String.class).equals("Normal")){
                     int res = getResources().getIdentifier("smoke_" + deviceNum, "id", getPackageName());
                     final ImageView image = findViewById(res);
                     image.setImageResource(R.drawable.green_smoke);
-                    issueAlert("Smoke Detected!" + temp + "\u00b0C)", deviceId, deviceNum);
+                    issueAlert(deviceId, deviceNum);
                 }
                 else{
                     int res = getResources().getIdentifier("smoke_" + deviceNum, "id", getPackageName());
                     final ImageView image = findViewById(res);
                     image.setImageResource(R.drawable.red_smoke);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        database.child("Devices").child(deviceId).child("humidity").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue(double.class) > 60){
+                    int res = getResources().getIdentifier("humid_" + deviceNum, "id", getPackageName());
+                    final ImageView image = findViewById(res);
+                    image.setImageResource(R.drawable.red_humid);
+                    issueAlert(deviceId, deviceNum);
+                }
+                else{
+                    int res = getResources().getIdentifier("humid_" + deviceNum, "id", getPackageName());
+                    final ImageView image = findViewById(res);
+                    image.setImageResource(R.drawable.green_humid);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        database.child("Devices").child(deviceId).child("sound").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue(Double.class) == null)
+                    sound = 0;
+                else
+                    sound = (int)Math.round(0.0 + dataSnapshot.getValue(Double.class));
+
+                int res = getResources().getIdentifier("decb_value_" + deviceNum, "id", getPackageName());
+                final TextView soundVal = findViewById(res);
+
+                res = getResources().getIdentifier("sound_" + deviceNum, "id", getPackageName());
+                final ConstraintLayout soundView = findViewById(res);
+
+                soundView.setBackgroundColor(Color.parseColor("#66ff66"));
+
+                if(sound < 30)
+                    soundView.setBackgroundColor(Color.parseColor("#66ff66"));
+                if(sound > 30 && sound < 50)
+                    soundView.setBackgroundColor(Color.parseColor("#ffb347"));
+                if(sound > 50) {
+                    soundView.setBackgroundColor(Color.parseColor("#ffb347"));
+                    issueAlert(deviceId, deviceNum);
+                }
+                soundVal.setText(sound + "dB");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("ERROR");
+            }
+        });
+
+        database.child("Devices").child(deviceId).child("carbon_monoxide").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue(String.class).equals("Normal")){
+                    int res = getResources().getIdentifier("monoxide_" + deviceNum, "id", getPackageName());
+                    final ImageView image = findViewById(res);
+                    image.setImageResource(R.drawable.green_carbon);
+                }
+                else{
+                    int res = getResources().getIdentifier("monoxide_" + deviceNum, "id", getPackageName());
+                    final ImageView image = findViewById(res);
+                    image.setImageResource(R.drawable.red_carbon);
+                    issueAlert(deviceId, deviceNum);
                 }
             }
 
@@ -228,18 +308,38 @@ public class Devices extends AppCompatActivity {
         this.startActivity(i);
     }
 
+    public void nextSong(View view){
+        int num = Integer.parseInt(getResources().getResourceEntryName(view.getId()).substring(getResources().getResourceEntryName(view.getId()).length() - 1));
+        database.child("Device_Instruction").child(listDevices.get(num-1)).setValue("next");
+    }
+
+    public void pauseSong(View view){
+        int num = Integer.parseInt(getResources().getResourceEntryName(view.getId()).substring(getResources().getResourceEntryName(view.getId()).length() - 1));
+
+        int res = getResources().getIdentifier("play_" + num, "id", getPackageName());
+        final ImageView play = findViewById(res);
+
+        if(!pause) {
+            database.child("Device_Instruction").child(listDevices.get(num - 1)).setValue("pause");
+            pause = true;
+            play.setImageResource(R.drawable.pause);
+        }
+        else {
+            database.child("Device_Instruction").child(listDevices.get(num - 1)).setValue("play");
+            pause = false;
+            play.setImageResource(R.drawable.play);
+        }
+    }
+
+    public void prevSong(View view){
+        int num = Integer.parseInt(getResources().getResourceEntryName(view.getId()).substring(getResources().getResourceEntryName(view.getId()).length() - 1));
+        database.child("Device_Instruction").child(listDevices.get(num-1)).setValue("prev");
+    }
+
     public void logout(View view){
         Intent logout = new Intent(Devices.this, Login.class);
         this.startActivity(logout);
         Toast.makeText(Devices.this, "Signed Out", Toast.LENGTH_SHORT).show();
         SaveSharedPreference.clearUserName(Devices.this);
-    }
-
-    public void settings(View view){
-        System.out.println("PRESSED");
-//        Intent intent = new Intent(getBaseContext(), Settings.class);
-//        intent.putExtra("devices", deviceId);
-//        intent.putExtra("username", username);
-//        Devices.this.startActivity(intent);
     }
 }
