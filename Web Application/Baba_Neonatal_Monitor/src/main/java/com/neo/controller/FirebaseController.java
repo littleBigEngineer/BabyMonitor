@@ -1,5 +1,6 @@
 package com.neo.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -31,16 +32,16 @@ public class FirebaseController {
 	boolean done = false;
 	ArrayList<ArrayList<String>> returnValue = new ArrayList<>();
 
-	final String firebaseKey = "https://drive.google.com/open?id=1Qpq42kGj0nJy6dDGfuqu4wNRTMEaYCwg";
+	final String firebaseKey = "src/main/resources/static/firebase-key.json";
 
 
 	public void initFirebase() throws IOException {
-		InputStream serviceAccount = new URL(firebaseKey).openStream();
+		FileInputStream serviceAccount = new FileInputStream(firebaseKey);
 		FirebaseOptions options = new FirebaseOptions.Builder()
 				.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 				.setDatabaseUrl("https://baba-neonatal-monitoring.firebaseio.com")
 				.build();
-
+		System.out.println("Done");
 		FirebaseApp.initializeApp(options);
 	}
 	

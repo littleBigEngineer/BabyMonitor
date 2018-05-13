@@ -2,38 +2,39 @@ $(document).ready(function() {
 	var usernames, emails;
 
 	getCurrentUser();
-//	setInterval(getTemp, 1000);
+	updateSong()
+	setInterval(getInformation, 1000);
+	setInterval(updateSong, 10000);
 	var prevNum = 0;
-<<<<<<< HEAD
-	
+
 	$('#vid_0').hide();
 	$('#vid_1').hide();
-	
+
 	$('#dv_0').click(function(){
 		$('#vid_0').show();
 		$('#therm_0').hide();
 		$('#sound_0').hide();
 	});
-	
+
 	$('#dv_1').click(function(){
 		$('#vid_1').show();
 		$('#therm_1').hide();
 		$('#sound_1').hide();
 	});
-	
+
 	$('#vid_0').click(function(){
 		console.log("click");
 		$('#vid_0').hide();
 		$('#therm_0').show();
 		$('#sound_0').show();
 	});
-	
+
 	$('#vid_1').click(function(){
 		$('#vid_1').hide();
 		$('#therm_1').show();
 		$('#sound_1').show();
 	});
-	
+
 
 	function updateSong(){
 		var cdata;
@@ -111,8 +112,6 @@ $(document).ready(function() {
 			})
 		});
 	}
-=======
->>>>>>> parent of 3c29281... Fix up
 
 	function getCurrentUser(){
 		$.ajax({
@@ -124,7 +123,7 @@ $(document).ready(function() {
 			}
 		});
 	}
-	
+
 	$("#logout").click(function(){
 		$.ajax({
 			url: "/logout",
@@ -134,7 +133,11 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
+
+	$("#settings").click(function(){
+		window.location = window.location + "settings";
+	});
+
 	function getDevices(){
 		$.ajax({
 			url: "/getDevices",
@@ -149,15 +152,6 @@ $(document).ready(function() {
 			}
 		});
 	}
-
-	$("#devCo").attr('title', 'Carbon Monoxide');
-	$('#settingsButton').click(function settingsPage(){
-		$.ajax({
-			url: "/settings",
-			dataType: "json",
-			method: "get"
-		});
-	});
 
 	function fillTherm(num){
 		if(num != prevNum){

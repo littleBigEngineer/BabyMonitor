@@ -18,56 +18,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.amazonaws.services.appstream.model.Session;
-=======
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
->>>>>>> parent of 6182620... a
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.neo.model.Account;
 import com.neo.model.Device;
-<<<<<<< HEAD
->>>>>>> parent of 3c29281... Fix up
-=======
->>>>>>> parent of 6182620... a
 
 @Controller
 public class MainController{
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 6182620... a
 	AccountController ac = new AccountController();
 	FirebaseController fc = new FirebaseController();
 	DeviceController dc = new DeviceController();
 	SensorController sc = new SensorController();
 	StorageController storeC = new StorageController();
-<<<<<<< HEAD
-	Thread mainThread = Thread.currentThread();
-=======
 
 	ArrayList<ArrayList<String>> information = new ArrayList<>();
 	ArrayList<Device> devices = new ArrayList<>();
->>>>>>> parent of 6182620... a
 
 	String currentUser = "";
 	boolean first = true;
 
 	AmazonS3 s3client;
 
-<<<<<<< HEAD
-=======
 
 	@RequestMapping(value = "/getDeviceInfo", method = RequestMethod.POST, produces = {"application/json"})
 	public ResponseEntity<ArrayList<String>> getDeviceInfo(@RequestParam("device") String device, HttpSession session){
@@ -83,7 +59,7 @@ public class MainController{
 			}
 		}
 		return new ResponseEntity<>(info, HttpStatus.OK);
-	} 
+	}
 
 	@RequestMapping(value = "/getInformation", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<ArrayList<ArrayList<String>>> getInformation(HttpSession session){
@@ -105,7 +81,7 @@ public class MainController{
 			information.add(info);
 		}
 		return new ResponseEntity<>(information, HttpStatus.OK);
-	} 
+	}
 
 	@RequestMapping(value = "/getLullaby", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<ArrayList<String>> getLullaby(HttpSession session){
@@ -118,10 +94,9 @@ public class MainController{
 			info.add(devices.get(i).getCurrently_playing());
 		}
 		return new ResponseEntity<>(info, HttpStatus.OK);
-	} 
+	}
 
 
->>>>>>> parent of 6182620... a
 	@PostMapping("/upload")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws UnsupportedAudioFileException, IOException {
 		System.out.println("Uploaded");
@@ -141,39 +116,23 @@ public class MainController{
 		while(username == null || password == null) {
 
 		}
-<<<<<<< HEAD
-		System.out.println(username + " - " + password);
-		Account account = ac.checkForAccount(username, password);
-		if(account != null) {
-			session.setAttribute("username", account.getUsername());
-			System.out.println("New Session: " + username);
-		}
-=======
 		Account account = ac.checkForAccount(username, password);
 		if(account != null)
 			session.setAttribute("username", account.getUsername());
->>>>>>> parent of 6182620... a
 		while(account == null) {
 
 		}
 		return "index_bootstrap";
 	}
 
-<<<<<<< HEAD
->>>>>>> parent of 3c29281... Fix up
-=======
->>>>>>> parent of 6182620... a
 	@RequestMapping(value = "/dashboard", method=RequestMethod.GET)
 	public String dashboard(HttpServletRequest request,HttpServletResponse response, HttpSession session) {
-		System.out.println("USERNAME - " + session.getAttribute("username"));
-		return "dashboard_boostrap";
+		return "dashboard_bootstrap";
 	}
 
-<<<<<<< HEAD
-=======
 	@RequestMapping(value = "/")
 	public String index(Model model, HttpSession session) throws IOException {
-		String page = "index_bootstrap";		
+		String page = "index_bootstrap";
 		if(session.getAttribute("username") != null)
 			page = "dashboard_bootstrap";
 		if(first) {
@@ -183,21 +142,6 @@ public class MainController{
 		return page;
 	}
 
-<<<<<<< HEAD
-=======
-	@RequestMapping(value = "/")
-	public String index(Model model, HttpSession session) throws IOException {
-		String page = "index_bootstrap";		
-		if(session.getAttribute("username") != null)
-			page = "dashboard_bootstrap";
-		if(first) {
-			fc.initFirebase();
-			first = false;
-		}
-		return page;
-	}
-
->>>>>>> parent of 6182620... a
 	@RequestMapping(value = "/settings")
 	public String settings(Model model) throws IOException, UnsupportedAudioFileException {
 		storeC.initStorage();
@@ -209,31 +153,16 @@ public class MainController{
 		ArrayList<ArrayList<String>> output = fc.getUsernames();
 		return new ResponseEntity<>(output, HttpStatus.OK);
 	}
-<<<<<<< HEAD
-	
->>>>>>> parent of 3c29281... Fix up
-=======
 
->>>>>>> parent of 6182620... a
 	@RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
 	public ResponseEntity<String> getCurrentUser(HttpSession session){
 		String user = session.getAttribute("username").toString();
-		System.out.println(user);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	@RequestMapping(value = "/getDeviceAssoc", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<ArrayList<String>> getDeviceAssoc(HttpSession session){
 		ArrayList<String> devices = new ArrayList<>();
-		System.out.println(session.getAttribute("username").toString());
-=======
-	@RequestMapping(value = "/getDeviceAssoc", method = RequestMethod.GET, produces = {"application/json"})
-	public ResponseEntity<ArrayList<String>> getDeviceAssoc(HttpSession session){
-		ArrayList<String> devices = new ArrayList<>();
->>>>>>> parent of 6182620... a
 		for(String device : ac.getAssocDevices(session.getAttribute("username").toString())) {
 			devices.add(device);
 		}
@@ -246,7 +175,7 @@ public class MainController{
 		ObjectListing objectListing = storeC.getListFiles("baba123");
 		for(S3ObjectSummary os : objectListing.getObjectSummaries()) {
 			files.add(os.getKey());
-		}		
+		}
 		return new ResponseEntity<>(files, HttpStatus.OK);
 	}
 
@@ -254,56 +183,20 @@ public class MainController{
 	public @ResponseBody void Submit(@RequestParam("file") String name) {
 		storeC.removeFile(name);
 	}
-<<<<<<< HEAD
-	
->>>>>>> parent of 3c29281... Fix up
-=======
 
->>>>>>> parent of 6182620... a
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public @ResponseBody void logout(HttpSession session) {
 		session.removeAttribute("username");
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	
-=======
 
->>>>>>> parent of 6182620... a
 	@RequestMapping(value="/getDevices", method=RequestMethod.GET)
 	public ResponseEntity<ArrayList<String>> getDevices(HttpSession session){
 		ArrayList<String> devs = new ArrayList<>();
 		ArrayList<Device> devices = dc.getDeviceList(session.getAttribute("username").toString());
-<<<<<<< HEAD
-		for(Device d : devices) {
-			devs.add(d.getDevice_name());
-		}
-		return new ResponseEntity<>(devs, HttpStatus.OK);
-		
-	}
-
-	@RequestMapping(value = "/customerdata", method = RequestMethod.GET, produces = {"application/json"})
-	public ResponseEntity<ArrayList<String>> getCustomerData(){
-		sc.getTemperatureReading();
-		ArrayList<String> info = new ArrayList<>();
-		int temp = (int) Math.round(sc.getTemperatureReading());
-		String message = "" + temp;
-		String coStatus = sc.getCarbonMonoxideStatus();
-
-		info.add("Device Name");
-		info.add(message);
-		info.add(coStatus);
-
-		return new ResponseEntity<>(info, HttpStatus.OK);
-	}
->>>>>>> parent of 3c29281... Fix up
-=======
 		for(int i = 0; i < devices.size(); i++) {
 			devs.add(devices.get(i).getDevice_name());
 		}
 		return new ResponseEntity<>(devs, HttpStatus.OK);
 
 	}
->>>>>>> parent of 6182620... a
 }

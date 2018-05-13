@@ -23,31 +23,22 @@ public class StorageController {
 
 	public void initStorage() throws IOException, UnsupportedAudioFileException {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-		AWSCredentials credentials = new BasicAWSCredentials("AKIAIPRKFXSZTWDDF4KA","I8/KzpWUvW3aJnCla4dYUPjPYurqNJ7C7j4nrr5r");
-=======
-		AWSCredentials credentials = new BasicAWSCredentials("AKIAI4IOY62475EC63GQ","s7mCeDxMzCUvMQ3UwAFGCIxGJuYFGTGp9darRbMV");
->>>>>>> parent of 3c29281... Fix up
-=======
 		AWSCredentials credentials = new BasicAWSCredentials("AKIAINIYX46W64AI3GQA","tPDaKHMIk+YVwgSpqckL8FxnIoGeMwXb+sCbmVDi");
->>>>>>> parent of 6182620... a
 		s3client = AmazonS3ClientBuilder
 				.standard()
 				.withCredentials(new AWSStaticCredentialsProvider(credentials))
-				.withRegion(Regions.US_EAST_2)
+				.withRegion(Regions.EU_WEST_1)
 				.build();
 	}
 
 	public ObjectListing getListFiles(String bucket) {
-		ObjectListing objectListing = s3client.listObjects("baba123");
-		return objectListing;			
+		ObjectListing objectListing = s3client.listObjects("baba123bucket");
+		return objectListing;
 	}
 
 	public void removeFile(String filename) {
-		for (S3ObjectSummary file : s3client.listObjects("baba123", filename).getObjectSummaries()){
-			s3client.deleteObject("baba123", file.getKey());
+		for (S3ObjectSummary file : s3client.listObjects("baba123bucket", filename).getObjectSummaries()){
+			s3client.deleteObject("baba123bucket", file.getKey());
 		}
 		System.out.println("Deleted " + filename);
 	}
@@ -58,18 +49,18 @@ public class StorageController {
 
 	public File convertFile(MultipartFile file) throws IOException {
 		File convFile = new File(file.getOriginalFilename());
-		convFile.createNewFile(); 
-		FileOutputStream fos = new FileOutputStream(convFile); 
+		convFile.createNewFile();
+		FileOutputStream fos = new FileOutputStream(convFile);
 		fos.write(file.getBytes());
-		fos.close(); 
+		fos.close();
 		return convFile;
 	}
 
-	public void uploadFile(MultipartFile file) throws UnsupportedAudioFileException, IOException {	
+	public void uploadFile(MultipartFile file) throws UnsupportedAudioFileException, IOException {
 		File upload = convertFile(file);
 		s3client.putObject(
-				"baba123", 
-				upload.getName(),  
+				"baba123bucket",
+				upload.getName(),
 				upload
 				);
 	}

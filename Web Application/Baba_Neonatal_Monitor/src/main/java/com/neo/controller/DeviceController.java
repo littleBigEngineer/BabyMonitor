@@ -15,7 +15,6 @@ public class DeviceController {
 	DatabaseReference ref;
 	
 	ArrayList<String> deviceList = new ArrayList<>();
-	ArrayList<String> childrenId = new ArrayList<>();
 	ArrayList<Device> devices = new ArrayList<>();
 	
 	public void getDevices(){
@@ -26,8 +25,7 @@ public class DeviceController {
 			public void onDataChange(DataSnapshot dataSnapshot) {
 				for (int i = 0; i < deviceList.size(); i++) {
                     Device d = dataSnapshot.child(deviceList.get(i)).getValue(Device.class);
-                    d.setId(deviceList.get(i));
-                    childrenId.add(d.getChild());
+                    d.setDevice_id(deviceList.get(i));
                     devices.add(d);
                 }
 				deviceFlag = true;
@@ -42,7 +40,6 @@ public class DeviceController {
 	public ArrayList<Device> getDeviceList(String userId){
 		devices.removeAll(devices);
 		deviceList.removeAll(deviceList);
-		childrenId.removeAll(childrenId);
 		deviceFlag = false;
 		ref = FirebaseDatabase.getInstance().getReference("Device Assoc").child(userId);
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
