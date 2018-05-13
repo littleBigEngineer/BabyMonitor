@@ -2,12 +2,15 @@ package com.neo.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Controller;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+@Controller
 public class SensorController{
 
 	DatabaseReference ref;
