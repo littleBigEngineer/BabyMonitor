@@ -19,8 +19,17 @@
     <string name="appwidget_text">Baba</string>
     <string name="add_widget">Add widget</string>
     <string name="back_to_dash">Back to Dashboard</string>
+    <string name="register_account">Register Account</string>
 
     <string name="add_device">Add Device</string>
     <string name="manage_devices">Manage Device</string>
     <string name="manage_users">Manage Users</string>
+    <string name="register">Register</string>
+    <string name="title_activity_nav__drawer">Nav_Drawer</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main_drawer">MainDrawer</string>
 </resources>

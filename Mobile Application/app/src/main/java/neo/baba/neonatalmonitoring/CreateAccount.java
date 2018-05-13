@@ -83,6 +83,12 @@ public class CreateAccount extends AppCompatActivity {
             flag = false;
         }
 
+        if(password.length() < 8){
+            pTwo.setError("Passwords do not match.");
+            pOne.setText("");
+            pTwo.setText("");
+        }
+
         if(uName.length() < 8 || uName.length() > 20){
             username.setText("");
             username.setError("Valid username requires between 8-20 characters in length");

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" /> <!-- Disables Zooming -->
+	<title>BABA | Neonatal Monitoring</title>
+	<link rel="stylesheet" type="text/css" media="all" href="../static/Addons/Bootstrap/css/bootstrap.css" th:href="@{/Addons/Bootstrap/css/bootstrap.css}" />
+	<link rel="shortcut icon" href="../static/Media/favicon.ico" th:href="@{/Media/favicon.ico}" type="image/x-icon" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="../static/Addons/Bootstrap/js/bootstrap.js" th:src="@{/Addons/Bootstrap/js/bootstrap.js}"></script>
+	<script src="../static/script/settings_jquery.js" th:src="@{/script/settings_jquery.js}"></script>
+</head>
+
+<body>
+	<div class="jumbotron text-center" style="margin-bottom: 0;">
+		<img src="../static/Media/header.png" class="img-responsive" th:src="@{/Media/header.png}" style="max-width:300px;" />
+	</div>
+	<div style="height: 3rem; background-color: #000; margin-bottom:2rem;">
+		<img src="../static/Media/logout.png" class="img-responsive float-left" th:src="@{/Media/logout.png}" style="max-width: 40px; margin-top: 3px; margin-left: 0.5rem;" />
+<<<<<<< HEAD
+		<div id="usernameTag" style="color: #fff; font-size: 1.5rem; margin-top: 0.25rem; font-weight: bold; margin-right: 0.5rem;" class="float-right">Username</div>
+		<img src="../static/Media/settings.png" class="img-responsive float-right" th:src="@{/Media/settings.png}" style="max-width: 40px; margin-top: 3px; margin-right: 0.5rem;" />
+	</div>
+	
+=======
+		<div id="usernameTag" style="color: #fff; font-size: 1.5rem; margin-top: 0.25rem; font-weight: bold; margin-right: 0.5rem;"class="float-right">Username</div>
+		<img src="../static/Media/settings.png" class="img-responsive float-right" th:src="@{/Media/settings.png}" style="max-width: 40px; margin-top: 3px; margin-right: 0.5rem;" />
+	</div>
+	
+	
+
+
+>>>>>>> parent of 3c29281... Fix up
+	<div class="container">
+
+		<div id="detailsModal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Edit Device Details</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+							<div class="col-sm-12 float-left" style="margin-bottom: 1rem;">
+<<<<<<< HEAD
+								<div class="col-sm-3 float-left" id="deviceNameField">Device Name:</div><div class="col-sm-8 float-left"> <input type="text" placeholder="Device Display Name"></input></div></div>
+								<div class="col-sm-12 float-left" id="userOneField"><div class="col-sm-3 float-left">User 1:</div><div class="col-sm-4 float-left"> <input type="text" placeholder="Username"></input></div><div class="col-sm-4 float-left"></div></div>
+								<div class="col-sm-12 float-left" id="userTwoField"><div class="col-sm-3 float-left">User 2:</div><div class="col-sm-4 float-left"> <input type="text" placeholder="Username"></input></div><div class="col-sm-4 float-left"></div></div>
+=======
+								<div class="col-sm-3 float-left">Device Name:</div><div class="col-sm-8 float-left"> <input type="text" placeholder="Device Display Name"></input></div></div>
+								<div class="col-sm-12 float-left"><div class="col-sm-3 float-left">User 1:</div><div class="col-sm-4 float-left"> <input type="text" placeholder="Username"></input></div><div class="col-sm-4 float-left"></div></div>
+								<div class="col-sm-12 float-left"><div class="col-sm-3 float-left">User 2:</div><div class="col-sm-4 float-left"> <input type="text" placeholder="Username"></input></div><div class="col-sm-4 float-left"></div></div>
+>>>>>>> parent of 3c29281... Fix up
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="featuresModal" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Edit Device Features</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<div class="container">
+								<div class="col-sm-12 float-left" style="margin-bottom: 1rem;">
+										<p class="col-sm-3 float-left">Temperature Sensor</p><input class="col-sm-2 float-left" type="checkbox" />
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div id="devices" class="row" style="padding-bottom: 1rem;">
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> parent of 6182620... a
+				<!-- <button id="dv0" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv1" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv2" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv3" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv4" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button>
+				<button id="dv5" class="col-sm-2 btn" style="background-color: #89cff0;">baba</button> -->
+<<<<<<< HEAD
+>>>>>>> parent of 3c29281... Fix up
+=======
+>>>>>>> parent of 6182620... a
+			</div>
+			<div class="row">
+				<h4 class="col-sm-11"><strong>Device Details</strong></h4>
+				<button class="btn-secondary col-sm-1 float-right" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#detailsModal">Edit</button>
+				<div class="row col-sm-12" style="padding: 0.5rem; background-color: rgba(192,192,192,0.2);">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">
+						<div class="col-sm-6 float-left">Device ID: </div>
+<<<<<<< HEAD
+						<div id="deviceId" class="col-sm-6 float-left">BABA</div>
+						<div class="col-sm-6 float-left">Device Name: </div>
+						<div id="deviceName" class="col-sm-6 float-left">BABA</div>
+						<div class="col-sm-6 float-left">Last Active: </div>
+						<div id="lastActive" class="col-sm-6 float-left">BABA</div>
+=======
+						<div class="col-sm-6 float-left">BABA</div>
+						<div class="col-sm-6 float-left">Device Name: </div>
+						<div class="col-sm-6 float-left">BABA</div>
+						<div class="col-sm-6 float-left">Last Active: </div>
+						<div class="col-sm-6 float-left">BABA</div>
+>>>>>>> parent of 3c29281... Fix up
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">
+						<div class="col-sm-12 float-left"><strong>Current Users</strong></div>
+						<div class="col-sm-6 float-left">User 1: </div>
+<<<<<<< HEAD
+						<div id="userOne" class="col-sm-6 float-left">Robert</div>
+						<div class="col-sm-6 float-left">User 2: </div>
+						<div id="userTwo" class="col-sm-6 float-left">Angela</div>
+=======
+						<div class="col-sm-6 float-left">Robert</div>
+						<div class="col-sm-6 float-left">User 2: </div>
+						<div class="col-sm-6 float-left">Angela</div>
+>>>>>>> parent of 3c29281... Fix up
+					</div>
+				</div>
+			</div>
+			<div style="margin-top: 1rem;" class="row">
+				<h4 class="col-sm-11"><strong>Device Features</strong></h4>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				<button class="btn-secondary col-sm-1 float-right" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#featuresModal">Edit</button>
+>>>>>>> parent of 3c29281... Fix up
+=======
+<!-- 				<button class="btn-secondary col-sm-1 float-right" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#featuresModal">Edit</button> -->
+>>>>>>> parent of 6182620... a
+				<div class="row col-sm-12" style="padding: 0.5rem; background-color: rgba(192,192,192,0.2);">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">
+						<div class="col-sm-6 float-left"><strong>Temperature: </strong></div>
+						<div class="col-sm-6 float-left">Enabled</div>
+						<div class="col-sm-6 float-left"><strong>Humidity: </strong></div>
+						<div class="col-sm-6 float-left">Enabled</div>
+						<div class="col-sm-6 float-left"><strong>Carbon Monoxide: </strong></div>
+						<div class="col-sm-6 float-left">Enabled</div>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">
+						<div class="col-sm-6 float-left"><strong>Smoke: </strong></div>
+						<div class="col-sm-6 float-left">Enabled</div>
+						<div class="col-sm-6 float-left"><strong>Sound: </strong></div>
+						<div class="col-sm-6 float-left">Enabled</div>
+						<div class="col-sm-6 float-left"><strong>Video Feed: </strong></div>
+						<div class="col-sm-6 float-left">Enabled</div>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top: 1rem;" class="row">
+				<h4 class="col-sm-12"><strong>Device Library</strong></h4>
+				<div class="row col-sm-12">
+					<div class="col-sm-6">
+						<table id="library" class="table table-striped">
+							<thead>
+								<tr>
+									<th>Track Name</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5 text-center" style="height: 120px; border: #000 solid medium;">
+						<div class="col-sm-2"></div>
+						<input type="file" class="col-sm-8" style="margin-top: 1rem; margin-bottom: 1rem;" name="file" accept=".mp3" />
+						<div class="col-sm-2"></div>
+						<button type="button" class="btn-secondary col-sm-4 text-center" data-toggle="modal" data-target="#myModal">Upload Lullaby</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	</html>

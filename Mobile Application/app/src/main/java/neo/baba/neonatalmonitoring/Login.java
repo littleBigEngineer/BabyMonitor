@@ -68,7 +68,7 @@ public class Login extends AppCompatActivity {
 
             if (u.equals("a")) {
                 u = "RobCrowley";
-                p = "Password1!";
+                p = "pass";
             }
 
             SaveSharedPreference.setUserName(Login.this, u);
@@ -103,7 +103,6 @@ public class Login extends AppCompatActivity {
 
     public void forgotten(View view){
 
-        final ImageView passImg = findViewById(R.id.password_icon);
         final EditText email = findViewById(R.id.username);
         final TextView forgotten_txt = findViewById(R.id.forgot_pass);
         final Button button = findViewById(R.id.login_button);
@@ -119,7 +118,6 @@ public class Login extends AppCompatActivity {
             EditText password = findViewById(R.id.password);
             password.setEnabled(false);
             password.setVisibility(View.GONE);
-            passImg.setVisibility(View.GONE);
             forgotten_txt.setText(R.string.return_login);
             button.setText(R.string.send_email);
         }

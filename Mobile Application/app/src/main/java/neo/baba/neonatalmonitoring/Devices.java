@@ -1,14 +1,16 @@
 package neo.baba.neonatalmonitoring;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -22,167 +24,201 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
 
-import neo.baba.neonatalmonitoring.fragment.LogoutFragment;
-import neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model.Child;
 import neo.baba.neonatalmonitoring.neo.baba.neonatalmonitoring.model.Device;
 
 public class Devices extends AppCompatActivity {
 
-    private String username;
-    private DrawerLayout mDrawerLayout;
-    private FirebaseDatabase database;
-    private ArrayList<String> deviceId = new ArrayList<>();
-    private ArrayList<Device> devices = new ArrayList<>();
-    private ArrayList<String> childrenId = new ArrayList<>();
-    private ArrayList<Child> children = new ArrayList<>();
+    private String username, notification = "";
+    private DatabaseReference database;
+    int num_devices, temp;    boolean devicesDone, sendNotification;
+    private ArrayList<String> listDevices;
+    private ArrayList<Device> devices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.devices_activity);
 
         Bundle extra = getIntent().getExtras();
         username = extra.getString("username");
-
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.devices_activity);
-        database = FirebaseDatabase.getInstance();
-        getDevices();
-
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
-    }
-
-    public void getDevices(){
-        final DatabaseReference deviceAssoc = database.getReference("Device Assoc").child(username);
-        deviceAssoc.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(int i = 1; i <= 6; i++) {
-                    if(dataSnapshot.hasChild(""+i)) {
-                        String device = dataSnapshot.child("" + i).getValue().toString();
-                        if(!deviceId.contains(device))
-                            deviceId.add(device);
-                    }
-                }
-
-                popDevices();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-    public void popDevices(){
-        final DatabaseReference devs = database.getReference("Devices");
-        devs.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (int i = 0; i < deviceId.size(); i++) {
-                    Device d = dataSnapshot.child(deviceId.get(i)).getValue(Device.class);
-                    childrenId.add(d.getChild());
-                    devices.add(d);
-                }
-                popChildren();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-    public void popChildren(){
-        final DatabaseReference cld = database.getReference("Child");
-        cld.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(int i = 0; i < childrenId.size(); i++){
-                    Child c = dataSnapshot.child(childrenId.get(i)).getValue(Child.class);
-                    children.add(c);
-                }
-                display();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-    public void display(){
-        System.out.println("IN HERE");
-        for(int i = 0; i < devices.size(); i++ ){
-            int d = i+1;
-            int device = this.getResources().getIdentifier("device_"+d, "id", getPackageName());
-            int name_id = this.getResources().getIdentifier("device_"+d+"_name", "id", getPackageName());
-            int child_id = this.getResources().getIdentifier("device_"+d+"_child", "id", getPackageName());
-            int on_circ = this.getResources().getIdentifier("device_"+d+"_on", "id", getPackageName());
-            int off_circ = this.getResources().getIdentifier("device_"+d+"_off", "id", getPackageName());
-
-            ConstraintLayout dev = findViewById(device);
-            dev.setVisibility(dev.VISIBLE);
-            TextView name = findViewById(name_id);
-            final TextView child = findViewById(child_id);
-            //final TextView room = findViewById(room_id);
-            Device sel_dev = devices.get(i);
-            String childName = "";
-
-            for(Child c: children){
-                if(c.getId().equals(sel_dev.getChild()))
-                    childName = c.getFirstName();
-            }
-
-            final ImageView on = findViewById(on_circ);
-            final ImageView off = findViewById(off_circ);
-
-            if(sel_dev.getActive() == 0){
-                on.setBackgroundResource(R.drawable.empty_circ);
-                off.setBackgroundResource(R.drawable.red_circ);
-                dev.setEnabled(false);
-            }
-            else{
-                on.setBackgroundResource(R.drawable.green_circ);
-                off.setBackgroundResource(R.drawable.empty_circ);
-            }
-
-            name.setText(sel_dev.getDevice_name());
-            child.setText("Child: " + childName);
-        }
+        database = FirebaseDatabase.getInstance().getReference();
+        final TextView curr_login = findViewById(R.id.curr_login);
+        curr_login.setText(username);
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if(hasFocus){
+            getUserDevices();
+
+            final Handler handler = new Handler();
+            int delay = 5000;
+
+            handler.postDelayed(new Runnable(){
+                public void run(){
+                    for(int i = 1; i <= devices.size(); i++){
+                        updateValues(devices.get(i-1).getDevice_id(), i);
+                    }
+                    handler.postDelayed(this, 5000);
+                }
+            }, delay);
+        }
+    }
+
+    public void getUserDevices(){
+        listDevices = new ArrayList<>();
+        database.child("Device Assoc").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    listDevices.add(ds.getValue(String.class));
+                }
+                getDevices();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.out.println("Nothing");
+            }
+        });
+    }
+
+    public void getDevices(){
+        devices = new ArrayList<>();
+        database.child("Devices").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(String device : listDevices) {
+                    devices.add(dataSnapshot.child(device).getValue(Device.class));
+                }
+                displayDevices();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("ERROR");
+            }
+        });
+    }
+
+    public void displayDevices(){
+        int i = 1;
+        System.out.println(num_devices);
+        for (i = 1; i <= devices.size(); i++) {
+            System.out.println("Current:" + i);
+            int res = getResources().getIdentifier("m" + i, "id", this.getPackageName());
+            final ConstraintLayout mon = findViewById(res);
+            mon.setVisibility(View.VISIBLE);
+
+            res = getResources().getIdentifier("currPlaying_" + i, "id", this.getPackageName());
+            final TextView playing = findViewById(res);
+            playing.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            playing.setSelected(true);
+            playing.setSingleLine(true);
+
+            res = getResources().getIdentifier("device_name_" + i, "id", this.getPackageName());
+            final TextView device_name = findViewById(res);
+            device_name.setText(devices.get(i - 1).getDevice_name());
+
+            updateValues(devices.get(i-1).getDevice_id(), i);
+        }
+        num_devices = devices.size();
+        devicesDone = true;
+    }
+
+    public void issueAlert(String message, String device, int deviceNum){
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+
+        Intent intent = new Intent(getApplicationContext(), Devices.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        mBuilder.setContentIntent(pendingIntent);
+
+        mBuilder.setSmallIcon(R.drawable.sleeping_baby);
+        mBuilder.setContentTitle("Uh Oh, I think we've got something");
+        mBuilder.setContentText("(" + device + ") " + message);
+
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(deviceNum, mBuilder.build());
 
     }
 
-    public boolean onNavigationItemSelected(MenuItem item){
-       int id = item.getItemId();
-       Fragment fragment = null;
-       Bundle bundle = new Bundle();
-       if(id == R.id.nav_logout)
-           fragment = new LogoutFragment();
+    public void updateValues(final String deviceId, final int deviceNum){
+        sendNotification = false;
+        notification = "";
+        database.child("Temperature").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(deviceId).getValue(Double.class) == null)
+                    temp = 0;
+                else
+                    temp = (int)Math.round(0.0 + dataSnapshot.child(deviceId).getValue(Double.class));
 
-       if(fragment !=  null) {
-           FragmentTransaction ft = getFragmentManager().beginTransaction();
-           ft.replace(R.id.content_frame, fragment);
-           ft.commit();
-       }
-       DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-       drawer.closeDrawer(GravityCompat.START);
-       return true;
+                int res = getResources().getIdentifier("temp_value_" + deviceNum, "id", getPackageName());
+                final TextView tempVal = findViewById(res);
+
+                res = getResources().getIdentifier("temp_" + deviceNum, "id", getPackageName());
+                final ConstraintLayout tempView = findViewById(res);
+
+                tempView.setBackgroundColor(Color.parseColor("#66ff66"));
+
+                if(temp < 15) {
+                    issueAlert("Temperature too low (" + temp + "\u00b0C)", deviceId, deviceNum);
+                    tempView.setBackgroundColor(Color.parseColor("#A5F2F3"));
+                }
+                if(temp > 25) {
+                    issueAlert("Temperature too high (" + temp + "\u00b0C)", deviceId, deviceNum);
+                    tempView.setBackgroundColor(Color.parseColor("#ce2029"));
+                }
+                tempVal.setText(temp + "\u00b0C");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("ERROR");
+            }
+        });
+
+        database.child("Gasses").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(deviceId).child("CO").getValue(String.class).equals("Normal")){
+                    int res = getResources().getIdentifier("monoxide_" + deviceNum, "id", getPackageName());
+                    final ImageView image = findViewById(res);
+                    image.setImageResource(R.drawable.green_carbon);
+                    issueAlert("Carbon Monoxide Detected!", deviceId, deviceNum);
+                }
+                else{
+                    int res = getResources().getIdentifier("monoxide_" + deviceNum, "id", getPackageName());
+                    final ImageView image = findViewById(res);
+                    image.setImageResource(R.drawable.red_carbon);
+                }
+
+                if(dataSnapshot.child(deviceId).child("CO2").getValue(String.class).equals("Normal")){
+                    int res = getResources().getIdentifier("smoke_" + deviceNum, "id", getPackageName());
+                    final ImageView image = findViewById(res);
+                    image.setImageResource(R.drawable.green_smoke);
+                    issueAlert("Smoke Detected!" + temp + "\u00b0C)", deviceId, deviceNum);
+                }
+                else{
+                    int res = getResources().getIdentifier("smoke_" + deviceNum, "id", getPackageName());
+                    final ImageView image = findViewById(res);
+                    image.setImageResource(R.drawable.red_smoke);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
+
 
     @Override
     public void onBackPressed() {
@@ -194,8 +230,16 @@ public class Devices extends AppCompatActivity {
 
     public void logout(View view){
         Intent logout = new Intent(Devices.this, Login.class);
-        Devices.this.startActivity(logout);
+        this.startActivity(logout);
         Toast.makeText(Devices.this, "Signed Out", Toast.LENGTH_SHORT).show();
         SaveSharedPreference.clearUserName(Devices.this);
+    }
+
+    public void settings(View view){
+        System.out.println("PRESSED");
+//        Intent intent = new Intent(getBaseContext(), Settings.class);
+//        intent.putExtra("devices", deviceId);
+//        intent.putExtra("username", username);
+//        Devices.this.startActivity(intent);
     }
 }

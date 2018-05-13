@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.google.auth.oauth2.GoogleCredentials;
@@ -32,7 +31,8 @@ public class FirebaseController {
 	boolean done = false;
 	ArrayList<ArrayList<String>> returnValue = new ArrayList<>();
 
-	final String firebaseKey = "https://s3.us-east-2.amazonaws.com/elasticbeanstalk-us-east-2-522520740280/firebase-key.json";
+	final String firebaseKey = "https://drive.google.com/open?id=1Qpq42kGj0nJy6dDGfuqu4wNRTMEaYCwg";
+
 
 	public void initFirebase() throws IOException {
 		InputStream serviceAccount = new URL(firebaseKey).openStream();
@@ -43,11 +43,17 @@ public class FirebaseController {
 
 		FirebaseApp.initializeApp(options);
 	}
+	
+	public ArrayList<String> getUsers(){
+		getUsernames();
+		return username;
+	}
 
 	public ArrayList<ArrayList<String>> getUsernames(){
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Accounts");
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
 				username.clear();
@@ -74,7 +80,7 @@ public class FirebaseController {
 		});
 
 		while(!done) {
-			System.out.println("Waiting");
+
 		}
 		return returnValue;
 	}

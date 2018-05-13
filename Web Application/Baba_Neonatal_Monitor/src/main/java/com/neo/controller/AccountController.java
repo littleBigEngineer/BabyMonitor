@@ -1,6 +1,7 @@
 package com.neo.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -22,10 +23,10 @@ import com.neo.model.Account;
 
 public class AccountController {
 
-	boolean accountFlag;
+	boolean accountFlag, devicesFlag;
 	DatabaseReference ref;
 	Account account;
-
+	ArrayList<String> devices = new ArrayList<>();
 
 	final String username = "babaneonatal@gmail.com";
 	final String password = "NeoN@t@l1";
@@ -37,12 +38,37 @@ public class AccountController {
 		account.put(newAccount.getUsername(), newAccount);
 		ref.updateChildrenAsync(account);
 	}
+	
+	public ArrayList<String> getAssocDevices(String username) {
+		devicesFlag = false;
+		devices.removeAll(devices);
+		ref = FirebaseDatabase.getInstance().getReference("Device Assoc/" + username);
+		ref.addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot dataSnapshot) {
+				for(DataSnapshot ds: dataSnapshot.getChildren()) {
+					devices.add(ds.getValue(String.class));
+				}
+				devicesFlag = true;
+			}
+
+			@Override
+			public void onCancelled(DatabaseError error) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		while(!devicesFlag) {
+			
+		}
+		
+		return devices;
+	}
 
 	public Account checkForAccount(String username, String password) {
-		System.out.println("Accounts");
 		ref = FirebaseDatabase.getInstance().getReference("Accounts/"+username);
 		accountFlag = false;
-		System.out.println("Hello");
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,6 +84,7 @@ public class AccountController {
 		while(!accountFlag) {
 
 		}
+		System.out.println(password);
 		if(!password.equals(account.getPassword()))
 			account = null;
 
