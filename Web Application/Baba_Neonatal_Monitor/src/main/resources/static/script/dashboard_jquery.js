@@ -44,6 +44,7 @@ $(document).ready(function() {
 		}).done(function(data){
 			cdata = data;
 			$.each(cdata, function(index, value){
+				console.log(cdata);
 				$("#curr_" + index).html("<marquee>" + value + "</marquee>");
 			})
 		});
@@ -135,14 +136,13 @@ $(document).ready(function() {
 	});
 	
 	function getDevices(){
-		var cdata;
 		$.ajax({
 			url: "/getDevices",
 			method: "get",
 			success: function(data){
 				cdata = data;
-				console.log(cdata);
 				$.each(cdata, function(index, value) {
+					console.log(value);
 					$("#dv_" + index).css("visibility","visible");
 					$("#name_" + index).html(value);
 				});

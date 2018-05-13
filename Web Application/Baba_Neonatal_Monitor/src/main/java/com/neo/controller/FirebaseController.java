@@ -7,15 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -25,7 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-@Controller
 public class FirebaseController {
 
 	DatabaseReference ref;
@@ -34,7 +24,6 @@ public class FirebaseController {
 	FirebaseDatabase fd;
 
 	String uName = "";
-	boolean first = true;
 	Map<String, Object> output = new HashMap<>();
 
 	ArrayList<String> username = new ArrayList<>();
@@ -42,11 +31,8 @@ public class FirebaseController {
 	boolean done = false;
 	ArrayList<ArrayList<String>> returnValue = new ArrayList<>();
 
-<<<<<<< HEAD
 	final String firebaseKey = "https://drive.google.com/open?id=1Qpq42kGj0nJy6dDGfuqu4wNRTMEaYCwg";
-=======
-	final String firebaseKey = "https://s3.us-east-2.amazonaws.com/elasticbeanstalk-us-east-2-522520740280/firebase-key.json";
->>>>>>> parent of 3c29281... Fix up
+
 
 	public void initFirebase() throws IOException {
 		InputStream serviceAccount = new URL(firebaseKey).openStream();
@@ -97,23 +83,5 @@ public class FirebaseController {
 
 		}
 		return returnValue;
-	}
-	
-	@RequestMapping(value = "/")
-	public String index(Model model, HttpSession session) throws IOException {
-		String page = "index_bootstrap";		
-		if(session.getAttribute("username") != null)
-			page = "dashboard_bootstrap";
-		if(first) {
-			initFirebase();
-			first = false;
-		}
-		return page;
-	}
-
-	@RequestMapping(value = "/getRegistered", method = RequestMethod.GET, produces = {"application/json"})
-	public ResponseEntity<ArrayList<ArrayList<String>>> getRegistered(){
-		ArrayList<ArrayList<String>> output = getUsernames();
-		return new ResponseEntity<>(output, HttpStatus.OK);
 	}
 }

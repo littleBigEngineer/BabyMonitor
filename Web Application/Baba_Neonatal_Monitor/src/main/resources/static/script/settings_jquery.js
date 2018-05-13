@@ -45,6 +45,7 @@ $(document).ready(function() {
 	}
 
 	function getDevices(){
+		var color;
 		var cdata;
 		$.ajax({
 			url: "/getDeviceAssoc",
@@ -67,8 +68,7 @@ $(document).ready(function() {
 		console.log("clicked");
 	});
 	
-	function populateInformation(device_this){
-		deviceId = $(device_this).attr('id')
+	function populateInformation(deviceId){
 		var data = "";
 		$.ajax({
 		  	type: "POST",

@@ -1,6 +1,5 @@
 package com.neo.controller;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,17 +13,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.neo.model.Account;
 
-@Controller
 public class AccountController {
 
 	boolean accountFlag, devicesFlag;
@@ -145,35 +132,5 @@ public class AccountController {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
-	}
-	
-	@RequestMapping(value = "/getDeviceAssoc", method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<String>> getDeviceAssoc(HttpSession session){
-		ArrayList<String> devices = new ArrayList<>();
-		for(String device : getAssocDevices(session.getAttribute("username").toString())) {
-			devices.add(device);
-		}
-		return new ResponseEntity<>(devices, HttpStatus.OK);
-	}
-	
-	@PostMapping("/registerUser")
-	public String handleUserRegistration(@RequestParam("fName") String fName, @RequestParam("lName") String lName, @RequestParam("phone") String phone, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("username") String username, RedirectAttributes redirectAttributes) throws UnsupportedAudioFileException, IOException {
-		System.out.println("New User");
-		createAccount(new Account(email, fName, lName, phone, password, username));
-		return "index";
-	}
-
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String handleLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) throws UnsupportedAudioFileException, IOException {
-		while(username == null || password == null) {
-
-		}
-		Account account = checkForAccount(username, password);
-		if(account != null)
-			session.setAttribute("username", account.getUsername());
-		while(account == null) {
-
-		}
-		return "index_bootstrap";
 	}
 }
