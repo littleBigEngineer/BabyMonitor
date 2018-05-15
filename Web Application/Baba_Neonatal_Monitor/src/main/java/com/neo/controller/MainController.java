@@ -24,6 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.neo.model.Account;
 import com.neo.model.Device;
 
@@ -34,15 +36,14 @@ public class MainController{
 	FirebaseController fc = new FirebaseController();
 	DeviceController dc = new DeviceController();
 	SensorController sc = new SensorController();
-	StorageController storeC = new StorageController();
+
+	DatabaseReference ref;
 
 	ArrayList<ArrayList<String>> information = new ArrayList<>();
 	ArrayList<Device> devices = new ArrayList<>();
 
 	String currentUser = "";
 	boolean first = true;
-
-	AmazonS3 s3client;
 
 	@RequestMapping(value = "/getDeviceInfo", method = RequestMethod.POST, produces = {"application/json"})
 	public ResponseEntity<ArrayList<String>> getDeviceInfo(@RequestParam("device") String device, HttpSession session){
@@ -99,7 +100,7 @@ public class MainController{
 	@PostMapping("/upload")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws UnsupportedAudioFileException, IOException {
 		System.out.println("Uploaded");
-		storeC.uploadFile(file);
+//		storeC.uploadFile(file);
 		return "settings";
 	}
 
@@ -123,6 +124,39 @@ public class MainController{
 		}
 		return "index_bootstrap";
 	}
+	
+	@PostMapping("/changeDeviceUsers")
+	public void changeDeviceInfo(@RequestParam("dev_name") String deviceName, HttpSession session) throws UnsupportedAudioFileException, IOException {
+		ref = FirebaseDatabase.getInstance().getReference("Devices").child(devices.get(0).getDevice_id()).child("device_name");
+		ref.setValue(deviceName);
+	}
+	
+	@PostMapping("/updateDeviceName")
+	public void updateDeviceName(@RequestParam("dev_name") String deviceName, HttpSession session) throws UnsupportedAudioFileException, IOException {
+		ref = FirebaseDatabase.getInstance().getReference("Devices").child(devices.get(0).getDevice_id()).child("device_name");
+		ref.setValue(deviceName);
+	}
+	
+	@PostMapping("/prevSong")
+	public void prevSong(@RequestParam("device") String device, HttpSession session) throws UnsupportedAudioFileException, IOException {
+		ref = FirebaseDatabase.getInstance().getReference("Device_Instruction").child(device);
+		ref.setValue("prev");
+	}
+	
+	@PostMapping("/nextSong")
+	public void nextSong(@RequestParam("device") String device, HttpSession session) throws UnsupportedAudioFileException, IOException {
+		ref = FirebaseDatabase.getInstance().getReference("Device_Instruction").child(device);
+		ref.setValue("next");
+	}
+	
+	@PostMapping("/pauseSong")
+	public void pauseSong(@RequestParam("device") String device, @RequestParam("pause") boolean pause, HttpSession session) throws UnsupportedAudioFileException, IOException {
+		ref = FirebaseDatabase.getInstance().getReference("Device_Instruction").child(device);
+		if(pause)
+			ref.setValue("pause");
+		else
+			ref.setValue("play");
+	}
 
 	@RequestMapping(value = "/dashboard", method=RequestMethod.GET)
 	public String dashboard(HttpServletRequest request,HttpServletResponse response, HttpSession session) {
@@ -143,7 +177,7 @@ public class MainController{
 
 	@RequestMapping(value = "/settings")
 	public String settings(Model model) throws IOException, UnsupportedAudioFileException {
-		storeC.initStorage();
+//		storeC.initStorage();
 		return "settings_bootstrap";
 	}
 
@@ -171,16 +205,16 @@ public class MainController{
 	@RequestMapping(value = "/getFiles", method = RequestMethod.GET, produces = {"application/json"})
 	public ResponseEntity<ArrayList<String>> getFiles(){
 		ArrayList<String> files = new ArrayList<>();
-		ObjectListing objectListing = storeC.getListFiles("baba123");
-		for(S3ObjectSummary os : objectListing.getObjectSummaries()) {
-			files.add(os.getKey());
-		}
+//		ObjectListing objectListing = storeC.getListFiles("baba123");
+//		for(S3ObjectSummary os : objectListing.getObjectSummaries()) {
+//			files.add(os.getKey());
+//		}
 		return new ResponseEntity<>(files, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/removeFromLibrary", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody void Submit(@RequestParam("file") String name) {
-		storeC.removeFile(name);
+//		storeC.removeFile(name);
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
@@ -191,9 +225,10 @@ public class MainController{
 	@RequestMapping(value="/getDevices", method=RequestMethod.GET)
 	public ResponseEntity<ArrayList<String>> getDevices(HttpSession session){
 		ArrayList<String> devs = new ArrayList<>();
+		
 		ArrayList<Device> devices = dc.getDeviceList(session.getAttribute("username").toString());
 		for(int i = 0; i < devices.size(); i++) {
-			devs.add(devices.get(i).getDevice_name());
+			devs.add(devices.get(i).getDevice_name()+"::"+devices.get(i).getDevice_id());
 		}
 		return new ResponseEntity<>(devs, HttpStatus.OK);
 

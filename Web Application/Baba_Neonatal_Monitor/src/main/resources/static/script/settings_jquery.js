@@ -2,9 +2,28 @@ $(document).ready(function() {
 	var devices;
 	getCurrentUser();
 	getDevices();
+	var uOne = "";
+	var uTwo = "";
+	var name = "";
 
-	$("#device").click(function(){
-		console.log("click");
+	$("#button_0, #button_1").click(function(){
+		console.log("Hellllo");
+	});
+
+	$(window).on('shown.bs.modal', function(e){
+		$("#uOneField").val(uOne);
+		$("#devNameField").val(name);
+		if(!uTwo === "---")
+			$("#uTwoField").val(uTwo);
+	});
+
+	$("#form_sub").click(function(){
+		console.log("Here");
+		$.ajax({
+			type: "POST",
+			url: "/updateDeviceName",
+			data: {deviceName: $("#devNameField").val()}
+		})		
 	});
 
 	$("#library").delegate(".del", "click", function() {
@@ -78,45 +97,46 @@ $(document).ready(function() {
 			method: "get"
 		}).done(function(data){
 			cdata = data;
+			var index = 0;
 			$.each(cdata, function(index, value) {
-				var tab;
-				tab = $("<div class='col-sm-2 btn' style='background-color: #89cff0;' onclick='populateInformation(this)'>"+value+"</div>");
+				var tab = $("<div class='col-sm-2 btn' style='background-color: #89cff0;'>"+value+"</div>");
 				if(index == 0)
 					populateInformation(value);
 				$("#devices").append(tab);
-				tab.attr('id', value);
+				tab.attr('id', "button_" + index);
+				tab.attr('name', value);
+				index += 1;
 			});
 		});
 		getFilesForDevice();
 	}
 
-	$('#device').on("click", function(){
-		console.log("clicked");
-	});
-
 	function populateInformation(deviceId){
 		var data = "";
 		$.ajax({
-		  	type: "POST",
-		    url: "/getDeviceInfo",
-		    data: {device: deviceId},
-		    success: function(data){
-		    	$("#deviceId").html(deviceId);
-		    	$.each(data, function(index, value){
-		    		if(index == 0){
-		    			$("#deviceName").html(value);
-		    		}
-		    		if(index == 1){
-		    			$("#userOne").html(value);
-		    		}
-		    		if(index == 2){
-		    			if(value === "na")
-		    				value = "---";
-		    			$("#userTwo").html(value);
-		    		}
-		    	});
-		    	console.log(data);
-		    }
+			type: "POST",
+			url: "/getDeviceInfo",
+			data: {device: deviceId},
+			success: function(data){
+				$("#deviceId").html(deviceId);
+				$.each(data, function(index, value){
+					if(index == 0){
+						$("#deviceName").html(value);
+						name = value;
+					}
+					if(index == 1){
+						$("#userOne").html(value);
+						uOne = value;
+					}
+					if(index == 2){
+						if(value === "na")
+							value = "---";
+						$("#userTwo").html(value);
+						uTwo = value;
+					}
+				});
+				console.log(data);
+			}
 		});
 	}
 });

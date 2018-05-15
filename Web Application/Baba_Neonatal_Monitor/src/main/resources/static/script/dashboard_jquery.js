@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	var usernames, emails;
+	var devices;
+	var paused = false;
 
 	getCurrentUser();
 	updateSong()
@@ -7,33 +9,33 @@ $(document).ready(function() {
 	setInterval(updateSong, 10000);
 	var prevNum = 0;
 
-	$('#vid_0').hide();
-	$('#vid_1').hide();
+//	$('#vid_0').hide();
+//	$('#vid_1').hide();
 
-	$('#dv_0').click(function(){
-		$('#vid_0').show();
-		$('#therm_0').hide();
-		$('#sound_0').hide();
-	});
+//	$('#dv_0').click(function(){
+//	$('#vid_0').show();
+//	$('#therm_0').hide();
+//	$('#sound_0').hide();
+//	});
 
-	$('#dv_1').click(function(){
-		$('#vid_1').show();
-		$('#therm_1').hide();
-		$('#sound_1').hide();
-	});
+//	$('#dv_1').click(function(){
+//	$('#vid_1').show();
+//	$('#therm_1').hide();
+//	$('#sound_1').hide();
+//	});
 
-	$('#vid_0').click(function(){
-		console.log("click");
-		$('#vid_0').hide();
-		$('#therm_0').show();
-		$('#sound_0').show();
-	});
+//	$('#vid_0').click(function(){
+//	console.log("click");
+//	$('#vid_0').hide();
+//	$('#therm_0').show();
+//	$('#sound_0').show();
+//	});
 
-	$('#vid_1').click(function(){
-		$('#vid_1').hide();
-		$('#therm_1').show();
-		$('#sound_1').show();
-	});
+//	$('#vid_1').click(function(){
+//	$('#vid_1').hide();
+//	$('#therm_1').show();
+//	$('#sound_1').show();
+//	});
 
 
 	function updateSong(){
@@ -50,6 +52,51 @@ $(document).ready(function() {
 			})
 		});
 	}
+	
+	$("#settings_button").click(function(){
+		$.ajax({
+			type: "GET",
+			url: "/settings"
+		})
+	});
+
+	$("#prev_0, #prev_1, #prev_2, #prev_3, #prev_4, #prev_5").click(function(event){
+		var id = parseInt($(this).prop("id").substr($(this).prop("id").length - 1));
+		console.log();
+		$.ajax({
+			type: "POST",
+			url: "/prevSong",
+			data: {device: devices[id].split('::')[1]}
+		})
+	});
+	
+	$("#next_0, #next_1, #next_2, #next_3, #next_4, #next_5").click(function(event){
+		var id = parseInt($(this).prop("id").substr($(this).prop("id").length - 1));
+		console.log();
+		$.ajax({
+			type: "POST",
+			url: "/nextSong",
+			data: {device: devices[id].split('::')[1]}
+		})
+	});
+	
+	$("#play_0, #play_1, #play_2, #play_3, #play_4, #play_5").click(function(event){
+		var id = parseInt($(this).prop("id").substr($(this).prop("id").length - 1));
+		console.log();
+		$.ajax({
+			type: "POST",
+			url: "/pauseSong",
+			data: {device: devices[id].split('::')[1], pause: paused}
+		})
+		if(!paused){
+			$(this).attr("src","../Media/pause.png");
+			paused = true;
+		}
+		else{
+			$(this).attr("src","../Media/play.png");
+			paused = false;
+		}
+	});
 
 	function getInformation(){
 		var cdata;
@@ -100,13 +147,15 @@ $(document).ready(function() {
 					if(indexTwo == 5){
 						$("#db_" + index).html(Math.round(valueTwo) + "dB");
 
-						if(valueTwo > 50)
+						if(valueTwo > 60)
 							$("#sound_" + index).css("background-color", "#F31431");
-						else
+						else if(valueTwo < 30)
 							$("#sound_" + index).css("background-color", "#00FF00");
+						else if(valueTwo > 30 && valueTwo < 60)
+							$("#sound_" + index).css("background-color", "#ffb347");
 					}
 					if(indexTwo == 6)
-						$("#name_" + index).html(valueTwo);
+						$("#name_" + index).html(valueTwo.split('::')[0]);
 
 				})
 			})
@@ -143,6 +192,7 @@ $(document).ready(function() {
 			url: "/getDevices",
 			method: "get",
 			success: function(data){
+				devices = data;
 				cdata = data;
 				$.each(cdata, function(index, value) {
 					console.log(value);
